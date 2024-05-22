@@ -32,7 +32,7 @@ public class Worker implements Serializable{
     @DateTimeFormat(iso = ISO.DATE)
     private LocalDate birthDate;
 
-    @Column(name = "salary", nullable = false)
+    @Column(name = "salary", nullable = false, columnDefinition = "DECIMAL")
     private BigDecimal salary;
 
     @Column(nullable = false)
