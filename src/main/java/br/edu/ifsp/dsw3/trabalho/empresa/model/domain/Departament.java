@@ -1,6 +1,7 @@
 package br.edu.ifsp.dsw3.trabalho.empresa.model.domain;
 
 import java.io.Serializable;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -29,22 +30,33 @@ public class Departament implements Serializable{
     private String description;
 
     @OneToMany
-    @JoinColumn(name="departament_id", nullable=false)
-    private Worker worker;
+    @JoinColumn(name="workers", nullable=false)
+    private List<Worker> workers;
     
-    public Departament(Long id, String address, String name, String description, Worker worker) {
+    public List<Worker> getWorkers() {
+        return workers;
+    }
+
+    public void setWorkers(List<Worker> workers) {
+        this.workers = workers;
+    }
+
+    public Departament(Long id, String address, String name, String description, List<Worker> workers) {
         this.id = id;
         this.address = address;
         this.name = name;
         this.description = description;
-        this.worker = worker;
+        this.workers = workers;
     }
 
-    public Departament(String address, String name, String description, Worker worker) {
+    public Departament(String address, String name, String description, List<Worker> workers) {
         this.address = address;
         this.name = name;
         this.description = description;
-        this.worker = worker;
+        this.workers = workers;
+    }
+
+    public Departament() {
     }
     
     public Long getId() {
@@ -71,12 +83,5 @@ public class Departament implements Serializable{
     public void setDescription(String description) {
         this.description = description;
     }
-    public Worker getWorker() {
-        return worker;
-    }
-    public void setWorker(Worker worker) {
-        this.worker = worker;
-    }
-
     
 }

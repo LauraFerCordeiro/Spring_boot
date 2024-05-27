@@ -12,6 +12,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -37,22 +39,36 @@ public class Worker implements Serializable{
 
     @Column(nullable = false)
     private String role;
+
+    @ManyToOne
+    @JoinColumn(name="departament_id", nullable=false)
+    private Departament departament;
     
-    public Worker(String name, String email, LocalDate birthDate, BigDecimal salary, String role) {
+    public Departament getDepartament() {
+        return departament;
+    }
+
+    public void setDepartament(Departament departament) {
+        this.departament = departament;
+    }
+
+    public Worker(String name, String email, LocalDate birthDate, BigDecimal salary, String role, Departament departament) {
         this.name = name;
         this.email = email;
         this.birthDate = birthDate;
         this.salary = salary;
         this.role = role;
+        this.departament = departament;
     }
 
-    public Worker(Long id, String name, String email, LocalDate birthDate, BigDecimal salary, String role) {
+    public Worker(Long id, String name, String email, LocalDate birthDate, BigDecimal salary, String role, Departament departament) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.birthDate = birthDate;
         this.salary = salary;
         this.role = role;
+        this.departament = departament;
     }
 
     public Worker() {
