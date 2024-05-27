@@ -29,31 +29,22 @@ public class Departament implements Serializable{
     @Column(nullable = false)
     private String description;
 
-    @OneToMany
-    @JoinColumn(name="workers", nullable=false)
-    private List<Worker> workers;
-    
-    public List<Worker> getWorkers() {
-        return workers;
-    }
+    // O Salina falou que deveria ter uma lista de workers aqui
+    // Eu tinha colocado mas tirei por 2 motivos:
+    // 1 - No banco de dados não tava aparecendo
+    // 2 - Não tava dando pra cadastrar Departamento sem a lista de workers, e não dá pra cadastrar um worker sem um departamento
 
-    public void setWorkers(List<Worker> workers) {
-        this.workers = workers;
-    }
-
-    public Departament(Long id, String address, String name, String description, List<Worker> workers) {
+    public Departament(Long id, String address, String name, String description) {
         this.id = id;
         this.address = address;
         this.name = name;
         this.description = description;
-        this.workers = workers;
     }
 
-    public Departament(String address, String name, String description, List<Worker> workers) {
+    public Departament(String address, String name, String description) {
         this.address = address;
         this.name = name;
         this.description = description;
-        this.workers = workers;
     }
 
     public Departament() {

@@ -15,8 +15,8 @@ public class DepartamentController {
     @Autowired
     private DepartamentDAO dao;
     
-    // @PostMapping("/cadastrar")
-    // public Departament cadastrarDepartament(@RequestParam(value = "address") String address, @RequestParam(value = "name") String name, @RequestParam(value = "description") String description){
-    //     return dao.save(new Departament(address, name, description));
-    // }
+    @PostMapping("/register")
+    public Departament cadastrarDepartament(@RequestParam(value = "address") String address, @RequestParam(value = "name") String name, @RequestParam(value = "description") String description){
+        return dao.save(new Departament(address, name, description));
+    }
 }
