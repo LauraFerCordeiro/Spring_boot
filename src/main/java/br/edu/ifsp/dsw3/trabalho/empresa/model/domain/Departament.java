@@ -8,12 +8,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="Departaments")
+@Table(name="departaments")
 public class Departament implements Serializable{
 
     @Id
@@ -29,10 +28,8 @@ public class Departament implements Serializable{
     @Column(nullable = false)
     private String description;
 
-    // O Salina falou que deveria ter uma lista de workers aqui
-    // Eu tinha colocado mas tirei por 2 motivos:
-    // 1 - No banco de dados não tava aparecendo
-    // 2 - Não tava dando pra cadastrar Departamento sem a lista de workers, e não dá pra cadastrar um worker sem um departamento
+    @OneToMany(mappedBy = "departament")
+    private List<Worker> workers;
 
     public Departament(Long id, String address, String name, String description) {
         this.id = id;

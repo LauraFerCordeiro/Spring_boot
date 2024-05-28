@@ -41,7 +41,7 @@ public class Worker implements Serializable{
     private String role;
 
     @ManyToOne
-    @JoinColumn(name="departament_id", nullable = false)
+    @JoinColumn(name="departament", nullable = false)
     private Departament departament;
     
     public Departament getDepartament() {
