@@ -28,10 +28,17 @@ public class WorkerController {
     @Autowired
     private DepartamentDAO daoD;
 
+    private String erro = "Ocorreu um erro, verifique se todos os dados estão corretos";
+
     @PostMapping("/register")
     public Worker registerWorker(@RequestParam(value = "name") String name, @RequestParam(value = "email") String email, @RequestParam(value = "birthDate") LocalDate birthDate, @RequestParam(value = "salary") BigDecimal salary, @RequestParam(value = "role") String role, @RequestParam(value = "departamentId") Long departamentId){
-        Departament d = daoD.findById(departamentId).get();
-        return dao.save(new Worker(name, email, birthDate, salary, role, d));
+        if (daoD.existsById(departamentId)){
+            Departament d = daoD.findById(departamentId).get();
+            return dao.save(new Worker(name, email, birthDate, salary, role, d));
+        } else{
+            System.out.println(erro);
+            return null;
+        }
     }
 
     @GetMapping("/listar")
@@ -41,7 +48,12 @@ public class WorkerController {
 
     @GetMapping("/pesquisar/{id}")
     public Worker pesquisarCodigo(@PathVariable ("id") Long id){
-        return dao.findById(id).get();
+        if (dao.existsById(id)){
+            return dao.findById(id).get();
+        } else {
+            System.out.println(erro);
+            return null;
+        }
     }
 
     @DeleteMapping("/remover/{id}")
@@ -49,8 +61,10 @@ public class WorkerController {
         if (dao.existsById(id)){
             dao.deleteById(id);
             return true;
+        } else{
+            System.out.println(erro);
+            return false;
         }
-        return false;
     }
 
     @PutMapping("/editar/{id}")
@@ -59,7 +73,9 @@ public class WorkerController {
             Departament d = daoD.findById(departamentId).get();
             dao.updateWorker(id, name, email, birthDate, salary, role, d);
             return true;
+        } else{
+            System.out.println(erro);
+            return false;
         }
-        return false;
     }
 }
