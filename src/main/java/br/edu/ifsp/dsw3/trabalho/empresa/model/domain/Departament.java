@@ -3,6 +3,9 @@ package br.edu.ifsp.dsw3.trabalho.empresa.model.domain;
 import java.io.Serializable;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,6 +32,7 @@ public class Departament implements Serializable{
     private String description;
 
     @OneToMany(mappedBy = "departament")
+    @JsonBackReference
     private List<Worker> workers;
 
     public Departament(Long id, String address, String name, String description) {

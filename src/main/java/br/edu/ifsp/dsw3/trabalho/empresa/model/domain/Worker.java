@@ -7,6 +7,8 @@ import java.time.LocalDate;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -42,6 +44,7 @@ public class Worker implements Serializable{
 
     @ManyToOne
     @JoinColumn(name="departament", nullable = false)
+    @JsonManagedReference
     private Departament departament;
     
     public Departament getDepartament() {
