@@ -71,5 +71,13 @@ public class Departament implements Serializable{
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public List<Worker> getWorkers() {
+        return workers;
+    }
+
+    public void setWorkers(List<Worker> workers) {
+        this.workers = workers;
+    }
     
 }
