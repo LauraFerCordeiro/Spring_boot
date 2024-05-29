@@ -17,9 +17,6 @@ import br.edu.ifsp.dsw3.trabalho.empresa.model.dao.DepartamentDAO;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.dao.WorkerDAO;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Departament;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Worker;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-
 
 @RestController
 @RequestMapping("/workers")
