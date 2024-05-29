@@ -43,4 +43,13 @@ public class WorkerController {
         return dao.findById(id).get();
     }
 
+    @DeleteMapping("/remover/{id}")
+    public Boolean remover(@PathVariable ("id") Long id){
+        //Pessoa p = dao.findById(id).get();
+        if (dao.existsById(id)){
+            dao.deleteById(id);
+            return true;
+        }
+        return false;
+    }
 }
