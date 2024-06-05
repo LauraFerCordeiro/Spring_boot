@@ -78,4 +78,6 @@ public class WorkerController {
             return false;
         }
     }
+
+    // Consultas específicas (3)
 }

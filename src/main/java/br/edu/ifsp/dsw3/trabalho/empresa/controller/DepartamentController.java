@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.dao.DepartamentDAO;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.dao.WorkerDAO;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Departament;
+import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Worker;
 
 @RestController
 @RequestMapping("/departament")
@@ -75,5 +76,24 @@ public class DepartamentController {
             System.out.println(erro);
             return false;
         }
+    }
+
+    // Consultas específicas (3)
+    // Pesquisa os Departamentos por parte do nome dele
+    @GetMapping("/pesquisarNome/{name}")
+    public List<Departament> pesquisarNome(@PathVariable ("name") String name){
+        return dao.findByName(name);
+    }
+
+    // Lista os trabalhadores de um departamento pelo id do departamento
+    @GetMapping("/pesquisarWorkers/{id}")
+    public List<Worker> pesquisarWorkers(@PathVariable ("id") Long id){
+        return daoW.buscarWorkers(id);
+    }
+
+    // Pesquisa os Departamentos por parte da descrição dele
+    @GetMapping("/pesquisarDescription/{description}")
+    public List<Departament> pesquisarDescription(@PathVariable ("description") String description){
+        return dao.findByDescription(description);
     }
 }

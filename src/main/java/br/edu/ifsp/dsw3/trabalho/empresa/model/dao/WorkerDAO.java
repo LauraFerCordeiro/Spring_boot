@@ -25,4 +25,5 @@ public interface WorkerDAO extends JpaRepository<Worker, Long> {
     @Modifying
     @Query("UPDATE Worker w SET w.name = ?2, w.email = ?3, w.birthDate = ?4, w.salary = ?5, w.role = ?6, w.departament = ?7 WHERE w.id = ?1")
     public void updateWorker (Long id, String name, String email, LocalDate birthDate, BigDecimal salary, String role, Departament departament);
+
 }
