@@ -27,7 +27,8 @@ public class DepartamentController {
     @Autowired
     private WorkerDAO daoW;
 
-    private String erro = "Ocorreu um erro, verifique se todos os dados estão corretos";
+    // Faltando: um tratamento de erro mais adequado com try catch e exception
+    //private String erro = "Ocorreu um erro, verifique se todos os dados estão corretos";
     
     @PostMapping("/register")
     public Departament registerDepartament(@RequestParam(value = "address") String address, @RequestParam(value = "name") String name, @RequestParam(value = "description") String description){
@@ -44,7 +45,8 @@ public class DepartamentController {
         if (dao.existsById(id)){
             return dao.findById(id).get();
         } else{
-            System.out.println(erro);
+            // Pesquisar um comando mais adequado para notificar o usuário sobre o erro
+            // System.out.println(erro);
             return null;
         }
     }
@@ -63,7 +65,7 @@ public class DepartamentController {
             }
         } 
         else{
-            System.out.println(erro);
+            // System.out.println(erro);
             return false;
         }
     }
@@ -74,7 +76,7 @@ public class DepartamentController {
             dao.updateDepartament(id, address, name, description);
             return true;
         } else{
-            System.out.println(erro);
+            // System.out.println(erro);
             return false;
         }
     }

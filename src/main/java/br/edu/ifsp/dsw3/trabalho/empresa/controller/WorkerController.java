@@ -28,7 +28,8 @@ public class WorkerController {
     @Autowired
     private DepartamentDAO daoD;
 
-    private String erro = "Ocorreu um erro, verifique se todos os dados estão corretos";
+    // Faltando: um tratamento de erro mais adequado com try catch e exception
+    // private String erro = "Ocorreu um erro, verifique se todos os dados estão corretos";
 
     @PostMapping("/register")
     public Worker registerWorker(@RequestParam(value = "name") String name, @RequestParam(value = "email") String email, @RequestParam(value = "birthDate") LocalDate birthDate, @RequestParam(value = "salary") BigDecimal salary, @RequestParam(value = "role") String role, @RequestParam(value = "departamentId") Long departamentId){
@@ -36,7 +37,8 @@ public class WorkerController {
             Departament d = daoD.findById(departamentId).get();
             return dao.save(new Worker(name, email, birthDate, salary, role, d));
         } else{
-            System.out.println(erro);
+            // Pesquisar um comando mais adequado para notificar o usuário sobre o erro
+            // System.out.println(erro);
             return null;
         }
     }
@@ -51,7 +53,7 @@ public class WorkerController {
         if (dao.existsById(id)){
             return dao.findById(id).get();
         } else {
-            System.out.println(erro);
+            // System.out.println(erro);
             return null;
         }
     }
@@ -62,7 +64,7 @@ public class WorkerController {
             dao.deleteById(id);
             return true;
         } else{
-            System.out.println(erro);
+            // System.out.println(erro);
             return false;
         }
     }
@@ -74,7 +76,7 @@ public class WorkerController {
             dao.updateWorker(id, name, email, birthDate, salary, role, d);
             return true;
         } else{
-            System.out.println(erro);
+            // System.out.println(erro);
             return false;
         }
     }
