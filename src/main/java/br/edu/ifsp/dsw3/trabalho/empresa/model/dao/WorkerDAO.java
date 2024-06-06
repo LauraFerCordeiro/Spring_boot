@@ -14,16 +14,25 @@ import jakarta.transaction.Transactional;
 
 public interface WorkerDAO extends JpaRepository<Worker, Long> {
     @Query("SELECT w FROM Worker w WHERE w.departament.id = ?1")
-    public List<Worker> buscarWorkers (Long id);
+    public List<Worker> findWorkers (Long id);
 
     @Transactional
     @Modifying
     @Query("DELETE FROM Worker w WHERE w.departament.id = ?1")
-    public void excluirWorkers (Long id);
+    public void deleteWorkers (Long id);
 
     @Transactional
     @Modifying
     @Query("UPDATE Worker w SET w.name = ?2, w.email = ?3, w.birthDate = ?4, w.salary = ?5, w.role = ?6, w.departament = ?7 WHERE w.id = ?1")
     public void updateWorker (Long id, String name, String email, LocalDate birthDate, BigDecimal salary, String role, Departament departament);
+
+    @Query("SELECT w FROM Worker w WHERE w.name LIKE %?1%")
+    public List<Worker> findByName (String name);
+
+    @Query("SELECT w FROM Worker w ORDER BY w.salary DESC")
+    public List<Worker> findSalary ();
+
+    @Query("SELECT w FROM Worker w WHERE w.role LIKE %?1% ORDER BY w.birthDate ASC")
+    public List<Worker> findRole(String role);
 
 }

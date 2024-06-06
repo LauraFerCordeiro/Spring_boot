@@ -41,13 +41,13 @@ public class WorkerController {
         }
     }
 
-    @GetMapping("/listar")
-    public List<Worker> listar(){
+    @GetMapping("/list")
+    public List<Worker> list(){
         return dao.findAll();
     }
 
-    @GetMapping("/pesquisar/{id}")
-    public Worker pesquisarCodigo(@PathVariable ("id") Long id){
+    @GetMapping("/search/{id}")
+    public Worker searchCod(@PathVariable ("id") Long id){
         if (dao.existsById(id)){
             return dao.findById(id).get();
         } else {
@@ -56,8 +56,8 @@ public class WorkerController {
         }
     }
 
-    @DeleteMapping("/remover/{id}")
-    public Boolean remover(@PathVariable ("id") Long id){
+    @DeleteMapping("/delete/{id}")
+    public Boolean delete(@PathVariable ("id") Long id){
         if (dao.existsById(id)){
             dao.deleteById(id);
             return true;
@@ -67,8 +67,8 @@ public class WorkerController {
         }
     }
 
-    @PutMapping("/editar/{id}")
-    public Boolean editar(@PathVariable ("id") Long id, @RequestParam(value = "name") String name, @RequestParam(value = "email") String email, @RequestParam(value = "birthDate") LocalDate birthDate, @RequestParam(value = "salary") BigDecimal salary, @RequestParam(value = "role") String role, @RequestParam(value = "departamentId") Long departamentId){
+    @PutMapping("/edit/{id}")
+    public Boolean edit(@PathVariable ("id") Long id, @RequestParam(value = "name") String name, @RequestParam(value = "email") String email, @RequestParam(value = "birthDate") LocalDate birthDate, @RequestParam(value = "salary") BigDecimal salary, @RequestParam(value = "role") String role, @RequestParam(value = "departamentId") Long departamentId){
         if (dao.existsById(id)){
             Departament d = daoD.findById(departamentId).get();
             dao.updateWorker(id, name, email, birthDate, salary, role, d);
@@ -80,4 +80,23 @@ public class WorkerController {
     }
 
     // Consultas específicas (3)
+    // Pesquisa Workers por parte do nome 
+    @GetMapping("/searchName/{name}")
+    public List<Worker> searchName(@PathVariable ("name") String name){
+        return dao.findByName(name);
+    }
+
+    // Workers do maior salário para o menor salário
+    @GetMapping("/searchSalary")
+    public List<Worker> searchSalary(){
+        return dao.findSalary();
+    }
+
+    // Pesquisar por função (role) do Worker ordenado do mais velho para o mais novo
+    @GetMapping("/searchRole")
+    public List<Worker> searchRole(@RequestParam ("role") String role){
+        return dao.findRole(role);
+    }
+
+
 }

@@ -16,6 +16,7 @@ import br.edu.ifsp.dsw3.trabalho.empresa.model.dao.DepartamentDAO;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.dao.WorkerDAO;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Departament;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Worker;
+import jakarta.websocket.server.PathParam;
 
 @RestController
 @RequestMapping("/departament")
@@ -29,17 +30,17 @@ public class DepartamentController {
     private String erro = "Ocorreu um erro, verifique se todos os dados estão corretos";
     
     @PostMapping("/register")
-    public Departament cadastrarDepartament(@RequestParam(value = "address") String address, @RequestParam(value = "name") String name, @RequestParam(value = "description") String description){
+    public Departament registerDepartament(@RequestParam(value = "address") String address, @RequestParam(value = "name") String name, @RequestParam(value = "description") String description){
         return dao.save(new Departament(address, name, description));
     }
 
-    @GetMapping("/listar")
-    public List<Departament> listar(){
+    @GetMapping("/list")
+    public List<Departament> list(){
         return dao.findAll();
     }
 
-    @GetMapping("/pesquisar/{id}")
-    public Departament pesquisarCodigo(@PathVariable ("id") Long id){
+    @GetMapping("/search/{id}")
+    public Departament searchCod(@PathVariable ("id") Long id){
         if (dao.existsById(id)){
             return dao.findById(id).get();
         } else{
@@ -48,15 +49,15 @@ public class DepartamentController {
         }
     }
 
-    @DeleteMapping("/remover/{id}")
-    public Boolean remover(@PathVariable("id") Long id){
+    @DeleteMapping("/delete/{id}")
+    public Boolean delete(@PathVariable("id") Long id){
         if (dao.existsById(id)){
-            if(daoW.buscarWorkers(id).isEmpty()){
+            if(daoW.findWorkers(id).isEmpty()){
                 dao.deleteById(id);
                 return true;
             }
             else{
-                daoW.excluirWorkers(id);
+                daoW.deleteWorkers(id);
                 dao.deleteById(id);
                 return true;
             }
@@ -67,8 +68,8 @@ public class DepartamentController {
         }
     }
 
-    @PutMapping("/editar/{id}")
-    public Boolean editar(@PathVariable ("id") Long id, @RequestParam(value = "address") String address, @RequestParam(value = "name") String name, @RequestParam(value = "description") String description){
+    @PutMapping("/edit/{id}")
+    public Boolean edit(@PathVariable ("id") Long id, @RequestParam(value = "address") String address, @RequestParam(value = "name") String name, @RequestParam(value = "description") String description){
         if (dao.existsById(id)){
             dao.updateDepartament(id, address, name, description);
             return true;
@@ -80,20 +81,20 @@ public class DepartamentController {
 
     // Consultas específicas (3)
     // Pesquisa os Departamentos por parte do nome dele
-    @GetMapping("/pesquisarNome/{name}")
-    public List<Departament> pesquisarNome(@PathVariable ("name") String name){
+    @GetMapping("/searchName/{name}")
+    public List<Departament> searchName(@PathVariable ("name") String name){
         return dao.findByName(name);
     }
 
     // Lista os trabalhadores de um departamento pelo id do departamento
-    @GetMapping("/pesquisarWorkers/{id}")
-    public List<Worker> pesquisarWorkers(@PathVariable ("id") Long id){
-        return daoW.buscarWorkers(id);
+    @GetMapping("/searchWorkers/{id}")
+    public List<Worker> searchWorkers(@PathVariable ("id") Long id){
+        return daoW.findWorkers(id);
     }
 
     // Pesquisa os Departamentos por parte da descrição dele
-    @GetMapping("/pesquisarDescription/{description}")
-    public List<Departament> pesquisarDescription(@PathVariable ("description") String description){
+    @GetMapping("/searchDepartament")
+    public List<Departament> searchDepartament(@PathParam ("description") String description){
         return dao.findByDescription(description);
     }
 }
