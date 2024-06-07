@@ -82,9 +82,9 @@ public class WorkerController {
     }
 
     // Consultas específicas (3)
-    // Pesquisa Workers por parte do nome 
-    @GetMapping("/searchName/{name}")
-    public List<Worker> searchName(@PathVariable ("name") String name){
+    // Pesquisa Workers por parte do nome  
+    @GetMapping("/searchName")
+    public List<Worker> searchName(@RequestParam ("name") String name){
         return dao.findByName(name);
     }
 

@@ -16,7 +16,6 @@ import br.edu.ifsp.dsw3.trabalho.empresa.model.dao.DepartamentDAO;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.dao.WorkerDAO;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Departament;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Worker;
-import jakarta.websocket.server.PathParam;
 
 @RestController
 @RequestMapping("/departament")
@@ -83,8 +82,8 @@ public class DepartamentController {
 
     // Consultas específicas (3)
     // Pesquisa os Departamentos por parte do nome dele
-    @GetMapping("/searchName/{name}")
-    public List<Departament> searchName(@PathVariable ("name") String name){
+    @GetMapping("/searchName")
+    public List<Departament> searchName(@RequestParam ("name") String name){
         return dao.findByName(name);
     }
 
@@ -96,7 +95,7 @@ public class DepartamentController {
 
     // Pesquisa os Departamentos por parte da descrição dele
     @GetMapping("/searchDepartament")
-    public List<Departament> searchDepartament(@PathParam ("description") String description){
+    public List<Departament> searchDepartament(@RequestParam ("description") String description){
         return dao.findByDescription(description);
     }
 }
