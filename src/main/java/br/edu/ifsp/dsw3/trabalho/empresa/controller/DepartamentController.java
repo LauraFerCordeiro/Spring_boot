@@ -29,7 +29,7 @@ public class DepartamentController {
     private WorkerDAO daoW;
     
     @PostMapping("/register")
-    public ResponseEntity<Departament>  registerDepartament(@RequestParam(value = "address") String address, @RequestParam(value = "name") String name, @RequestParam(value = "description") String description){
+    public ResponseEntity<Departament> registerDepartament(@RequestParam(value = "address") String address, @RequestParam(value = "name") String name, @RequestParam(value = "description") String description){
         Departament departament = dao.save(new Departament(address, name, description));
         return new ResponseEntity<>(departament, HttpStatus.CREATED);
     }
