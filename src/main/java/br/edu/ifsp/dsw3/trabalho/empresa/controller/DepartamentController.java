@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.dao.DepartamentDAO;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.dao.WorkerDAO;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Departament;
-import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Worker;
 
 @RestController
 @RequestMapping("/departament")
@@ -35,8 +34,8 @@ public class DepartamentController {
     }
 
     @GetMapping("/list")
-    public List<Departament> list(){
-        return dao.findAll();
+    public ResponseEntity<List<Departament>>list(){
+        return new ResponseEntity<>(dao.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/search/{id}")
@@ -79,19 +78,19 @@ public class DepartamentController {
     // Consultas específicas (3)
     // Pesquisa os Departamentos por parte do nome dele
     @GetMapping("/searchName")
-    public List<Departament> searchName(@RequestParam ("name") String name){
-        return dao.findByName(name);
+    public ResponseEntity<List<Departament>> searchName(@RequestParam ("name") String name){
+        return ResponseEntity.ok(dao.findByName(name));
     }
 
     // Lista os trabalhadores de um departamento pelo id do departamento
     @GetMapping("/searchWorkers/{id}")
-    public List<Worker> searchWorkers(@PathVariable ("id") Long id){
-        return daoW.findWorkers(id);
+    public ResponseEntity<List<Object[]>> searchWorkers(@PathVariable ("id") Long id){
+        return ResponseEntity.ok(daoW.findWorkersDepartament(id));
     }
 
     // Pesquisa os Departamentos por parte da descrição dele
     @GetMapping("/searchDepartament")
-    public List<Departament> searchDepartament(@RequestParam ("description") String description){
-        return dao.findByDescription(description);
+    public ResponseEntity<List<Departament>> searchDepartament(@RequestParam ("description") String description){
+        return ResponseEntity.ok(dao.findByDescription(description));
     }
 }

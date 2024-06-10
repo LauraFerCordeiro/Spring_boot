@@ -42,8 +42,8 @@ public class WorkerController {
     }
 
     @GetMapping("/list")
-    public List<Worker> list(){
-        return dao.findAll();
+    public ResponseEntity<List<Worker>> list(){
+        return new ResponseEntity<>(dao.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/search/{id}")
@@ -79,20 +79,20 @@ public class WorkerController {
     // Consultas específicas (3)
     // Pesquisa Workers por parte do nome  
     @GetMapping("/searchName")
-    public List<Worker> searchName(@RequestParam ("name") String name){
-        return dao.findByName(name);
+    public ResponseEntity<List<Worker>> searchName(@RequestParam ("name") String name){
+        return ResponseEntity.ok(dao.findByName(name));
     }
 
     // Workers do maior salário para o menor salário
     @GetMapping("/searchSalary")
-    public List<Worker> searchSalary(){
-        return dao.findSalary();
+    public ResponseEntity<List<Worker>> searchSalary(){
+        return ResponseEntity.ok(dao.findSalary());
     }
 
     // Pesquisar por função (role) do Worker ordenado do mais velho para o mais novo
     @GetMapping("/searchRole")
-    public List<Worker> searchRole(@RequestParam ("role") String role){
-        return dao.findRole(role);
+    public ResponseEntity<List<Worker>> searchRole(@RequestParam ("role") String role){
+        return ResponseEntity.ok(dao.findRole(role));
     }
 
 

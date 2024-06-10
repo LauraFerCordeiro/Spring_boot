@@ -16,6 +16,9 @@ public interface WorkerDAO extends JpaRepository<Worker, Long> {
     @Query("SELECT w FROM Worker w WHERE w.departament.id = ?1")
     public List<Worker> findWorkers (Long id);
 
+    @Query("SELECT w.id, w.name, w.email, w.birthDate, w.salary, w.role FROM Worker w WHERE w.departament.id = ?1")
+    public List<Object[]> findWorkersDepartament(Long id);
+
     @Transactional
     @Modifying
     @Query("DELETE FROM Worker w WHERE w.departament.id = ?1")
