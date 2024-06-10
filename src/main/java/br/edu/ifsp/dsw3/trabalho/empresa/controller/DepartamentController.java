@@ -3,6 +3,8 @@ package br.edu.ifsp.dsw3.trabalho.empresa.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,13 +27,11 @@ public class DepartamentController {
 
     @Autowired
     private WorkerDAO daoW;
-
-    // Faltando: um tratamento de erro mais adequado com try catch e exception
-    //private String erro = "Ocorreu um erro, verifique se todos os dados estão corretos";
     
     @PostMapping("/register")
-    public Departament registerDepartament(@RequestParam(value = "address") String address, @RequestParam(value = "name") String name, @RequestParam(value = "description") String description){
-        return dao.save(new Departament(address, name, description));
+    public ResponseEntity<Departament>  registerDepartament(@RequestParam(value = "address") String address, @RequestParam(value = "name") String name, @RequestParam(value = "description") String description){
+        Departament departament = dao.save(new Departament(address, name, description));
+        return new ResponseEntity<>(departament, HttpStatus.CREATED);
     }
 
     @GetMapping("/list")
@@ -40,43 +40,39 @@ public class DepartamentController {
     }
 
     @GetMapping("/search/{id}")
-    public Departament searchCod(@PathVariable ("id") Long id){
+    public ResponseEntity<Departament> searchCod(@PathVariable ("id") Long id){
         if (dao.existsById(id)){
-            return dao.findById(id).get();
+            return new ResponseEntity<>(dao.findById(id).get(), HttpStatus.OK);
         } else{
-            // Pesquisar um comando mais adequado para notificar o usuário sobre o erro
-            // System.out.println(erro);
-            return null;
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
     @DeleteMapping("/delete/{id}")
-    public Boolean delete(@PathVariable("id") Long id){
+    public ResponseEntity<Boolean> delete(@PathVariable("id") Long id){
         if (dao.existsById(id)){
             if(daoW.findWorkers(id).isEmpty()){
                 dao.deleteById(id);
-                return true;
+                return new ResponseEntity<>(true, HttpStatus.OK);
             }
             else{
                 daoW.deleteWorkers(id);
                 dao.deleteById(id);
-                return true;
+                return new ResponseEntity<>(true, HttpStatus.OK);
             }
         } 
         else{
-            // System.out.println(erro);
-            return false;
+            return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
         }
     }
 
     @PutMapping("/edit/{id}")
-    public Boolean edit(@PathVariable ("id") Long id, @RequestParam(value = "address") String address, @RequestParam(value = "name") String name, @RequestParam(value = "description") String description){
+    public ResponseEntity<Boolean> edit(@PathVariable ("id") Long id, @RequestParam(value = "address") String address, @RequestParam(value = "name") String name, @RequestParam(value = "description") String description){
         if (dao.existsById(id)){
             dao.updateDepartament(id, address, name, description);
-            return true;
+            return new ResponseEntity<>(true, HttpStatus.OK);
         } else{
-            // System.out.println(erro);
-            return false;
+            return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
         }
     }
 
