@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Departament;
-import br.edu.ifsp.dsw3.trabalho.empresa.model.service.DepartamentService;
+import br.edu.ifsp.dsw3.trabalho.empresa.service.DepartamentService;
 
 @RestController
 @RequestMapping("/departament")

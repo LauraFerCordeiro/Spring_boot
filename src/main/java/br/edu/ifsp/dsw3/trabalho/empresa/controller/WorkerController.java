@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Worker;
-import br.edu.ifsp.dsw3.trabalho.empresa.model.service.WorkerService;
+import br.edu.ifsp.dsw3.trabalho.empresa.service.WorkerService;
 
 @RestController
 @RequestMapping("/workers")

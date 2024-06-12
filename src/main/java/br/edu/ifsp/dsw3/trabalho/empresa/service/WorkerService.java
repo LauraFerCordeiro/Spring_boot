@@ -1,4 +1,4 @@
-package br.edu.ifsp.dsw3.trabalho.empresa.model.service;
+package br.edu.ifsp.dsw3.trabalho.empresa.service;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
