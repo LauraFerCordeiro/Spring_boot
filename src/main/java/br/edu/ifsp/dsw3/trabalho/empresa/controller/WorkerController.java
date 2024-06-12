@@ -26,7 +26,7 @@ public class WorkerController {
     @Autowired
     private WorkerService service;
 
-    @PostMapping
+    @PostMapping("/register")
     public ResponseEntity<Worker> registerWorker(@RequestBody Worker worker) {
         Worker createdWorker = service.registerWorker(worker.getName(), worker.getEmail(), worker.getBirthDate(), worker.getSalary(), worker.getRole(), worker.getDepartament().getId());
         if (createdWorker != null) {
@@ -36,13 +36,13 @@ public class WorkerController {
         }
     }
 
-    @GetMapping
+    @GetMapping("/list")
     public ResponseEntity<List<Worker>> list() {
         List<Worker> workers = service.list();
         return new ResponseEntity<>(workers, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/search/{id}")
     public ResponseEntity<Worker> searchCod(@PathVariable Long id) {
         Worker worker = service.searchCod(id);
         if (worker != null) {
@@ -52,7 +52,7 @@ public class WorkerController {
         }
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Boolean> delete(@PathVariable Long id) {
         boolean deleted = service.delete(id);
         if (deleted) {
@@ -62,7 +62,7 @@ public class WorkerController {
         }
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/edit/{id}")
     public ResponseEntity<Boolean> edit(@PathVariable Long id, @RequestBody Worker worker) {
         boolean updated = service.edit(id, worker.getName(), worker.getEmail(), worker.getBirthDate(), worker.getSalary(), worker.getRole(), worker.getDepartament().getId());
         if (updated) {
@@ -72,7 +72,7 @@ public class WorkerController {
         }
     }
 
-    @GetMapping("/name/{name}")
+    @GetMapping("/searchName/{name}")
     public ResponseEntity<List<Worker>> searchName(@PathVariable String name) {
         List<Worker> workers = service.searchName(name);
         return new ResponseEntity<>(workers, HttpStatus.OK);
@@ -84,8 +84,8 @@ public class WorkerController {
         return new ResponseEntity<>(workers, HttpStatus.OK);
     }
 
-    @GetMapping("/role/{role}")
-    public ResponseEntity<List<Worker>> searchRole(@PathVariable String role) {
+    @GetMapping("/role")
+    public ResponseEntity<List<Worker>> searchRole(@RequestParam String role) {
         List<Worker> workers = service.searchRole(role);
         return new ResponseEntity<>(workers, HttpStatus.OK);
     }
