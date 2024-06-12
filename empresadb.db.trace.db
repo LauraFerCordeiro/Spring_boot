@@ -2231,3 +2231,12 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: /home/laurinha/D
 	at org.h2.mvstore.SingleFileStore.open(SingleFileStore.java:81)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:286)
 	... 59 more
+2024-06-11 22:43:49.991762-03:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]search * from departaments"; expected "SAVEPOINT, SCRIPT, SHUTDOWN"; SQL statement:
+search * from departaments [42001-224]
+2024-06-11 22:44:04.421761-03:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]search * from DEPARTAMENTS"; expected "SAVEPOINT, SCRIPT, SHUTDOWN"; SQL statement:
+search * from DEPARTAMENTS [42001-224]
+2024-06-11 22:50:32.445672-03:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "DEPARTAMENS" not found; SQL statement:
+select * from DEPARTAMENS [42102-224]
