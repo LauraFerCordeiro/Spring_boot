@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
 
 import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Worker;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.service.WorkerService;
@@ -22,49 +24,69 @@ import br.edu.ifsp.dsw3.trabalho.empresa.model.service.WorkerService;
 @RequestMapping("/workers")
 public class WorkerController {
     @Autowired
-    private WorkerService workerService;
+    private WorkerService service;
 
-    @PostMapping("/register")
-    public ResponseEntity<Worker> registerWorker(@RequestParam(value = "name") String name, @RequestParam(value = "email") String email, @RequestParam(value = "birthDate") LocalDate birthDate, @RequestParam(value = "salary") BigDecimal salary, @RequestParam(value = "role") String role, @RequestParam(value = "departamentId") Long departamentId){
-        return workerService.registerWorker(name, email, birthDate, salary, role, departamentId);
+    @PostMapping
+    public ResponseEntity<Worker> registerWorker(@RequestBody Worker worker) {
+        Worker createdWorker = service.registerWorker(worker.getName(), worker.getEmail(), worker.getBirthDate(), worker.getSalary(), worker.getRole(), worker.getDepartament().getId());
+        if (createdWorker != null) {
+            return new ResponseEntity<>(createdWorker, HttpStatus.CREATED);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
-    @GetMapping("/list")
-    public ResponseEntity<List<Worker>> list(){
-        return workerService.list();
+    @GetMapping
+    public ResponseEntity<List<Worker>> list() {
+        List<Worker> workers = service.list();
+        return new ResponseEntity<>(workers, HttpStatus.OK);
     }
 
-    @GetMapping("/search/{id}")
-    public ResponseEntity<Worker> searchCod(@PathVariable ("id") Long id){
-        return workerService.searchCod(id);
+    @GetMapping("/{id}")
+    public ResponseEntity<Worker> searchCod(@PathVariable Long id) {
+        Worker worker = service.searchCod(id);
+        if (worker != null) {
+            return new ResponseEntity<>(worker, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Boolean> delete(@PathVariable ("id") Long id){
-        return workerService.delete(id);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Boolean> delete(@PathVariable Long id) {
+        boolean deleted = service.delete(id);
+        if (deleted) {
+            return new ResponseEntity<>(true, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
+        }
     }
 
-    @PutMapping("/edit/{id}")
-    public ResponseEntity<Boolean> edit(@PathVariable ("id") Long id, @RequestParam(value = "name") String name, @RequestParam(value = "email") String email, @RequestParam(value = "birthDate") LocalDate birthDate, @RequestParam(value = "salary") BigDecimal salary, @RequestParam(value = "role") String role, @RequestParam(value = "departamentId") Long departamentId){
-        return workerService.edit(id, name, email, birthDate, salary, role, departamentId);
+    @PutMapping("/{id}")
+    public ResponseEntity<Boolean> edit(@PathVariable Long id, @RequestBody Worker worker) {
+        boolean updated = service.edit(id, worker.getName(), worker.getEmail(), worker.getBirthDate(), worker.getSalary(), worker.getRole(), worker.getDepartament().getId());
+        if (updated) {
+            return new ResponseEntity<>(true, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
+        }
     }
 
-    // Consultas específicas (3)
-    // Pesquisa Workers por parte do nome  
-    @GetMapping("/searchName")
-    public ResponseEntity<List<Worker>> searchName(@RequestParam ("name") String name){
-        return workerService.searchName(name);
+    @GetMapping("/name/{name}")
+    public ResponseEntity<List<Worker>> searchName(@PathVariable String name) {
+        List<Worker> workers = service.searchName(name);
+        return new ResponseEntity<>(workers, HttpStatus.OK);
     }
 
-    // Workers do maior salário para o menor salário
-    @GetMapping("/searchSalary")
-    public ResponseEntity<List<Worker>> searchSalary(){
-        return workerService.searchSalary();
+    @GetMapping("/salary")
+    public ResponseEntity<List<Worker>> searchSalary() {
+        List<Worker> workers = service.searchSalary();
+        return new ResponseEntity<>(workers, HttpStatus.OK);
     }
 
-    // Pesquisar por função (role) do Worker ordenado do mais velho para o mais novo
-    @GetMapping("/searchRole")
-    public ResponseEntity<List<Worker>> searchRole(@RequestParam ("role") String role){
-        return workerService.searchRole(role);
+    @GetMapping("/role/{role}")
+    public ResponseEntity<List<Worker>> searchRole(@PathVariable String role) {
+        List<Worker> workers = service.searchRole(role);
+        return new ResponseEntity<>(workers, HttpStatus.OK);
     }
 }
