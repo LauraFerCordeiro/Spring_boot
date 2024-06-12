@@ -3,6 +3,7 @@ package br.edu.ifsp.dsw3.trabalho.empresa.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,46 +24,70 @@ public class DepartamentController {
     private DepartamentService departamentService;
 
     @PostMapping("/register")
-    public ResponseEntity<Departament> registerDepartament(@RequestParam(value = "address") String address, @RequestParam(value = "name") String name, @RequestParam(value = "description") String description){
-        return departamentService.registerDepartament(address, name, description);
+    public ResponseEntity<Departament> registerDepartament(
+            @RequestParam(value = "address") String address,
+            @RequestParam(value = "name") String name,
+            @RequestParam(value = "description") String description) {
+        Departament departament = departamentService.registerDepartament(address, name, description);
+        return new ResponseEntity<>(departament, HttpStatus.CREATED);
     }
 
     @GetMapping("/list")
-    public ResponseEntity<List<Departament>>list(){
-        return departamentService.list();
+    public ResponseEntity<List<Departament>> list() {
+        List<Departament> departaments = departamentService.list();
+        return new ResponseEntity<>(departaments, HttpStatus.OK);
     }
 
     @GetMapping("/search/{id}")
-    public ResponseEntity<Departament> searchCod(@PathVariable ("id") Long id){
-        return departamentService.searchCod(id);
+    public ResponseEntity<Departament> searchCod(@PathVariable("id") Long id) {
+        Departament departament = departamentService.searchCod(id);
+        if (departament != null) {
+            return new ResponseEntity<>(departament, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Boolean> delete(@PathVariable("id") Long id){
-        return departamentService.delete(id);
+    public ResponseEntity<Boolean> delete(@PathVariable("id") Long id) {
+        boolean deleted = departamentService.delete(id);
+        if (deleted) {
+            return new ResponseEntity<>(true, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
+        }
     }
 
     @PutMapping("/edit/{id}")
-    public ResponseEntity<Boolean> edit(@PathVariable ("id") Long id, @RequestParam(value = "address") String address, @RequestParam(value = "name") String name, @RequestParam(value = "description") String description){
-        return departamentService.edit(id, address, name, description);
+    public ResponseEntity<Boolean> edit(
+            @PathVariable("id") Long id,
+            @RequestParam(value = "address") String address,
+            @RequestParam(value = "name") String name,
+            @RequestParam(value = "description") String description) {
+        boolean edited = departamentService.edit(id, address, name, description);
+        if (edited) {
+            return new ResponseEntity<>(true, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
+        }
     }
 
-    // Consultas específicas (3)
-    // Pesquisa os Departamentos por parte do nome dele
     @GetMapping("/searchName")
-    public ResponseEntity<List<Departament>> searchName(@RequestParam ("name") String name){
-        return departamentService.searchName(name);
+    public ResponseEntity<List<Departament>> searchName(@RequestParam("name") String name) {
+        List<Departament> departaments = departamentService.searchName(name);
+        return new ResponseEntity<>(departaments, HttpStatus.OK);
     }
 
-    // Lista os trabalhadores de um departamento pelo id do departamento
     @GetMapping("/searchWorkers/{id}")
-    public ResponseEntity<List<Object[]>> searchWorkers(@PathVariable ("id") Long id){
-        return departamentService.searchWorkers(id);
+    public ResponseEntity<List<Object[]>> searchWorkers(@PathVariable("id") Long id) {
+        List<Object[]> workers = departamentService.searchWorkers(id);
+        return new ResponseEntity<>(workers, HttpStatus.OK);
     }
 
-    // Pesquisa os Departamentos por parte da descrição dele
     @GetMapping("/searchDescription")
-    public ResponseEntity<List<Departament>> searchDescription(@RequestParam ("description") String description){
-        return departamentService.searchDescription(description);
+    public ResponseEntity<List<Departament>> searchDescription(@RequestParam("description") String description) {
+        List<Departament> departaments = departamentService.searchDescription(description);
+        return new ResponseEntity<>(departaments, HttpStatus.OK);
     }
 }
+
