@@ -16,6 +16,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -42,6 +43,9 @@ public class Worker implements Serializable{
     @Column(nullable = false)
     private String role;
 
+    @OneToOne(mappedBy = "worker")
+    private Consultancy consultancy;
+
     @ManyToOne
     @JoinColumn(name="departament", nullable = false)
     @JsonManagedReference
@@ -55,16 +59,17 @@ public class Worker implements Serializable{
         this.departament = departament;
     }
 
-    public Worker(String name, String email, LocalDate birthDate, BigDecimal salary, String role, Departament departament) {
+    public Worker(String name, String email, LocalDate birthDate, BigDecimal salary, String role, Departament departament, Consultancy consultancy) {
         this.name = name;
         this.email = email;
         this.birthDate = birthDate;
         this.salary = salary;
         this.role = role;
         this.departament = departament;
+        this.consultancy = consultancy;
     }
 
-    public Worker(Long id, String name, String email, LocalDate birthDate, BigDecimal salary, String role, Departament departament) {
+    public Worker(Long id, String name, String email, LocalDate birthDate, BigDecimal salary, String role, Departament departament, Consultancy consultancy) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -72,6 +77,7 @@ public class Worker implements Serializable{
         this.salary = salary;
         this.role = role;
         this.departament = departament;
+        this.consultancy = consultancy;
     }
 
     public Worker() {
@@ -112,6 +118,14 @@ public class Worker implements Serializable{
     }
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public Consultancy getConsultancy() {
+        return consultancy;
+    }
+
+    public void setConsultancy(Consultancy consultancy) {
+        this.consultancy = consultancy;
     }
     
 }
