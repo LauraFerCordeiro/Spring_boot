@@ -1,5 +1,7 @@
 package br.edu.ifsp.dsw3.trabalho.empresa.model.domain;
 
+import java.io.Serializable;
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
@@ -14,7 +16,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "clients")
-public class Client {
+public class Client implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,23 +32,23 @@ public class Client {
     private Consultancy consultancy;
 
     @ManyToOne
-    @JoinColumn(name = "department_id_fk")
+    @JoinColumn(name = "course")
     @JsonManagedReference
-    private Departament department;
+    private Course course;
 
-    public Client(Long id, String name, String email, Consultancy consultancy, Departament department) {
+    public Client(Long id, String name, String email, Consultancy consultancy, Course course) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.consultancy = consultancy;
-        this.department = department;
+        this.course = course;
     }
 
-    public Client(String name, String email, Consultancy consultancy, Departament department) {
+    public Client(String name, String email, Consultancy consultancy, Course course) {
         this.name = name;
         this.email = email;
         this.consultancy = consultancy;
-        this.department = department;
+        this.course = course;
     }
 
     public Client() {
@@ -84,13 +86,11 @@ public class Client {
         this.consultancy = consultancy;
     }
 
-    public Departament getDepartment() {
-        return department;
+    public Course getCourse() {
+        return course;
     }
 
-    public void setDepartment(Departament department) {
-        this.department = department;
+    public void setCourse(Course course) {
+        this.course = course;
     }
-
-    
 }

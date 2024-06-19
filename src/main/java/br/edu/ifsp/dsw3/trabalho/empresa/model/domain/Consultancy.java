@@ -1,5 +1,6 @@
 package br.edu.ifsp.dsw3.trabalho.empresa.model.domain;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -18,42 +19,42 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "consultancies")
-public class Consultancy {
+public class Consultancy implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @Column(name = "value", nullable = false, columnDefinition = "DECIMAL")
     private BigDecimal value;
 
-    @Column(name = "date", nullable = false, columnDefinition = "DATE")
+    @Column(name = "end_date", nullable = false, columnDefinition = "DATE")
     @DateTimeFormat(iso = ISO.DATE)
-    private LocalDate data;
+    private LocalDate endDate;
 
     @Column(nullable = false)
     private String description;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "consultancy_id_fk")
+    @JoinColumn(name = "client")
     private Client client;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "consultancy_id_fk")
+    @JoinColumn(name = "worker")
     private Worker worker;
 
-    public Consultancy(Long id, BigDecimal value, LocalDate data, String description, Client client, Worker worker) {
+    public Consultancy(Long id, BigDecimal value, LocalDate endDate, String description, Client client, Worker worker) {
         this.id = id;
         this.value = value;
-        this.data = data;
+        this.endDate = endDate;
         this.description = description;
         this.client = client;
         this.worker = worker;
     }
 
-    public Consultancy(BigDecimal value, LocalDate data, String description, Client client, Worker worker) {
+    public Consultancy(BigDecimal value, LocalDate endDate, String description, Client client, Worker worker) {
         this.value = value;
-        this.data = data;
+        this.endDate = endDate;
         this.description = description;
         this.client = client;
         this.worker = worker;
@@ -78,12 +79,12 @@ public class Consultancy {
         this.value = value;
     }
 
-    public LocalDate getData() {
-        return data;
+    public LocalDate getendDate() {
+        return endDate;
     }
 
-    public void setData(LocalDate data) {
-        this.data = data;
+    public void setendDate(LocalDate endDate) {
+        this.endDate = endDate;
     }
 
     public String getDescription() {
@@ -110,5 +111,4 @@ public class Consultancy {
         this.worker = worker;
     }
 
-    
 }

@@ -32,8 +32,10 @@ public class WorkerController {
             @RequestParam(value = "birthDate") LocalDate birthDate,
             @RequestParam(value = "salary") BigDecimal salary,
             @RequestParam(value = "role") String role,
-            @RequestParam(value = "departamentId") Long departamentId) {
-        Worker worker = workerService.registerWorker(name, email, birthDate, salary, role, departamentId);
+            @RequestParam(value = "departamentId") Long departamentId,
+            @RequestParam(value = "consultancyId") Long consultancyId) {
+        Worker worker = workerService.registerWorker(name, email, birthDate, salary, role, departamentId,
+                consultancyId);
         if (worker != null) {
             return new ResponseEntity<>(worker, HttpStatus.CREATED);
         } else {
@@ -75,8 +77,9 @@ public class WorkerController {
             @RequestParam(value = "birthDate") LocalDate birthDate,
             @RequestParam(value = "salary") BigDecimal salary,
             @RequestParam(value = "role") String role,
-            @RequestParam(value = "departamentId") Long departamentId) {
-        boolean edited = workerService.edit(id, name, email, birthDate, salary, role, departamentId);
+            @RequestParam(value = "departamentId") Long departamentId,
+            @RequestParam(value = "consultancyId") Long consultancyId) {
+        boolean edited = workerService.edit(id, name, email, birthDate, salary, role, departamentId, consultancyId);
         if (edited) {
             return new ResponseEntity<>(true, HttpStatus.OK);
         } else {

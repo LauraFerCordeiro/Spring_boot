@@ -1,5 +1,6 @@
 package br.edu.ifsp.dsw3.trabalho.empresa.model.domain;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
@@ -19,7 +20,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "courses")
-public class Course {
+public class Course implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,29 +35,29 @@ public class Course {
     @Column(nullable = false)
     private String description;
 
-    @Column(name = "duration", nullable = false, columnDefinition = "DATE")
+    @Column(name = "end_date", nullable = false, columnDefinition = "DATE")
     @DateTimeFormat(iso = ISO.DATE)
-    private LocalDate duration;
+    private LocalDate endDate;
 
     @OneToMany(mappedBy = "department")
     @JsonBackReference
     private List<Client> clients;
 
-    public Course(Long id, BigDecimal value, String name, String description, LocalDate duration,
+    public Course(Long id, BigDecimal value, String name, String description, LocalDate endDate,
             List<Client> clients) {
         this.id = id;
         this.value = value;
         this.name = name;
         this.description = description;
-        this.duration = duration;
+        this.endDate = endDate;
         this.clients = clients;
     }
 
-    public Course(BigDecimal value, String name, String description, LocalDate duration, List<Client> clients) {
+    public Course(BigDecimal value, String name, String description, LocalDate endDate, List<Client> clients) {
         this.value = value;
         this.name = name;
         this.description = description;
-        this.duration = duration;
+        this.endDate = endDate;
         this.clients = clients;
     }
 
@@ -95,12 +96,12 @@ public class Course {
         this.description = description;
     }
 
-    public LocalDate getDuration() {
-        return duration;
+    public LocalDate getendDate() {
+        return endDate;
     }
 
-    public void setDuration(LocalDate duration) {
-        this.duration = duration;
+    public void setendDate(LocalDate endDate) {
+        this.endDate = endDate;
     }
 
     public List<Client> getClients() {
@@ -111,5 +112,4 @@ public class Course {
         this.clients = clients;
     }
 
-    
 }
