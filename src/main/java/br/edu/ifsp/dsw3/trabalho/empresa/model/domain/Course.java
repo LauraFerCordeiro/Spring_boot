@@ -39,26 +39,23 @@ public class Course implements Serializable {
     @DateTimeFormat(iso = ISO.DATE)
     private LocalDate endDate;
 
-    @OneToMany(mappedBy = "department")
+    @OneToMany(mappedBy = "course")
     @JsonBackReference
     private List<Client> clients;
 
-    public Course(Long id, BigDecimal value, String name, String description, LocalDate endDate,
-            List<Client> clients) {
+    public Course(Long id, BigDecimal value, String name, String description, LocalDate endDate) {
         this.id = id;
         this.value = value;
         this.name = name;
         this.description = description;
         this.endDate = endDate;
-        this.clients = clients;
     }
 
-    public Course(BigDecimal value, String name, String description, LocalDate endDate, List<Client> clients) {
+    public Course(BigDecimal value, String name, String description, LocalDate endDate) {
         this.value = value;
         this.name = name;
         this.description = description;
         this.endDate = endDate;
-        this.clients = clients;
     }
 
     public Course() {

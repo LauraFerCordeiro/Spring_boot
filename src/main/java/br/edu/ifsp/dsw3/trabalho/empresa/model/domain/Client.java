@@ -51,6 +51,23 @@ public class Client implements Serializable {
         this.course = course;
     }
 
+    public Client(String name, String email, Consultancy consultancy) {
+        this.name = name;
+        this.email = email;
+        this.consultancy = consultancy;
+    }
+
+    public Client(String name, String email, Course course) {
+        this.name = name;
+        this.email = email;
+        this.course = course;
+    }
+
+    public Client(String name, String email) {
+        this.name = name;
+        this.email = email;
+    }
+
     public Client() {
     }
 
