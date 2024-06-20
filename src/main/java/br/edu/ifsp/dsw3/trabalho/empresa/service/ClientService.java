@@ -108,8 +108,15 @@ public class ClientService {
                 }
 
             } else {
-                dao.updateClient(id, name, email, null, null);
-                return true;
+                Consultancy consultancy = dao.findById(id).get().getConsultancy();
+                Course course = dao.findById(id).get().getCourse();
+                if (consultancy == null && course == null) {
+                    dao.updateClient(id, name, email);
+                    dao.flush();
+                    return true;
+                } else {
+                    return false;
+                }
             }
         }else{
             return false; 

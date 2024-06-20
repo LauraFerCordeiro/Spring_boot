@@ -18,18 +18,21 @@ public interface ClientDAO extends JpaRepository<Client, Long> {
     @Query("UPDATE Client c SET c.name = ?2, c.email = ?3, c.consultancy = ?4, c.course = ?5 WHERE c.id = ?1")
     public void updateClient(Long id, String name, String email, Consultancy consultancy, Course course);
 
+    @Transactional
     @Modifying
     @Query("UPDATE Client c SET c.name = ?2, c.email = ?3, c.consultancy = ?4, c.course = ?5 WHERE c.id = ?1")
     public default void updateClient(Long id, String name, String email, Consultancy consultancy) {
         updateClient(id, name, email, consultancy, null);
     }
 
+    @Transactional
     @Modifying
     @Query("UPDATE Client c SET c.name = ?2, c.email = ?3, c.consultancy = ?4, c.course = ?5 WHERE c.id = ?1")
     public default void updateClient(Long id, String name, String email, Course course) {
         updateClient(id, name, email, null, course);
     }
 
+    @Transactional
     @Modifying
     @Query("UPDATE Client c SET c.name = ?2, c.email = ?3 WHERE c.id = ?1")
     public void updateClient(Long id, String name, String email);
