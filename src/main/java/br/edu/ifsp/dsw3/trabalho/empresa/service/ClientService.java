@@ -81,7 +81,7 @@ public class ClientService {
                 if (daoC.existsById(consultancyId) && daoCo.existsById(courseId)) {
                     Consultancy c = daoC.findById(consultancyId).get();
                     Course co = daoCo.findById(courseId).get();
-                    dao.updateClient(courseId, name, email, c, co);
+                    dao.updateClient(id, name, email, c, co);
                     return true;
                 } else {
                     return false;
@@ -91,7 +91,7 @@ public class ClientService {
 
                 if (daoC.existsById(consultancyId)) {
                     Consultancy c = daoC.findById(consultancyId).get();
-                    dao.updateClient(courseId, name, email, c);
+                    dao.updateClient(id, name, email, c);
                     return true;
                 } else {
                     return false;
@@ -101,14 +101,14 @@ public class ClientService {
 
                 if (daoC.existsById(courseId)) {
                     Course co = daoCo.findById(courseId).get();
-                    dao.updateClient(courseId, name, email, co);
+                    dao.updateClient(id, name, email, co);
                     return true;
                 } else {
                     return false;
                 }
 
             } else {
-                dao.updateClient(courseId, name, email);
+                dao.updateClient(id, name, email, null, null);
                 return true;
             }
         }else{

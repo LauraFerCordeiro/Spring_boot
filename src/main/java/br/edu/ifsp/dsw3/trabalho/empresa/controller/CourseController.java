@@ -33,7 +33,7 @@ public class CourseController {
             @RequestParam(value = "name") String name,
             @RequestParam(value = "value") BigDecimal value,
             @RequestParam(value = "description") String description,
-            @RequestParam(value = "endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
+            @RequestParam(value = "endDate") LocalDate endDate) {
         Course course = courseService.register(name, value, description, endDate);
         return new ResponseEntity<>(course, HttpStatus.CREATED);
     }

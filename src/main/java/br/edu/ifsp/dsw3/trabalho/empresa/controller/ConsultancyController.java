@@ -30,7 +30,7 @@ public class ConsultancyController {
     @PostMapping("/register")
     public ResponseEntity<Consultancy> registerConsultancy(
             @RequestParam(value = "value") BigDecimal value,
-            @RequestParam(value = "endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
+            @RequestParam(value = "endDate") LocalDate endDate,
             @RequestParam(value = "description") String description,
             @RequestParam(value = "clientId") Long clientId,
             @RequestParam(value = "workerId") Long workerId) {
