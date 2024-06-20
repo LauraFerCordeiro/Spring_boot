@@ -5,12 +5,14 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import br.edu.ifsp.dsw3.trabalho.empresa.model.dao.ClientDAO;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.dao.CourseDAO;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Client;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Course;
 
+@Service
 public class CourseService {
     @Autowired
     private CourseDAO dao;
