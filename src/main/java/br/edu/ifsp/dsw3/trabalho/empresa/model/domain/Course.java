@@ -26,8 +26,8 @@ public class Course implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "value", nullable = false, columnDefinition = "DECIMAL")
-    private BigDecimal value;
+    @Column(name = "cost", nullable = false, columnDefinition = "DECIMAL")
+    private BigDecimal cost;
 
     @Column(nullable = false)
     private String name;
@@ -43,16 +43,16 @@ public class Course implements Serializable {
     @JsonBackReference
     private List<Client> clients;
 
-    public Course(Long id, BigDecimal value, String name, String description, LocalDate endDate) {
+    public Course(Long id, BigDecimal cost, String name, String description, LocalDate endDate) {
         this.id = id;
-        this.value = value;
+        this.cost = cost;
         this.name = name;
         this.description = description;
         this.endDate = endDate;
     }
 
-    public Course(BigDecimal value, String name, String description, LocalDate endDate) {
-        this.value = value;
+    public Course(BigDecimal cost, String name, String description, LocalDate endDate) {
+        this.cost = cost;
         this.name = name;
         this.description = description;
         this.endDate = endDate;
@@ -69,12 +69,12 @@ public class Course implements Serializable {
         this.id = id;
     }
 
-    public BigDecimal getValue() {
-        return value;
+    public BigDecimal getCost() {
+        return cost;
     }
 
-    public void setValue(BigDecimal value) {
-        this.value = value;
+    public void setCost(BigDecimal cost) {
+        this.cost = cost;
     }
 
     public String getName() {
@@ -93,11 +93,11 @@ public class Course implements Serializable {
         this.description = description;
     }
 
-    public LocalDate getendDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setendDate(LocalDate endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 
@@ -108,5 +108,4 @@ public class Course implements Serializable {
     public void setClients(List<Client> clients) {
         this.clients = clients;
     }
-
 }

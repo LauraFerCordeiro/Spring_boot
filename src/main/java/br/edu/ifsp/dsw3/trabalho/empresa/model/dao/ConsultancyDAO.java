@@ -12,10 +12,10 @@ import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Consultancy;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Worker;
 import jakarta.transaction.Transactional;
 
-public interface ConsultancyDAO extends JpaRepository<Consultancy, Long>{
-    
+public interface ConsultancyDAO extends JpaRepository<Consultancy, Long> {
+
     @Transactional
     @Modifying
-    @Query("UPDATE consultancies c SET c.value = ?2, c.end_date = ?3, c.description = ?4, c.client = ?5, c.worker = ?6 WHERE c.id = ?1")
-    public void updateConsultancy(Long id, BigDecimal value, LocalDate endDate, String description, Client client, Worker worker);
+    @Query("UPDATE Consultancy c SET c.cost = ?2, c.endDate = ?3, c.description = ?4, c.client = ?5, c.worker = ?6 WHERE c.id = ?1")
+    public void updateConsultancy(Long id, BigDecimal cost, LocalDate endDate, String description, Client client, Worker worker);
 }

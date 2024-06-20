@@ -14,7 +14,7 @@ public interface CourseDAO extends JpaRepository<Course, Long> {
     
     @Transactional
     @Modifying
-    @Query("UPDATE courses c SET c.name = ?2, c.value = ?3, c.description = ?4, c.end_date = ?5 WHERE c.id = ?1")
-    public void updateCourse(Long id, String name, BigDecimal value, String description, LocalDate endDate);
+    @Query("UPDATE Course c SET c.name = ?2, c.cost = ?3, c.description = ?4, c.endDate = ?5 WHERE c.id = ?1")
+    void updateCourse(Long id, String name, BigDecimal cost, String description, LocalDate endDate);
 
 }

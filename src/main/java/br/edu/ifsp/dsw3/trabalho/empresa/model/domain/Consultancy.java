@@ -25,8 +25,8 @@ public class Consultancy implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "value", nullable = false, columnDefinition = "DECIMAL")
-    private BigDecimal value;
+    @Column(name = "cost", nullable = false, columnDefinition = "DECIMAL")
+    private BigDecimal cost;
 
     @Column(name = "end_date", nullable = false, columnDefinition = "DATE")
     @DateTimeFormat(iso = ISO.DATE)
@@ -36,24 +36,24 @@ public class Consultancy implements Serializable {
     private String description;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "client")
+    @JoinColumn(name = "client_id")
     private Client client;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "worker")
+    @JoinColumn(name = "worker_id")
     private Worker worker;
 
-    public Consultancy(Long id, BigDecimal value, LocalDate endDate, String description, Client client, Worker worker) {
+    public Consultancy(Long id, BigDecimal cost, LocalDate endDate, String description, Client client, Worker worker) {
         this.id = id;
-        this.value = value;
+        this.cost = cost;
         this.endDate = endDate;
         this.description = description;
         this.client = client;
         this.worker = worker;
     }
 
-    public Consultancy(BigDecimal value, LocalDate endDate, String description, Client client, Worker worker) {
-        this.value = value;
+    public Consultancy(BigDecimal cost, LocalDate endDate, String description, Client client, Worker worker) {
+        this.cost = cost;
         this.endDate = endDate;
         this.description = description;
         this.client = client;
@@ -71,19 +71,19 @@ public class Consultancy implements Serializable {
         this.id = id;
     }
 
-    public BigDecimal getValue() {
-        return value;
+    public BigDecimal getCost() {
+        return cost;
     }
 
-    public void setValue(BigDecimal value) {
-        this.value = value;
+    public void setCost(BigDecimal cost) {
+        this.cost = cost;
     }
 
-    public LocalDate getendDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setendDate(LocalDate endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 
@@ -110,5 +110,4 @@ public class Consultancy implements Serializable {
     public void setWorker(Worker worker) {
         this.worker = worker;
     }
-
 }
