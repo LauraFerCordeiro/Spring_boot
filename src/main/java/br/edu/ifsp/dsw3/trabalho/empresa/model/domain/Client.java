@@ -2,6 +2,7 @@ package br.edu.ifsp.dsw3.trabalho.empresa.model.domain;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
@@ -29,6 +30,7 @@ public class Client implements Serializable {
     private String email;
 
     @OneToOne(mappedBy = "client")
+    @JsonBackReference
     private Consultancy consultancy;
 
     @ManyToOne

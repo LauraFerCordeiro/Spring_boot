@@ -55,17 +55,42 @@ public class ConsultancyService {
 
     public boolean edit(Long id, BigDecimal value, LocalDate endDate, String description, Long clientId,
             Long workerId) {
-        if (dao.existsById(id)) {
-            if (daoC.existsById(clientId) && daoW.existsById(workerId)) {
-                Client c = daoC.findById(clientId).get();
-                Worker w = daoW.findById(workerId).get();
-                dao.updateConsultancy(workerId, value, endDate, description, c, w);
-                return true;
+        if (clientId != null && workerId != null) {
+            if (dao.existsById(id)) {
+                if (daoC.existsById(clientId) && daoW.existsById(workerId)) {
+                    Client c = daoC.findById(clientId).get();
+                    Worker w = daoW.findById(workerId).get();
+                    dao.updateConsultancy(id, value, endDate, description, c, w);
+                    return true;
+                } else {
+                    return false;
+                }
             } else {
                 return false;
             }
-        } else {
-            return false;
+        }else if(clientId != null){
+            if(dao.existsById(id) && daoC.existsById(clientId)){
+                Client c = daoC.findById(clientId).get();
+                dao.updateConsultancy(id, value, endDate, description, c);
+                return true;
+            }else{
+                return false;
+            }
+        }else if(workerId != null){
+            if(dao.existsById(id) && daoW.existsById(workerId)){
+                Worker w = daoW.findById(workerId).get();
+                dao.updateConsultancy(id, value, endDate, description, w);
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            if(dao.existsById(id)){
+                dao.updateConsultancy(id, value, endDate, description);
+                return true;
+            }else{
+                return false;
+            }
         }
     }
 }

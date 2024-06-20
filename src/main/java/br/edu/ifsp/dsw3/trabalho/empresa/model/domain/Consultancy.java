@@ -7,6 +7,8 @@ import java.time.LocalDate;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -35,12 +37,14 @@ public class Consultancy implements Serializable {
     @Column(nullable = false)
     private String description;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "client_id")
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "client")
+    @JsonManagedReference
     private Client client;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "worker_id")
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "worker")
+    @JsonManagedReference
     private Worker worker;
 
     public Consultancy(Long id, BigDecimal cost, LocalDate endDate, String description, Client client, Worker worker) {

@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
@@ -44,6 +45,7 @@ public class Worker implements Serializable{
     private String role;
 
     @OneToOne(mappedBy = "worker")
+    @JsonBackReference
     private Consultancy consultancy;
 
     @ManyToOne
@@ -78,6 +80,18 @@ public class Worker implements Serializable{
         this.role = role;
         this.departament = departament;
         this.consultancy = consultancy;
+    }
+
+    
+
+    public Worker(String name, String email, LocalDate birthDate, BigDecimal salary, String role,
+            Departament departament) {
+        this.name = name;
+        this.email = email;
+        this.birthDate = birthDate;
+        this.salary = salary;
+        this.role = role;
+        this.departament = departament;
     }
 
     public Worker() {
