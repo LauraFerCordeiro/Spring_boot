@@ -45,7 +45,7 @@ public class ClientService {
 
         } else if (courseId != null) {
 
-            if (daoC.existsById(courseId)) {
+            if (daoCo.existsById(courseId)) {
                 Course co = daoCo.findById(courseId).get();
                 return dao.save(new Client(name, email, co));
             } else {
@@ -99,7 +99,7 @@ public class ClientService {
 
             } else if (courseId != null) {
 
-                if (daoC.existsById(courseId)) {
+                if (daoCo.existsById(courseId)) {
                     Course co = daoCo.findById(courseId).get();
                     dao.updateClient(id, name, email, co);
                     return true;

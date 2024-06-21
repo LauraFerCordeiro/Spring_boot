@@ -20,26 +20,24 @@ public interface ClientDAO extends JpaRepository<Client, Long> {
 
     @Transactional
     @Modifying
-    @Query("UPDATE Client c SET c.name = ?2, c.email = ?3, c.consultancy = ?4, c.course = ?5 WHERE c.id = ?1")
-    public default void updateClient(Long id, String name, String email, Consultancy consultancy) {
-        updateClient(id, name, email, consultancy, null);
-    }
+    @Query("UPDATE Client c SET c.name = ?2, c.email = ?3, c.consultancy = ?4 WHERE c.id = ?1")
+    public void updateClient(Long id, String name, String email, Consultancy consultancy);
 
     @Transactional
     @Modifying
-    @Query("UPDATE Client c SET c.name = ?2, c.email = ?3, c.consultancy = ?4, c.course = ?5 WHERE c.id = ?1")
-    public default void updateClient(Long id, String name, String email, Course course) {
-        updateClient(id, name, email, null, course);
-    }
+    @Query("UPDATE Client c SET c.name = ?2, c.email = ?3, c.course = ?4 WHERE c.id = ?1")
+    public void updateClient(Long id, String name, String email, Course course);
 
     @Transactional
     @Modifying
     @Query("UPDATE Client c SET c.name = ?2, c.email = ?3 WHERE c.id = ?1")
     public void updateClient(Long id, String name, String email);
 
+    @Transactional
+    @Modifying
     @Query("UPDATE Client c SET c.course = NULL WHERE c.course.id = ?1")
     public void removeCourseId(Long id);
 
-    @Query("SELECT c.id, c.name, c.email, c.consultancy FROM Client c WHERE c.course.id = ?1")
-    public List<Client> findClientsByCourse(Long id);
+    @Query("SELECT c.id, c.name, c.email FROM Client c WHERE c.course.id = ?1")
+    public List<Object[]> findClientsByCourse(Long id);
 }

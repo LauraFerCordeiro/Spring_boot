@@ -18,4 +18,20 @@ public interface ConsultancyDAO extends JpaRepository<Consultancy, Long> {
     @Modifying
     @Query("UPDATE Consultancy c SET c.cost = ?2, c.endDate = ?3, c.description = ?4, c.client = ?5, c.worker = ?6 WHERE c.id = ?1")
     public void updateConsultancy(Long id, BigDecimal cost, LocalDate endDate, String description, Client client, Worker worker);
+
+    @Transactional
+    @Modifying
+    @Query("UPDATE Consultancy c SET c.cost = ?2, c.endDate = ?3, c.description = ?4, c.client = ?5 WHERE c.id = ?1")
+    public void updateConsultancy(Long id, BigDecimal cost, LocalDate endDate, String description, Client client);
+
+    @Transactional
+    @Modifying
+    @Query("UPDATE Consultancy c SET c.cost = ?2, c.endDate = ?3, c.description = ?4, c.worker = ?5 WHERE c.id = ?1")
+    public void updateConsultancy(Long id, BigDecimal cost, LocalDate endDate, String description, Worker worker);
+
+    @Transactional
+    @Modifying
+    @Query("UPDATE Consultancy c SET c.cost = ?2, c.endDate = ?3, c.description = ?4 WHERE c.id = ?1")
+    public void updateConsultancy(Long id, BigDecimal cost, LocalDate endDate, String description);
+
 }

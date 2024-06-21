@@ -8,7 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
-import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Consultancy;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Departament;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Worker;
 import jakarta.transaction.Transactional;
@@ -17,7 +16,7 @@ public interface WorkerDAO extends JpaRepository<Worker, Long> {
     @Query("SELECT w FROM Worker w WHERE w.departament.id = ?1")
     public List<Worker> findWorkers(Long id);
 
-    @Query("SELECT w.id, w.name, w.email, w.birthDate, w.salary, w.role, w.consultancy FROM Worker w WHERE w.departament.id = ?1")
+    @Query("SELECT w.id, w.name, w.email, w.birthDate, w.salary, w.role FROM Worker w WHERE w.departament.id = ?1")
     public List<Object[]> findWorkersDepartament(Long id);
 
     @Transactional
@@ -27,9 +26,9 @@ public interface WorkerDAO extends JpaRepository<Worker, Long> {
 
     @Transactional
     @Modifying
-    @Query("UPDATE Worker w SET w.name = ?2, w.email = ?3, w.birthDate = ?4, w.salary = ?5, w.role = ?6, w.departament = ?7, w.consultancy = ?8 WHERE w.id = ?1")
+    @Query("UPDATE Worker w SET w.name = ?2, w.email = ?3, w.birthDate = ?4, w.salary = ?5, w.role = ?6, w.departament = ?7 WHERE w.id = ?1")
     public void updateWorker(Long id, String name, String email, LocalDate birthDate, BigDecimal salary, String role,
-            Departament departament, Consultancy consultancy);
+            Departament departament);
 
     @Query("SELECT w FROM Worker w WHERE w.name LIKE %?1%")
     public List<Worker> findByName(String name);

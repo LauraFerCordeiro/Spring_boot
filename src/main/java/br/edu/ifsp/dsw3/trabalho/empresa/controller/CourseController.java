@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Client;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Course;
 import br.edu.ifsp.dsw3.trabalho.empresa.service.CourseService;
 
@@ -31,10 +29,10 @@ public class CourseController {
     @PostMapping("/register")
     public ResponseEntity<Course> registerCourse(
             @RequestParam(value = "name") String name,
-            @RequestParam(value = "value") BigDecimal value,
+            @RequestParam(value = "cost") BigDecimal cost,
             @RequestParam(value = "description") String description,
             @RequestParam(value = "endDate") LocalDate endDate) {
-        Course course = courseService.register(name, value, description, endDate);
+        Course course = courseService.register(name, cost, description, endDate);
         return new ResponseEntity<>(course, HttpStatus.CREATED);
     }
 
@@ -68,10 +66,10 @@ public class CourseController {
     public ResponseEntity<Boolean> edit(
             @PathVariable("id") Long id,
             @RequestParam(value = "name") String name,
-            @RequestParam(value = "value") BigDecimal value,
+            @RequestParam(value = "cost") BigDecimal cost,
             @RequestParam(value = "description") String description,
-            @RequestParam(value = "endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
-        boolean edited = courseService.edit(id, name, value, description, endDate);
+            @RequestParam(value = "endDate") LocalDate endDate) {
+        boolean edited = courseService.edit(id, name, cost, description, endDate);
         if (edited) {
             return new ResponseEntity<>(true, HttpStatus.OK);
         } else {
@@ -80,8 +78,8 @@ public class CourseController {
     }
 
     @GetMapping("/listClients/{id}")
-    public ResponseEntity<List<Client>> listClients(@PathVariable("id") Long id) {
-        List<Client> clients = courseService.listClients(id);
+    public ResponseEntity<List<Object[]>> listClients(@PathVariable("id") Long id) {
+        List<Object[]> clients = courseService.listClients(id);
         return new ResponseEntity<>(clients, HttpStatus.OK);
     }
 }

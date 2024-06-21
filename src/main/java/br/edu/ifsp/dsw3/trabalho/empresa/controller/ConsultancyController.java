@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -29,12 +28,12 @@ public class ConsultancyController {
 
     @PostMapping("/register")
     public ResponseEntity<Consultancy> registerConsultancy(
-            @RequestParam(value = "value") BigDecimal value,
+            @RequestParam(value = "cost") BigDecimal cost,
             @RequestParam(value = "endDate") LocalDate endDate,
             @RequestParam(value = "description") String description,
             @RequestParam(value = "clientId") Long clientId,
             @RequestParam(value = "workerId") Long workerId) {
-        Consultancy consultancy = consultancyService.register(value, endDate, description, clientId, workerId);
+        Consultancy consultancy = consultancyService.register(cost, endDate, description, clientId, workerId);
         if (consultancy != null) {
             return new ResponseEntity<>(consultancy, HttpStatus.CREATED);
         } else {
@@ -71,12 +70,12 @@ public class ConsultancyController {
     @PutMapping("/edit/{id}")
     public ResponseEntity<Boolean> edit(
             @PathVariable("id") Long id,
-            @RequestParam(value = "value") BigDecimal value,
-            @RequestParam(value = "endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
+            @RequestParam(value = "cost") BigDecimal cost,
+            @RequestParam(value = "endDate") LocalDate endDate,
             @RequestParam(value = "description") String description,
-            @RequestParam(value = "clientId") Long clientId,
-            @RequestParam(value = "workerId") Long workerId) {
-        boolean edited = consultancyService.edit(id, value, endDate, description, clientId, workerId);
+            @RequestParam(value = "clientId", required = false) Long clientId,
+            @RequestParam(value = "workerId", required = false) Long workerId) {
+        boolean edited = consultancyService.edit(id, cost, endDate, description, clientId, workerId);
         if (edited) {
             return new ResponseEntity<>(true, HttpStatus.OK);
         } else {
