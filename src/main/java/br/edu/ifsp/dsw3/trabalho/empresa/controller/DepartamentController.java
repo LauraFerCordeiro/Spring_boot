@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Departament;
+import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Department;
 import br.edu.ifsp.dsw3.trabalho.empresa.service.DepartamentService;
 
 @RestController
@@ -24,23 +24,23 @@ public class DepartamentController {
     private DepartamentService departamentService;
 
     @PostMapping("/register")
-    public ResponseEntity<Departament> registerDepartament(
+    public ResponseEntity<Department> registerDepartament(
             @RequestParam(value = "address") String address,
             @RequestParam(value = "name") String name,
             @RequestParam(value = "description") String description) {
-        Departament departament = departamentService.registerDepartament(address, name, description);
+        Department departament = departamentService.registerDepartament(address, name, description);
         return new ResponseEntity<>(departament, HttpStatus.CREATED);
     }
 
     @GetMapping("/list")
-    public ResponseEntity<List<Departament>> list() {
-        List<Departament> departaments = departamentService.list();
+    public ResponseEntity<List<Department>> list() {
+        List<Department> departaments = departamentService.list();
         return new ResponseEntity<>(departaments, HttpStatus.OK);
     }
 
     @GetMapping("/search/{id}")
-    public ResponseEntity<Departament> searchCod(@PathVariable("id") Long id) {
-        Departament departament = departamentService.searchCod(id);
+    public ResponseEntity<Department> searchCod(@PathVariable("id") Long id) {
+        Department departament = departamentService.searchCod(id);
         if (departament != null) {
             return new ResponseEntity<>(departament, HttpStatus.OK);
         } else {
@@ -73,8 +73,8 @@ public class DepartamentController {
     }
 
     @GetMapping("/searchName")
-    public ResponseEntity<List<Departament>> searchName(@RequestParam("name") String name) {
-        List<Departament> departaments = departamentService.searchName(name);
+    public ResponseEntity<List<Department>> searchName(@RequestParam("name") String name) {
+        List<Department> departaments = departamentService.searchName(name);
         return new ResponseEntity<>(departaments, HttpStatus.OK);
     }
 
@@ -85,8 +85,8 @@ public class DepartamentController {
     }
 
     @GetMapping("/searchDescription")
-    public ResponseEntity<List<Departament>> searchDescription(@RequestParam("description") String description) {
-        List<Departament> departaments = departamentService.searchDescription(description);
+    public ResponseEntity<List<Department>> searchDescription(@RequestParam("description") String description) {
+        List<Department> departaments = departamentService.searchDescription(description);
         return new ResponseEntity<>(departaments, HttpStatus.OK);
     }
 }

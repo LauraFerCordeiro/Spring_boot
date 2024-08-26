@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import br.edu.ifsp.dsw3.trabalho.empresa.model.dao.DepartamentDAO;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.dao.WorkerDAO;
-import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Departament;
+import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Department;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Worker;
 
 @Service
@@ -30,7 +30,7 @@ public class WorkerService {
             Long departamentId
             ) {
         if (daoD.existsById(departamentId)) {
-            Departament d = daoD.findById(departamentId).get();
+            Department d = daoD.findById(departamentId).get();
             return dao.save(new Worker(name, email, birthDate, salary, role, d));
         } else {
             return null;
@@ -57,7 +57,7 @@ public class WorkerService {
     public boolean edit(Long id, String name, String email, LocalDate birthDate, BigDecimal salary, String role,
             Long departamentId) {
         if (dao.existsById(id) && daoD.existsById(departamentId)) {
-            Departament d = daoD.findById(departamentId).get();
+            Department d = daoD.findById(departamentId).get();
             dao.updateWorker(id, name, email, birthDate, salary, role, d);
             return true;
         } else {

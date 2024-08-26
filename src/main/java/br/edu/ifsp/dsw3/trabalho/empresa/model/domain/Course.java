@@ -26,36 +26,45 @@ public class Course implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "cost", nullable = false, columnDefinition = "DECIMAL")
-    private BigDecimal cost;
-
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
-    private String description;
+    @Column(name = "start_date", nullable = false, columnDefinition = "DATE")
+    @DateTimeFormat(iso = ISO.DATE)
+    private LocalDate startDate;
 
     @Column(name = "end_date", nullable = false, columnDefinition = "DATE")
     @DateTimeFormat(iso = ISO.DATE)
     private LocalDate endDate;
 
-    @OneToMany(mappedBy = "course")
-    @JsonBackReference
-    private List<Client> clients;
+    @Column(nullable = false)
+    private String category;
 
-    public Course(Long id, BigDecimal cost, String name, String description, LocalDate endDate) {
+    @Column(nullable = false)
+    private String description;
+
+    @Column(name = "cost", nullable = false, columnDefinition = "DECIMAL")
+    private BigDecimal cost;
+
+    public Course(Long id, String name, LocalDate startDate, LocalDate endDate, String category, String description,
+            BigDecimal cost) {
         this.id = id;
-        this.cost = cost;
         this.name = name;
-        this.description = description;
+        this.startDate = startDate;
         this.endDate = endDate;
+        this.category = category;
+        this.description = description;
+        this.cost = cost;
     }
 
-    public Course(BigDecimal cost, String name, String description, LocalDate endDate) {
-        this.cost = cost;
+    public Course(String name, LocalDate startDate, LocalDate endDate, String category, String description,
+            BigDecimal cost) {
         this.name = name;
-        this.description = description;
+        this.startDate = startDate;
         this.endDate = endDate;
+        this.category = category;
+        this.description = description;
+        this.cost = cost;
     }
 
     public Course() {
@@ -69,14 +78,6 @@ public class Course implements Serializable {
         this.id = id;
     }
 
-    public BigDecimal getCost() {
-        return cost;
-    }
-
-    public void setCost(BigDecimal cost) {
-        this.cost = cost;
-    }
-
     public String getName() {
         return name;
     }
@@ -85,12 +86,12 @@ public class Course implements Serializable {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public LocalDate getStartDate() {
+        return startDate;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
     }
 
     public LocalDate getEndDate() {
@@ -101,11 +102,29 @@ public class Course implements Serializable {
         this.endDate = endDate;
     }
 
-    public List<Client> getClients() {
-        return clients;
+    public String getCategory() {
+        return category;
     }
 
-    public void setClients(List<Client> clients) {
-        this.clients = clients;
+    public void setCategory(String category) {
+        this.category = category;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public BigDecimal getCost() {
+        return cost;
+    }
+
+    public void setCost(BigDecimal cost) {
+        this.cost = cost;
+    }
+
+    
 }

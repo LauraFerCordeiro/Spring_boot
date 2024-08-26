@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.edu.ifsp.dsw3.trabalho.empresa.model.dao.DepartamentDAO;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.dao.WorkerDAO;
-import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Departament;
+import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Department;
 
 @Service
 public class DepartamentService {
@@ -17,15 +17,15 @@ public class DepartamentService {
     @Autowired
     private WorkerDAO daoW;
 
-    public Departament registerDepartament(String address, String name, String description) {
-        return dao.save(new Departament(address, name, description));
+    public Department registerDepartament(String address, String name, String description) {
+        return dao.save(new Department(address, name, description));
     }
 
-    public List<Departament> list() {
+    public List<Department> list() {
         return dao.findAll();
     }
 
-    public Departament searchCod(Long id) {
+    public Department searchCod(Long id) {
         return dao.findById(id).orElse(null);
     }
 
@@ -53,7 +53,7 @@ public class DepartamentService {
         }
     }
 
-    public List<Departament> searchName(String name) {
+    public List<Department> searchName(String name) {
         return dao.findByName(name);
     }
 
@@ -61,7 +61,7 @@ public class DepartamentService {
         return daoW.findWorkersDepartament(id);
     }
 
-    public List<Departament> searchDescription(String description) {
+    public List<Department> searchDescription(String description) {
         return dao.findByDescription(description);
     }
 }

@@ -6,78 +6,62 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
-@Entity
-@Table(name = "clients")
-public class Client implements Serializable {
+@MappedSuperclass
+public abstract class Client <ID extends Serializable> implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    protected ID id;
 
     @Column(nullable = false)
-    private String name;
+    protected String name;
+
+    @Column(nullable = false, unique = true)
+    protected String email;
 
     @Column(nullable = false)
-    private String email;
+    protected String password;
 
-    @OneToOne(mappedBy = "client")
-    @JsonBackReference
-    private Consultancy consultancy;
+    @Column(nullable = false, unique = true)
+    protected String telephone;
+    
+    @Column(nullable = false)
+    protected String address;
 
-    @ManyToOne
-    @JoinColumn(name = "course")
-    @JsonManagedReference
-    private Course course;
-
-    public Client(Long id, String name, String email, Consultancy consultancy, Course course) {
+    protected Client(ID id, String name, String email, String password, String telephone, String address) {
         this.id = id;
         this.name = name;
         this.email = email;
-        this.consultancy = consultancy;
-        this.course = course;
+        this.password = password;
+        this.telephone = telephone;
+        this.address = address;
     }
 
-    public Client(String name, String email, Consultancy consultancy, Course course) {
+    protected Client(String name, String email, String password, String telephone, String address) {
         this.name = name;
         this.email = email;
-        this.consultancy = consultancy;
-        this.course = course;
+        this.password = password;
+        this.telephone = telephone;
+        this.address = address;
     }
 
-    public Client(String name, String email, Consultancy consultancy) {
-        this.name = name;
-        this.email = email;
-        this.consultancy = consultancy;
+    protected Client() {
     }
 
-    public Client(String name, String email, Course course) {
-        this.name = name;
-        this.email = email;
-        this.course = course;
+    public ID getId(){
+        return this.id;
     }
 
-    public Client(String name, String email) {
-        this.name = name;
-        this.email = email;
-    }
-
-    public Client() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
+    public void setId(ID id){
         this.id = id;
     }
 
@@ -97,19 +81,27 @@ public class Client implements Serializable {
         this.email = email;
     }
 
-    public Consultancy getConsultancy() {
-        return consultancy;
+    public String getPassword() {
+        return password;
     }
 
-    public void setConsultancy(Consultancy consultancy) {
-        this.consultancy = consultancy;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public Course getCourse() {
-        return course;
+    public String getTelephone() {
+        return telephone;
     }
 
-    public void setCourse(Course course) {
-        this.course = course;
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

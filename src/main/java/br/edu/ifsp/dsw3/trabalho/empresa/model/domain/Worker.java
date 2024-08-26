@@ -32,114 +32,143 @@ public class Worker implements Serializable{
     private String name;
 
     @Column(nullable = false)
-    private String email;
-
-    @Column(name = "birthDate", nullable = false, columnDefinition = "DATE")
-    @DateTimeFormat(iso = ISO.DATE)
-    private LocalDate birthDate;
-
-    @Column(name = "salary", nullable = false, columnDefinition = "DECIMAL")
-    private BigDecimal salary;
+    private String cpf;
 
     @Column(nullable = false)
     private String role;
 
-    @OneToOne(mappedBy = "worker")
-    @JsonBackReference
-    private Consultancy consultancy;
+    @Column(name = "salary", nullable = false, columnDefinition = "DECIMAL")
+    private BigDecimal salary;
 
-    @ManyToOne
-    @JoinColumn(name="departament", nullable = false)
-    @JsonManagedReference
-    private Departament departament;
-    
-    public Departament getDepartament() {
-        return departament;
-    }
+    @Column(name = "birth_date", nullable = false, columnDefinition = "DATE")
+    @DateTimeFormat(iso = ISO.DATE)
+    private LocalDate birthDate;
 
-    public void setDepartament(Departament departament) {
-        this.departament = departament;
-    }
+    @Column(nullable = false)
+    private String address;
 
-    public Worker(String name, String email, LocalDate birthDate, BigDecimal salary, String role, Departament departament, Consultancy consultancy) {
-        this.name = name;
-        this.email = email;
-        this.birthDate = birthDate;
-        this.salary = salary;
-        this.role = role;
-        this.departament = departament;
-        this.consultancy = consultancy;
-    }
+    @Column(nullable = false)
+    private String telephone;
 
-    public Worker(Long id, String name, String email, LocalDate birthDate, BigDecimal salary, String role, Departament departament, Consultancy consultancy) {
+    public Worker(Long id, String name, String email, String cpf, String password, String role, BigDecimal salary,
+            LocalDate birthDate, String address, String telephone, Department departament) {
         this.id = id;
         this.name = name;
         this.email = email;
-        this.birthDate = birthDate;
-        this.salary = salary;
+        this.cpf = cpf;
+        this.password = password;
         this.role = role;
+        this.salary = salary;
+        this.birthDate = birthDate;
+        this.address = address;
+        this.telephone = telephone;
         this.departament = departament;
-        this.consultancy = consultancy;
     }
 
-    
-
-    public Worker(String name, String email, LocalDate birthDate, BigDecimal salary, String role,
-            Departament departament) {
+    public Worker(String name, String email, String cpf, String password, String role, BigDecimal salary,
+            LocalDate birthDate, String address, String telephone, Department departament) {
         this.name = name;
         this.email = email;
-        this.birthDate = birthDate;
-        this.salary = salary;
+        this.cpf = cpf;
+        this.password = password;
         this.role = role;
+        this.salary = salary;
+        this.birthDate = birthDate;
+        this.address = address;
+        this.telephone = telephone;
         this.departament = departament;
     }
 
     public Worker() {
     }
-    
+
     public Long getId() {
         return id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }
+
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
+
     public String getEmail() {
         return email;
     }
+
     public void setEmail(String email) {
         this.email = email;
     }
-    public LocalDate getBirthDate() {
-        return birthDate;
+
+    public String getCpf() {
+        return cpf;
     }
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
-    public BigDecimal getSalary() {
-        return salary;
+
+    public String getPassword() {
+        return password;
     }
-    public void setSalary(BigDecimal salary) {
-        this.salary = salary;
+
+    public void setPassword(String password) {
+        this.password = password;
     }
+
     public String getRole() {
         return role;
     }
+
     public void setRole(String role) {
         this.role = role;
     }
 
-    public Consultancy getConsultancy() {
-        return consultancy;
+    public BigDecimal getSalary() {
+        return salary;
     }
 
-    public void setConsultancy(Consultancy consultancy) {
-        this.consultancy = consultancy;
+    public void setSalary(BigDecimal salary) {
+        this.salary = salary;
     }
+
+    public LocalDate getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
+    public Department getDepartament() {
+        return departament;
+    }
+
+    public void setDepartament(Department departament) {
+        this.departament = departament;
+    }
+    
     
 }
