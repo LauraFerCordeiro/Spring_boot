@@ -36,6 +36,9 @@ public class Department implements Serializable{
     @Column(nullable = false)
     private String address;
 
+    @OneToMany(mappedBy = "department")
+    private List<Worker> workers;
+
     public Department(Long id, String name, String description, String category, String telephone, String address,
             List<Worker> workers) {
         this.id = id;

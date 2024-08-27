@@ -46,6 +46,9 @@ public class Course implements Serializable {
     @Column(name = "cost", nullable = false, columnDefinition = "DECIMAL")
     private BigDecimal cost;
 
+    @OneToMany(mappedBy = "course")
+    private List<PayCourse> pays;
+
     public Course(Long id, String name, LocalDate startDate, LocalDate endDate, String category, String description,
             BigDecimal cost) {
         this.id = id;

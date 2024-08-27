@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -30,6 +31,14 @@ public class Account implements Serializable{
 
     @Column(nullable = false)
     private Boolean admin;
+
+    @OneToOne(mappedBy = "account")
+    private Client client;
+
+    @OneToOne(mappedBy = "account")
+    private Worker worker;
+
+    @OneToOne()
 
     public Account(Long id, String email, String password, String name, Integer view, Boolean admin) {
         this.id = id;

@@ -3,12 +3,15 @@ package br.edu.ifsp.dsw3.trabalho.empresa.model.domain;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -38,6 +41,12 @@ public class Request implements Serializable{
 
     @Column(nullable = false)
     private BigDecimal costEstimate;
+
+    @OneToMany(mappedBy = "request")
+    private List<Vulnerability> vulnerabilities;
+
+    @OneToOne(mappedBy = "request")
+    private PayRequest pay;
 
     public Request(Long id, String name, String description, LocalDate startDate, LocalDate endDate, Integer priority,
             String status, BigDecimal costEstimate) {
