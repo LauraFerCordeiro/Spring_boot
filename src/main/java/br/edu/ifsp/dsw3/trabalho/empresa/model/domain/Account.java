@@ -38,23 +38,27 @@ public class Account implements Serializable{
     @OneToOne(mappedBy = "account")
     private Worker worker;
 
-    @OneToOne()
-
-    public Account(Long id, String email, String password, String name, Integer view, Boolean admin) {
+    public Account(Long id, String email, String password, String name, Integer view, Boolean admin, Client client,
+            Worker worker) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.name = name;
         this.view = view;
         this.admin = admin;
+        this.client = client;
+        this.worker = worker;
     }
 
-    public Account(String email, String password, String name, Integer view, Boolean admin) {
+    public Account(String email, String password, String name, Integer view, Boolean admin, Client client,
+            Worker worker) {
         this.email = email;
         this.password = password;
         this.name = name;
         this.view = view;
         this.admin = admin;
+        this.client = client;
+        this.worker = worker;
     }
 
     public Account() {
@@ -108,5 +112,20 @@ public class Account implements Serializable{
         this.admin = admin;
     }
 
-    
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public Worker getWorker() {
+        return worker;
+    }
+
+    public void setWorker(Worker worker) {
+        this.worker = worker;
+    }
+
 }

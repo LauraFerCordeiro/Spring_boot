@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import br.edu.ifsp.dsw3.trabalho.empresa.model.dao.ClientDAO;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.dao.CourseDAO;
+import br.edu.ifsp.dsw3.trabalho.empresa.model.dao.PayCourseDAO;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Course;
 
 @Service
@@ -17,10 +18,10 @@ public class CourseService {
     private CourseDAO dao;
 
     @Autowired
-    private ClientDAO daoC;
+    private PayCourseDAO daoP;
 
-    public Course register(String name, BigDecimal value, String description, LocalDate endDate){
-        return dao.save(new Course(value, name, description, endDate));
+    public Course register(String name, LocalDate startDate, LocalDate endDate, String category, String description, BigDecimal cost){
+        return dao.save(new Course(name, startDate, endDate, category, description, cost));
     }
 
     public List<Course> list(){

@@ -49,7 +49,7 @@ public class Request implements Serializable{
     private PayRequest pay;
 
     public Request(Long id, String name, String description, LocalDate startDate, LocalDate endDate, Integer priority,
-            String status, BigDecimal costEstimate) {
+            String status, BigDecimal costEstimate, List<Vulnerability> vulnerabilities, PayRequest pay) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -58,10 +58,12 @@ public class Request implements Serializable{
         this.priority = priority;
         this.status = status;
         this.costEstimate = costEstimate;
+        this.vulnerabilities = vulnerabilities;
+        this.pay = pay;
     }
 
     public Request(String name, String description, LocalDate startDate, LocalDate endDate, Integer priority,
-            String status, BigDecimal costEstimate) {
+            String status, BigDecimal costEstimate, List<Vulnerability> vulnerabilities, PayRequest pay) {
         this.name = name;
         this.description = description;
         this.startDate = startDate;
@@ -69,6 +71,8 @@ public class Request implements Serializable{
         this.priority = priority;
         this.status = status;
         this.costEstimate = costEstimate;
+        this.vulnerabilities = vulnerabilities;
+        this.pay = pay;
     }
 
     public Request() {
@@ -136,6 +140,22 @@ public class Request implements Serializable{
 
     public void setCostEstimate(BigDecimal costEstimate) {
         this.costEstimate = costEstimate;
+    }
+
+    public List<Vulnerability> getVulnerabilities() {
+        return vulnerabilities;
+    }
+
+    public void setVulnerabilities(List<Vulnerability> vulnerabilities) {
+        this.vulnerabilities = vulnerabilities;
+    }
+
+    public PayRequest getPay() {
+        return pay;
+    }
+
+    public void setPay(PayRequest pay) {
+        this.pay = pay;
     }
 
 }

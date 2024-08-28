@@ -3,8 +3,6 @@ package br.edu.ifsp.dsw3.trabalho.empresa.model.domain;
 import java.io.Serializable;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

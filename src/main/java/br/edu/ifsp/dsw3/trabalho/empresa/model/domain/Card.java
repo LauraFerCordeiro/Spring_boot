@@ -34,19 +34,21 @@ public class Card {
     @JoinColumn(name = "client_id")
     private Client client;
 
-    public Card(Long id, String holderName, String number, Integer cvv, LocalDate dueDate) {
+    public Card(Long id, String holderName, String number, Integer cvv, LocalDate dueDate, Client client) {
         this.id = id;
         this.holderName = holderName;
         this.number = number;
         this.cvv = cvv;
         this.dueDate = dueDate;
+        this.client = client;
     }
 
-    public Card(String holderName, String number, Integer cvv, LocalDate dueDate) {
+    public Card(String holderName, String number, Integer cvv, LocalDate dueDate, Client client) {
         this.holderName = holderName;
         this.number = number;
         this.cvv = cvv;
         this.dueDate = dueDate;
+        this.client = client;
     }
 
     public Card() {
@@ -92,5 +94,14 @@ public class Card {
         this.dueDate = dueDate;
     }
 
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    
     
 }

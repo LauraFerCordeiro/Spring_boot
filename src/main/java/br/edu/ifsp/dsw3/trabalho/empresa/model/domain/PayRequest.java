@@ -36,15 +36,19 @@ public class PayRequest implements Serializable{
     @JoinColumn(name = "request_id", referencedColumnName = "id")
     private Request request;
 
-    public PayRequest(Long id, LocalDate date, BigDecimal cost) {
+    public PayRequest(Long id, LocalDate date, BigDecimal cost, Company company, Request request) {
         this.id = id;
         this.date = date;
         this.cost = cost;
+        this.company = company;
+        this.request = request;
     }
 
-    public PayRequest(LocalDate date, BigDecimal cost) {
+    public PayRequest(LocalDate date, BigDecimal cost, Company company, Request request) {
         this.date = date;
         this.cost = cost;
+        this.company = company;
+        this.request = request;
     }
 
     public PayRequest() {
@@ -74,5 +78,20 @@ public class PayRequest implements Serializable{
         this.cost = cost;
     }
 
-    
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+    public Request getRequest() {
+        return request;
+    }
+
+    public void setRequest(Request request) {
+        this.request = request;
+    }
+
 }

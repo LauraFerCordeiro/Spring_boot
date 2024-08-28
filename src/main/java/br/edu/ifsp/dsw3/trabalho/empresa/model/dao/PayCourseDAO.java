@@ -1,5 +1,9 @@
 package br.edu.ifsp.dsw3.trabalho.empresa.model.dao;
 
-public class PayCourseDAO {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.PayCourse;
+
+public interface PayCourseDAO extends JpaRepository<PayCourse, Long>{
     
 }

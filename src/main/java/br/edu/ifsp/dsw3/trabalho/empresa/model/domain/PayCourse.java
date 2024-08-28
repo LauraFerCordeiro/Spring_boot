@@ -34,15 +34,19 @@ public class PayCourse implements Serializable{
     @JoinColumn(name = "person_id")
     private Person person;
 
-    public PayCourse(Long id, LocalDate date, BigDecimal cost) {
+    public PayCourse(Long id, LocalDate date, BigDecimal cost, Course course, Person person) {
         this.id = id;
         this.date = date;
         this.cost = cost;
+        this.course = course;
+        this.person = person;
     }
 
-    public PayCourse(LocalDate date, BigDecimal cost) {
+    public PayCourse(LocalDate date, BigDecimal cost, Course course, Person person) {
         this.date = date;
         this.cost = cost;
+        this.course = course;
+        this.person = person;
     }
 
     public PayCourse() {
@@ -72,5 +76,22 @@ public class PayCourse implements Serializable{
         this.cost = cost;
     }
 
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+
+    
     
 }

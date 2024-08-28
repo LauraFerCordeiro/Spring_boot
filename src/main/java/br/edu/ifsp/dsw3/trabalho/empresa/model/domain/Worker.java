@@ -8,9 +8,6 @@ import java.util.List;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -64,33 +61,33 @@ public class Worker implements Serializable{
     @OneToMany(mappedBy = "worker")
     private List<Vulnerability> vulnerabilities;
 
-    public Worker(Long id, String name, String email, String cpf, String password, String role, BigDecimal salary,
-            LocalDate birthDate, String address, String telephone, Department departament) {
+    public Worker(Long id, String name, String cpf, String role, BigDecimal salary, LocalDate birthDate, String address,
+            String telephone, Account account, Department department, List<Vulnerability> vulnerabilities) {
         this.id = id;
         this.name = name;
-        this.email = email;
         this.cpf = cpf;
-        this.password = password;
         this.role = role;
         this.salary = salary;
         this.birthDate = birthDate;
         this.address = address;
         this.telephone = telephone;
-        this.departament = departament;
+        this.account = account;
+        this.department = department;
+        this.vulnerabilities = vulnerabilities;
     }
 
-    public Worker(String name, String email, String cpf, String password, String role, BigDecimal salary,
-            LocalDate birthDate, String address, String telephone, Department departament) {
+    public Worker(String name, String cpf, String role, BigDecimal salary, LocalDate birthDate, String address,
+            String telephone, Account account, Department department, List<Vulnerability> vulnerabilities) {
         this.name = name;
-        this.email = email;
         this.cpf = cpf;
-        this.password = password;
         this.role = role;
         this.salary = salary;
         this.birthDate = birthDate;
         this.address = address;
         this.telephone = telephone;
-        this.departament = departament;
+        this.account = account;
+        this.department = department;
+        this.vulnerabilities = vulnerabilities;
     }
 
     public Worker() {
@@ -112,28 +109,12 @@ public class Worker implements Serializable{
         this.name = name;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getCpf() {
         return cpf;
     }
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getRole() {
@@ -176,13 +157,28 @@ public class Worker implements Serializable{
         this.telephone = telephone;
     }
 
-    public Department getDepartament() {
-        return departament;
+    public Account getAccount() {
+        return account;
     }
 
-    public void setDepartament(Department departament) {
-        this.departament = departament;
+    public void setAccount(Account account) {
+        this.account = account;
     }
-    
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public List<Vulnerability> getVulnerabilities() {
+        return vulnerabilities;
+    }
+
+    public void setVulnerabilities(List<Vulnerability> vulnerabilities) {
+        this.vulnerabilities = vulnerabilities;
+    }
     
 }

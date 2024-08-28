@@ -8,8 +8,6 @@ import java.util.List;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -50,7 +48,7 @@ public class Course implements Serializable {
     private List<PayCourse> pays;
 
     public Course(Long id, String name, LocalDate startDate, LocalDate endDate, String category, String description,
-            BigDecimal cost) {
+            BigDecimal cost, List<PayCourse> pays) {
         this.id = id;
         this.name = name;
         this.startDate = startDate;
@@ -58,6 +56,18 @@ public class Course implements Serializable {
         this.category = category;
         this.description = description;
         this.cost = cost;
+        this.pays = pays;
+    }
+
+    public Course(String name, LocalDate startDate, LocalDate endDate, String category, String description,
+            BigDecimal cost, List<PayCourse> pays) {
+        this.name = name;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.category = category;
+        this.description = description;
+        this.cost = cost;
+        this.pays = pays;
     }
 
     public Course(String name, LocalDate startDate, LocalDate endDate, String category, String description,
@@ -129,5 +139,12 @@ public class Course implements Serializable {
         this.cost = cost;
     }
 
-    
+    public List<PayCourse> getPays() {
+        return pays;
+    }
+
+    public void setPays(List<PayCourse> pays) {
+        this.pays = pays;
+    }
+
 }

@@ -4,9 +4,6 @@ import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
@@ -21,14 +18,36 @@ public class Company extends Client{
     @OneToMany(mappedBy = "company")
     private List<PayRequest> pays;
 
-    public Company(String name, String email, String password, String telephone, String address, String cnpj) {
-        super(name, email, password, telephone, address);
+    public Company(Long id, String name, String telephone, String address, Account account, List<Card> cards,
+            String cnpj, List<PayRequest> pays) {
+        super(id, name, telephone, address, account, cards);
+        this.cnpj = cnpj;
+        this.pays = pays;
+    }
+
+    public Company(Long id, String name, String telephone, String address, Account account, List<Card> cards,
+            String cnpj) {
+        super(id, name, telephone, address, account, cards);
         this.cnpj = cnpj;
     }
 
-    public Company(Long id, String name, String email, String password, String telephone, String address, String cnpj) {
-        super(id, name, email, password, telephone, address);
+    public Company(String name, String telephone, String address, Account account, List<Card> cards, String cnpj,
+            List<PayRequest> pays) {
+        super(name, telephone, address, account, cards);
         this.cnpj = cnpj;
+        this.pays = pays;
+    }
+
+    public Company(String name, String telephone, String address, Account account, List<Card> cards, String cnpj) {
+        super(name, telephone, address, account, cards);
+        this.cnpj = cnpj;
+    }
+
+    public Company(Long id, String name, String telephone, String address, Account account, List<Card> cards) {
+        super(id, name, telephone, address, account, cards);
+    } 
+
+    public Company() {
     }
 
     public String getCnpj() {
@@ -37,6 +56,14 @@ public class Company extends Client{
 
     public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
+    }
+
+    public List<PayRequest> getPays() {
+        return pays;
+    }
+
+    public void setPays(List<PayRequest> pays) {
+        this.pays = pays;
     }
 
 }

@@ -22,18 +22,42 @@ public class Person extends Client{
     @OneToMany(mappedBy = "person")
     private List<PayCourse> pays;
 
-    public Person(String name, String email, String password, String telephone, String address, String cpf,
+    public Person(Long id, String name, String telephone, String address, Account account, List<Card> cards, String cpf,
+            LocalDate birthDate, List<PayCourse> pays) {
+        super(id, name, telephone, address, account, cards);
+        this.cpf = cpf;
+        this.birthDate = birthDate;
+        this.pays = pays;
+    }
+
+    public Person(String name, String telephone, String address, Account account, List<Card> cards, String cpf,
+            LocalDate birthDate, List<PayCourse> pays) {
+        super(name, telephone, address, account, cards);
+        this.cpf = cpf;
+        this.birthDate = birthDate;
+        this.pays = pays;
+    }
+
+    public Person(Long id, String name, String telephone, String address, Account account, List<Card> cards, String cpf,
             LocalDate birthDate) {
-        super(name, email, password, telephone, address);
+        super(id, name, telephone, address, account, cards);
         this.cpf = cpf;
         this.birthDate = birthDate;
     }
 
-    public Person(Long id, String name, String email, String password, String telephone, String address, String cpf,
+    public Person(String name, String telephone, String address, Account account, List<Card> cards, String cpf,
             LocalDate birthDate) {
-        super(id, name, email, password, telephone, address);
+        super(name, telephone, address, account, cards);
         this.cpf = cpf;
         this.birthDate = birthDate;
+    }
+
+    public Person(String cpf, LocalDate birthDate) {
+        this.cpf = cpf;
+        this.birthDate = birthDate;
+    }
+
+    public Person() {
     }
 
     public String getCpf() {
@@ -51,7 +75,13 @@ public class Person extends Client{
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
-    
-    
+
+    public List<PayCourse> getPays() {
+        return pays;
+    }
+
+    public void setPays(List<PayCourse> pays) {
+        this.pays = pays;
+    }
 
 }

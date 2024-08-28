@@ -1,5 +1,9 @@
 package br.edu.ifsp.dsw3.trabalho.empresa.model.dao;
 
-public class ClientDAO {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Client;
+
+public interface ClientDAO extends JpaRepository<Client, Long>{
     
 }

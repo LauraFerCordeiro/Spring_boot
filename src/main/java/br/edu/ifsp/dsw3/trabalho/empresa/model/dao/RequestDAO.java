@@ -1,5 +1,9 @@
 package br.edu.ifsp.dsw3.trabalho.empresa.model.dao;
 
-public class RequestDAO {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Request;
+
+public interface RequestDAO extends JpaRepository<Request, Long>{
     
 }

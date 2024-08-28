@@ -1,5 +1,9 @@
 package br.edu.ifsp.dsw3.trabalho.empresa.model.dao;
 
-public class CardDAO {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Card;
+
+public interface CardDAO extends JpaRepository<Card, Long>{
     
 }
