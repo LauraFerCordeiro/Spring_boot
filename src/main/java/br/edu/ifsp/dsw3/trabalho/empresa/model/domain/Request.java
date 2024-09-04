@@ -10,6 +10,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -47,6 +49,10 @@ public class Request implements Serializable{
 
     @OneToOne(mappedBy = "request")
     private PayRequest pay;
+
+    @ManyToOne
+    @JoinColumn(name = "company_id")
+    private Company company;
 
     public Request(Long id, String name, String description, LocalDate startDate, LocalDate endDate, Integer priority,
             String status, BigDecimal costEstimate, List<Vulnerability> vulnerabilities, PayRequest pay) {

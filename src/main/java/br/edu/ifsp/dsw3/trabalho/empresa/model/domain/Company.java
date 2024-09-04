@@ -18,6 +18,9 @@ public class Company extends Client{
     @OneToMany(mappedBy = "company")
     private List<PayRequest> pays;
 
+    @OneToMany(mappedBy = "company")
+    private List<Request> requests;
+
     public Company(Long id, String name, String telephone, String address, Account account, List<Card> cards,
             String cnpj, List<PayRequest> pays) {
         super(id, name, telephone, address, account, cards);

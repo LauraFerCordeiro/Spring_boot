@@ -6,4 +6,5 @@ import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Company;
 
 public interface CompanyDAO extends JpaRepository<Company, Long>{
     
+    
 }
