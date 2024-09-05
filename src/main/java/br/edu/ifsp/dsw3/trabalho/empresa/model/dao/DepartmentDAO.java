@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Department;
 
-public interface DepartamentDAO extends JpaRepository<Department, Long>{
+public interface DepartmentDAO extends JpaRepository<Department, Long>{
 
 }

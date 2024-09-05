@@ -6,5 +6,4 @@ import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Account;
 
 public interface AccountDAO extends JpaRepository<Account, Long>{
 
-    
 }

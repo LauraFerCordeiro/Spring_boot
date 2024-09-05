@@ -38,7 +38,7 @@ public class CardController {
 
     @GetMapping("/editar/{id}")
     public String editar(ModelMap map, @PathVariable("id")Long id ){
-        map.addAttribute("cards", cdao.getReferenceById(id));
+        map.addAttribute("card", cdao.getReferenceById(id));
         return ("/cards/editar");
     }
 

@@ -3,6 +3,9 @@ package br.edu.ifsp.dsw3.trabalho.empresa.model.domain;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
@@ -16,7 +19,8 @@ public class Person extends Client{
     @Column(unique = true, nullable = false)
     private String cpf;
 
-    @Column(nullable = false)
+    @Column(name = "birth_date", nullable = false, columnDefinition = "DATE")
+    @DateTimeFormat(iso = ISO.DATE)
     private LocalDate birthDate;
 
     @OneToMany(mappedBy = "person")

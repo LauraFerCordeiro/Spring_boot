@@ -5,6 +5,9 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,10 +32,12 @@ public class Request implements Serializable{
     @Column(nullable = false)
     private String description;
 
-    @Column(nullable = false)
+    @Column(name = "start_date", nullable = false, columnDefinition = "DATE")
+    @DateTimeFormat(iso = ISO.DATE)
     private LocalDate startDate;
 
-    @Column(nullable = false)
+    @Column(name = "end_date", nullable = false, columnDefinition = "DATE")
+    @DateTimeFormat(iso = ISO.DATE)
     private LocalDate endDate;
 
     @Column(nullable = false)
@@ -41,7 +46,7 @@ public class Request implements Serializable{
     @Column(nullable = false)
     private String status;
 
-    @Column(nullable = false)
+    @Column(name = "cost_estimate", nullable = false, columnDefinition = "DECIMAL")
     private BigDecimal costEstimate;
 
     @OneToMany(mappedBy = "request")

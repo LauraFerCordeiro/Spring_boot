@@ -58,7 +58,7 @@ public class CompanyController {
 
     @GetMapping("/editar/{id}")
     public String editar(ModelMap map, @PathVariable("id")Long id ){
-        map.addAttribute("companies", companyDAO.getReferenceById(id));
+        map.addAttribute("company", companyDAO.getReferenceById(id));
         return ("/companies/editar");
     }
 
@@ -73,8 +73,9 @@ public class CompanyController {
     public String excluir(@PathVariable("id")Long id, ModelMap map){
         List<Request> requests = requestDAO.findRequestsByCompanyId(id);
         List<PayRequest> pays = payRequestDAO.findPaysByCompanyId(id);
+
         if(!(pays.isEmpty())){
-            payRequestDAO.deletePaysCompany(id);
+            payRequestDAO.deletePaysByCompanyId(id);
         }
         if(requests.isEmpty()){
             requestDAO.deleteRequestsByCompanyId(id);
@@ -86,9 +87,10 @@ public class CompanyController {
             }
             requestDAO.deleteRequestsByCompanyId(id);
         }
-            
         
         companyDAO.deleteById(id);
+        clientDAO.deleteById(id);
+
         map.addAttribute("success", "Compania excluída com sucesso");
         return listar(map);
     }

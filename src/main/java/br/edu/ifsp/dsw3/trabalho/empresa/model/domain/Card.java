@@ -2,6 +2,8 @@ package br.edu.ifsp.dsw3.trabalho.empresa.model.domain;
 
 import java.time.LocalDate;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,7 +29,8 @@ public class Card {
     @Column(nullable = false)
     private Integer cvv;
 
-    @Column(nullable = false)
+    @Column(name = "due_date", nullable = false, columnDefinition = "DATE")
+    @DateTimeFormat(pattern = "yyyy-MM")
     private LocalDate dueDate;
 
     @ManyToOne
@@ -91,7 +94,7 @@ public class Card {
     }
 
     public void setDueDate(LocalDate dueDate) {
-        this.dueDate = dueDate;
+        this.dueDate = dueDate.withDayOfMonth(1);
     }
 
     public Client getClient() {

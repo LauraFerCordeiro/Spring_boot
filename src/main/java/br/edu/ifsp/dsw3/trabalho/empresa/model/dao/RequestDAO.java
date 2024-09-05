@@ -12,10 +12,10 @@ import jakarta.transaction.Transactional;
 public interface RequestDAO extends JpaRepository<Request, Long>{
     @Transactional
     @Modifying
-    @Query("DELETE FROM requests r WHERE r.id_company = ?1")
+    @Query("DELETE FROM Request r WHERE r.company.id = ?1")
     public void deleteRequestsByCompanyId(Long id);
 
-    @Query("SELECT r.id, r.name, r.description, r.startDate, r.endDate, r.priority, r.status, r.costEstimate, r.company_id FROM requests r WHERE r.company_id = ?1")
+    @Query("SELECT r FROM Request r WHERE r.company.id = ?1")
     public List<Request> findRequestsByCompanyId(Long id);  
 
 }
