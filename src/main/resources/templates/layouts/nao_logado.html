@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>GuaraHacks</title>
+    <link rel="stylesheet" th:href="@{/css/output.css}">
+    <script th:src="@{/js/nao_logado.js}"></script>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+    <header th:replace="~{fragments/header :: cabecalho}">
+        <!-- Fragmento de cabeçalho será inserido aqui -->
+    </header>
+    <main>
+        <div layout:fragment="corpo">
+
+        </div>
+    </main>
+    <footer th:replace="~{fragments/footer :: rodape}">
+        <!-- Fragmento de rodapé será inserido aqui -->
+    </footer>
+</body>
+</html>

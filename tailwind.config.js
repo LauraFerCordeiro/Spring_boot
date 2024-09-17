@@ -2,8 +2,12 @@
 module.exports = {
   content: ["./src/**/*.{html,js}"],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage:{
+        'cibersecurity': "url('/image/cybersecurity.jpg')",
+      }
+    },
   },
-  plugins: [],
+  plugins: [require("tw-elements/plugin.cjs")],
 }
 
