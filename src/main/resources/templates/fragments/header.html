@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <title>GuaraHackers</title>
+    <script src="/src/main/resources/static/js/home.js"></script>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <header th:fragment="header">
+        <nav class="bg-zinc-800 items-center text-white h-12 grid grid-cols-3 px-10">
+            <div>
+
+            </div>
+            <div class="flex gap-5 menu">
+                <a th:href="@{/.}">Home</a>
+                <a th:href="@{/quem_somos}">Quem Somos</a>
+                <a th:href="@{/parceiros}">Parceiros</a>
+                <a th:href="@{/contato}">Contate-nos</a>
+            </div>
+            <div class="size-full justify-end items-center gap-5 flex">
+                <a th:href="@{/login}" class="bg-zinc-600 border-white border rounded px-2">Entrar</a>
+                <a th:href="@{/registro}" class="bg-purple-500 border-white border rounded px-2">Registrar</a>
+            </div>
+        </nav>
+    </header>
+</body>
+
+</html>

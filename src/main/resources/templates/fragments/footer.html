@@ -2,10 +2,21 @@
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>GuaraHackers</title>
+    <link rel="stylesheet" th:href="@{/css/output.css}">
 </head>
 <body>
-    
+    <footer class="grid grid-cols-3 grid-rows-2 bg-white p-10" th:fragment="footer">
+        <div class="row-start-1"></div>
+        <div class="row-start-1 flex flex-col justify-center items-center">
+            <a th:href="@{/.}">Home</a>
+            <a th:href="@{/quem_somos}">Quem Somos</a>
+        </div>
+        <div class="row-start-1 flex flex-col items-center">
+            <a th:href="@{/parceiros}">Parceiros</a>
+            <a th:href="@{/contato}">Contate-nos</a>
+        </div>
+        <div class="row-start-2 col-start-1 col-end-4 justify-center flex">&copy; Desenvolvido por GuaraDevs em 2024</div>
+    </footer>
 </body>
 </html>
