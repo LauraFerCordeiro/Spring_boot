@@ -1,11 +1,29 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/nao_logado}">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-    
+    <div layout:fragment="corpo">
+        <div class="grid bg-zinc-800 h-[95vh] grid-cols-2">
+            <div>
+                <h1 class="mx-32 text-7xl text-purple-500 mt-32 mb-8">Quem somos?</h1>
+                <div class="mx-32 size-2/3 text-2xl text-justify text-white">
+                    <p>A GuaraHack é uma empresa especializada em segurança da informação e pentest.</p>
+                    <p>Nós realizamos consultorias verificando os possíveis erros de segurança no site da sua empresa.
+                    </p>
+                    <p>Você também pode comprar os melhores cursos do Brasil e ser um profissional certificado.</p>
+                </div>
+            </div>
+            <div class="bg-[url('/image/illustration.jpg')] bg-cover h-full">
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>

@@ -11,11 +11,11 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <body>
     <header th:fragment="cabecalho">
-        <nav class="bg-zinc-800 items-center text-white h-12 grid grid-cols-3 px-10">
+        <nav class="bg-zinc-800 items-center text-white h-12 grid grid-cols-3 px-10 border-b-2 border-zinc-700">
             <div>
 
             </div>
-            <div class="flex gap-5 menu">
+            <div class="flex gap-5 menu justify-center">
                 <a th:href="@{/.}">Home</a>
                 <a th:href="@{/quem_somos}">Quem Somos</a>
                 <a th:href="@{/parceiros}">Parceiros</a>

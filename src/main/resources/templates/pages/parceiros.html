@@ -1,11 +1,22 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/nao_logado}">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-    
+    <div layout:fragment="corpo">
+        <div class="h-[95vh] bg-zinc-800 grid grid-cols-5 grid-rows-3">
+            <h1 class="text-purple-500 text-7xl col-start-3 mt-32">Parceiros</h1>
+            <div class="col-start-2 col-end-5 flex justify-center">
+                <p class="text-white text-2xl">Empresas que fornecemos consultorias:</p>
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>
