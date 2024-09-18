@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,22 +42,22 @@ public class DepartmentController {
     }
 
     @PostMapping("/salvar")
-    public String salvar(Department department){
+    public String salvar(@ModelAttribute Department department){
         dDao.save(department);
-        return("redirect:/departments/cadastrar");
+        return("redirect:/departments/lista");
     }
 
     @GetMapping("/editar/{id}")
     public String editar(ModelMap map, @PathVariable("id")Long id ){
         map.addAttribute("department", dDao.getReferenceById(id));
-        return ("/departments/editar");
+        return ("pages/departments/editar");
     }
 
-    @PostMapping("/editar")
+    @PostMapping("/editar/{id}")
     public String alterar(Department department, RedirectAttributes attr){
         dDao.save(department);
         attr.addFlashAttribute("success", "Departamento editado com sucesso!");
-        return("redirect:/department/lista");
+        return("redirect:/departments/lista");
     }
 
     @GetMapping("/excluir/{id}")

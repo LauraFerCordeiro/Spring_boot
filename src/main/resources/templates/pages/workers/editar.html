@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/adm}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Funcionário</title>
+</head>
+
+<body>
+    <div layout:fragment="corpo">
+        <section>
+            <nav>
+                <h3>Editar Funcionário</h3>
+            </nav>
+
+            <div class="w-full">
+                <form th:object="${worker}" th:action="@{/workers/editar/{id} (id=${worker.id})}" method="post">
+                    <div class="flex flex-col gap-4">
+                        <label for="name">Nome:</label>
+                        <input type="text" th:field="*{name}" id="name" class="px-4 py-2 rounded-md border border-purple-200 text-white">
+
+                        <label for="cpf">CPF:</label>
+                        <input type="text" th:field="*{cpf}" id="cpf" class="px-4 py-2 rounded-md border bg-purple-200 text-white">
+
+                        <label for="role">Função:</label>
+                        <input type="text" th:field="*{role}" id="role" class="px-4 py-2 rounded-md border border-purple-200 text-white">
+
+                        <label for="salary">Salário:</label>
+                        <input type="text" th:field="*{salary}" id="salary" class="px-4 py-2 rounded-md border border-purple-200 text-white">
+
+                        <label for="birthDate">Data de Nascimento:</label>
+                        <input type="text" th:field="*{birthDate}" id="birthDate" class="px-4 py-2 rounded-md border border-purple-200 text-white">
+
+                        <label for="address">Endereço</label>
+                        <input type="text" th:field="*{address}" id="address" class="px-4 py-2 rounded-md border border-purple-200 text-white">
+
+                        <label for="telephone">Telefone</label>
+                        <input type="text" th:field="*{telephone}" id="telephone" class="px-4 py-2 rounded-md border border-purple-200 text-white">
+
+                        <label for="department">Departamentos </label>
+                            <select id="department" th:field="*{department}">
+                                <option value="">Selecione</option>
+                                <option th:each="d : ${departments}" th:value="${d.id}" th:text="${d.name}" class="px-4 py-2 rounded-md border border-purple-200 text-white">Administração</option>
+                                
+                            </select>
+
+                        <button type="submit" class="bg-purple-400 hover:bg-purple-500 px-4 py-2 rounded-md">Editar</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+</body>
+
+</html>

@@ -9,8 +9,37 @@
 </head>
 
 <body>
-    <div layout:fragment="corpo">
-        
+    <div layout:fragment="corpo" class="bg-zinc-800 w-full justify-center items-start flex">
+        <section class="justify-center flex flex-col text-white w-2/3">
+            <nav>
+                <h3 class="font-bold text-5xl text-purple-500 mb-4 mt-20">Cadastrar Departamento</h3>
+            </nav>
+
+            <div class="w-full" id="cadastro">
+                <form th:action="${department.id==null}? @{/departments/salvar}:@{/departments/editar}" th:object="${department}" method="POST">
+                    <div class="flex flex-col gap-4">
+                        <label for="name">Nome do Departamento</label>
+                        <input type="text" id="name" placeholder="Nome" autofocus="autofocus" th:field="*{name}" class="px-4 py-2 rounded-md border border-purple-200 text-white"/>
+            
+                        <label for="description">Descrição</label>
+                        <input type="text" id="description" th:field="*{description}" class="px-4 py-2 rounded-md border border-purple-200 text-white"/>
+                    
+                        <label for="category">Categoria</label>
+                        <input type="text" id="category" th:field="*{category}" class="px-4 py-2 rounded-md border border-purple-200 text-white"/>
+                        
+                        <label for="address">Endereço</label>
+                        <input type="text" id="address" th:field="*{address}" class="px-4 py-2 rounded-md border border-purple-200 text-white"/>
+
+                        
+                        <label for="telephone">Telefone</label>
+                        <input type="text" id="telephone" th:field="*{telephone}" class="px-4 py-2 rounded-md border border-purple-200 text-white"/>
+                                        
+                        <input type="hidden" id="id" name="id" value="" class="px-4 py-2 rounded-md border border-purple-200 text-white"/>
+                        <button type="submit" class="bg-purple-400 hover:bg-purple-500 px-4 py-2 rounded-md">Salvar</button>
+                    </div>
+                </form>
+            </div>
+        </section>
     </div>
 </body>
 

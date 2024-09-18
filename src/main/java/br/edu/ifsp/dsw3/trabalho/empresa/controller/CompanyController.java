@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,21 +52,22 @@ public class CompanyController {
     }
 
     @PostMapping("/salvar")
-    public String salvar(Company company){
+    public String salvar(@ModelAttribute Company company) {
         companyDAO.save(company);
-        return("redirect:/companies/cadastrar");
+        return "redirect:/companies/lista";
     }
 
     @GetMapping("/editar/{id}")
-    public String editar(ModelMap map, @PathVariable("id")Long id ){
+    public String editar(ModelMap map, @PathVariable("id") Long id) {
         map.addAttribute("company", companyDAO.getReferenceById(id));
-        return ("pages/companies/cadastrar");
+        return ("pages/companies/editar");
     }
-
-    @PostMapping("/editar")
-    public String alterar(Company company, RedirectAttributes attr){
+    
+    @PostMapping("/editar/{id}")
+    public String alterar(@PathVariable("id") Long id, @ModelAttribute Company company, RedirectAttributes attr) {
+        company.setId(id);
         companyDAO.save(company);
-        attr.addFlashAttribute("success", "Compania editada com sucesso!");
+        attr.addFlashAttribute("success", "Companhia editada com sucesso!");
         return("redirect:/companies/lista");
     }
 

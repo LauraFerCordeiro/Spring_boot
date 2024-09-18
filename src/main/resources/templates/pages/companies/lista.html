@@ -9,38 +9,37 @@
 </head>
 
 <body>
-    <div layout:fragment="corpo">
+    <div layout:fragment="corpo" class="bg-zinc-800 w-full overflow-auto">
         <section>
             <nav>
-                <h3>Lista de empresas</h3>
-                <a href="">Cadastrar nova empresa</a>
+                <h3 class="font-bold text-5xl text-purple-500 mt-20 mb-8 text-center">Lista de empresas</h3>
             </nav>
 
-            <div class="">
-                <table class="">
+            <div class="mx-52 border-2 rounded-2xl overflow-auto">
+                <table class="w-full text-white">
                     <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Nome</th>
-                        <th>Endereço</th>
-                        <th>Telefone</th>
-                        <th>CNPJ</th>
-                    </tr>
+                        <tr class="bg-zinc-600">
+                            <th class="px-4 py-2">#</th>
+                            <th class="px-4 py-2">Nome</th>
+                            <th class="px-4 py-2">Endereço</th>
+                            <th class="px-4 py-2">Telefone</th>
+                            <th class="px-4 py-2">CNPJ</th>
+                            <th class="px-4 py-2">Ações</th>
+                        </tr>                
                     </thead>
                     <tbody>
 
-                    <tr th:each="c : ${companies}">
-                        <td th:text="${c.id}">1</td>
-                        <td th:text="${c.name}">Pane Silvio</td>
-                        <td th:text="${c.address}">Rua Carlos Mota</td>
-                        <td th:text="${c.telephone}">1111111111</td>
-                        <td th:text="${c.cnpj}">111111111</td>
-                        <td colspan="2">
-                            <a th:href="@{/companies/editar/{id} (id=${c.id})}" role="button">
-                                <span title="Editar" aria-hidden="true">editar</span>
-                            </a>
-                        </td>
-                    </tr>
+                        <tr th:each="c : ${companies}" class="bg-zinc-800 hover:bg-zinc-700 text-center">
+                            <td class="px-4 py-2" th:text="${c.id}">1</td>
+                            <td class="px-4 py-2" th:text="${c.name}">Pane Silvio</td>
+                            <td class="px-4 py-2" th:text="${c.address}">Rua Carlos Mota</td>
+                            <td class="px-4 py-2" th:text="${c.telephone}">1111111111</td>
+                            <td class="px-4 py-2" th:text="${c.cnpj}">111111111</td>
+                            <td class="px-4 py-2">
+                                <a th:href="@{/companies/editar/{id} (id=${c.id})}" role="button" class="bg-purple-400 hover:bg-purple-500 px-4 py-2 rounded-md">Editar</a>
+                                <a th:href="@{/companies/excluir/{id} (id=${c.id})}" role="button" th:onclick="|if(confirm('Tem certeza que deseja excluir a empresa?')) { location.href='/companies/excluir/'+${c.id} } else { return false; }|" class="bg-red-500 hover:bg-red-600 px-4 py-2 rounded-md">Excluir</a>
+                            </td>
+                        </tr>
 
                     </tbody>
                 </table>
