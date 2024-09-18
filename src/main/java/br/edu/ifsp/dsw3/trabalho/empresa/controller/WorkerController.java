@@ -20,13 +20,13 @@ public class WorkerController {
 
     @GetMapping("/cadastrar")
     public String cadastrar(Worker worker){
-        return("/workers/cadastro");
+        return("pages/workers/cadastrar");
     }
 
-    @GetMapping("/listar")
+    @GetMapping("/lista")
     public String listar(ModelMap map){
         map.addAttribute("workers", wDao.findAll());
-        return ("/workers/lista");
+        return ("pages/workers/lista");
     }
 
     @PostMapping("/salvar")
@@ -45,7 +45,7 @@ public class WorkerController {
     public String alterar(Worker worker, RedirectAttributes attr){
         wDao.save(worker);
         attr.addFlashAttribute("success", "Funcionario editado com sucesso!");
-        return("redirect:/workers/listar");
+        return("redirect:/workers/lista");
     }
 
     @GetMapping("/excluir/{id}")

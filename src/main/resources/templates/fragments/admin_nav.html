@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <title>GuaraHackers</title>
+    <link rel="stylesheet" th:href="@{/css/output.css}">
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <aside th:fragment="nav" class="bg-zinc-700">
+        <nav class="flex flex-col text-white w-60 text-center">
+            <div class="flex flex-col">
+                <h3 class="text-xl font-bold bg-zinc-600">Empresas</h3>
+                <a th:href="@{/companies/cadastrar}" class="transition ease-in-out hover:bg-purple-500">Cadastrar</a>
+                <a th:href="@{/companies/lista}" class="transition ease-in-out hover:bg-purple-500">Listar</a>
+            </div>
+            <div class="flex flex-col">
+                <h3 class="text-xl font-bold bg-zinc-600">Funcionarios</h3>
+                <a th:href="@{/workers/cadastrar}" class="transition ease-in-out hover:bg-purple-500">Cadastrar</a>
+                <a th:href="@{/workers/lista}" class="transition ease-in-out hover:bg-purple-500">Listar</a>
+            </div>
+            <div class="flex flex-col">
+                <h3 class="text-xl font-bold bg-zinc-600">Departamentos</h3>
+                <a th:href="@{/departments/cadastrar}" class="transition ease-in-out hover:bg-purple-500">Cadastrar</a>
+                <a th:href="@{/departments/lista}" class="transition ease-in-out hover:bg-purple-500">Listar</a>
+            </div>
+        </nav>
+    </aside>
+</body>
+
+</html>

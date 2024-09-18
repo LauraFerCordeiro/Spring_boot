@@ -21,13 +21,13 @@ public class AccountController {
 
     @GetMapping("/cadastrar")
     public String cadastrar(Account Account){
-        return("/accounts/cadastro");
+        return("pages/accounts/cadastrar");
     }
 
-    @GetMapping("/listar")
+    @GetMapping("/lista")
     public String listar(ModelMap map){
         map.addAttribute("accounts", adao.findAll());
-        return ("/accounts/lista");
+        return ("pages/accounts/lista");
     }
 
     @PostMapping("/salvar")

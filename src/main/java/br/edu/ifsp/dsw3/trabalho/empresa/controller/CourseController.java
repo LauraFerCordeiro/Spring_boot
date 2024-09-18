@@ -24,13 +24,13 @@ public class CourseController {
 
     @GetMapping("/cadastrar")
     public String cadastrar(Course course){
-        return("/courses/cadastro");
+        return("pages/courses/cadastrar");
     }
 
-    @GetMapping("/listar")
+    @GetMapping("/lista")
     public String listar(ModelMap map){
         map.addAttribute("courses", cDao.findAll());
-        return ("/courses/lista");
+        return ("pages/courses/lista");
     }
 
     @PostMapping("/salvar")
@@ -49,7 +49,7 @@ public class CourseController {
     public String alterar(Course course, RedirectAttributes attr){
         cDao.save(course);
         attr.addFlashAttribute("success", "Curso editado com sucesso!");
-        return("redirect:/courses/listar");
+        return("redirect:/courses/lista");
     }
 
     @GetMapping("/excluir/{id}")

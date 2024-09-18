@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/adm}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div layout:fragment="corpo">
+        <section>
+            <nav>
+                <h3>Lista de empresas</h3>
+                <a href="">Cadastrar nova empresa</a>
+            </nav>
+
+            <div class="">
+                <table class="">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nome</th>
+                        <th>Endereço</th>
+                        <th>Telefone</th>
+                        <th>CNPJ</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr th:each="c : ${companies}">
+                        <td th:text="${c.id}">1</td>
+                        <td th:text="${c.name}">Pane Silvio</td>
+                        <td th:text="${c.address}">Rua Carlos Mota</td>
+                        <td th:text="${c.telephone}">1111111111</td>
+                        <td th:text="${c.cnpj}">111111111</td>
+                        <td colspan="2">
+                            <a th:href="@{/companies/editar/{id} (id=${c.id})}" role="button">
+                                <span title="Editar" aria-hidden="true">editar</span>
+                            </a>
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+</body>
+
+</html>

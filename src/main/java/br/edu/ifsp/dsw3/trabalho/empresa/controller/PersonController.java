@@ -24,13 +24,13 @@ public class PersonController {
 
     @GetMapping("/cadastrar")
     public String cadastrar(Person person){
-        return("/people/cadastro");
+        return("pages/people/cadastrar");
     }
 
-    @GetMapping("/listar")
+    @GetMapping("/lista")
     public String listar(ModelMap map){
         map.addAttribute("people", pDao.findAll());
-        return ("/people/lista");
+        return ("pages/people/lista");
     }
 
     @PostMapping("/salvar")
@@ -49,7 +49,7 @@ public class PersonController {
     public String alterar(Person person, RedirectAttributes attr){
         pDao.save(person);
         attr.addFlashAttribute("success", "Pessoa editada com sucesso!");
-        return("redirect:/people/listar");
+        return("redirect:/people/lista");
     }
 
     @GetMapping("/excluir/{id}")

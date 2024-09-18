@@ -31,13 +31,13 @@ public class DepartmentController {
 
     @GetMapping("/cadastrar")
     public String cadastrar(Department department){
-        return("/departments/cadastro");
+        return("/pages/departments/cadastrar");
     }
 
-    @GetMapping("/listar")
+    @GetMapping("/lista")
     public String listar(ModelMap map){
         map.addAttribute("departments", dDao.findAll());
-        return ("/departments/lista");
+        return ("/pages/departments/lista");
     }
 
     @PostMapping("/salvar")
@@ -56,7 +56,7 @@ public class DepartmentController {
     public String alterar(Department department, RedirectAttributes attr){
         dDao.save(department);
         attr.addFlashAttribute("success", "Departamento editado com sucesso!");
-        return("redirect:/department/listar");
+        return("redirect:/department/lista");
     }
 
     @GetMapping("/excluir/{id}")

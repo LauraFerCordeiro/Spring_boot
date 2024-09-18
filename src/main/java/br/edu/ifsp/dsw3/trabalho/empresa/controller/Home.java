@@ -46,4 +46,14 @@ public class Home {
     public String registro() {
         return "pages/registro";
     }
+
+    @GetMapping("/nav")
+    public String nav() {
+        return "fragments/admin_nav";
+    }
+
+    @GetMapping("/header")
+    public String headerAdm() {
+        return "fragments/header_adm";
+    }
 }

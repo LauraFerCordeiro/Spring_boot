@@ -41,13 +41,13 @@ public class CompanyController {
 
     @GetMapping("/cadastrar")
     public String cadastrar(Company company){
-        return("/companies/cadastro");
+        return("pages/companies/cadastrar");
     }
 
-    @GetMapping("/listar")
+    @GetMapping("/lista")
     public String listar(ModelMap map){
         map.addAttribute("companies", companyDAO.findAll());
-        return ("/companies/lista");
+        return ("pages/companies/lista");
     }
 
     @PostMapping("/salvar")
@@ -59,14 +59,14 @@ public class CompanyController {
     @GetMapping("/editar/{id}")
     public String editar(ModelMap map, @PathVariable("id")Long id ){
         map.addAttribute("company", companyDAO.getReferenceById(id));
-        return ("/companies/editar");
+        return ("pages/companies/cadastrar");
     }
 
     @PostMapping("/editar")
     public String alterar(Company company, RedirectAttributes attr){
         companyDAO.save(company);
         attr.addFlashAttribute("success", "Compania editada com sucesso!");
-        return("redirect:/companies/listar");
+        return("redirect:/companies/lista");
     }
 
     @GetMapping("/excluir/{id}")
