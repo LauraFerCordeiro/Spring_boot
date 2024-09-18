@@ -8,6 +8,27 @@
 </head>
 <body>
     <div layout:fragment="corpo">
+        <div class="h-[95vh] w-full bg-zinc-800 justify-center flex flex-col text-center gap-10">
+            <h1>Registrar</h1>
+            <div class="w-full flex justify-center">
+                <form action=""
+                    class="grid p-8 items-center text-left grid-rows-7 grid-cols-2 gap-x-5 gap-y-3 w-[50vw] text-white bg-stone-800 border border-stone-500 rounded-lg">
+                    <label for="nome" class="col-start-1 row-start-1">Nome da empresa</label>
+                    <input name="nome" type="text" class="col-start-1 row-start-2">
+                    <label for="email" class="col-start-2 row-start-1">Email empresarial</label>
+                    <input name="email" type="email" class="col-start-2 row-start-2">
+                    <label for="telefone" class="col-start-1 row-start-3">Telefone</label>
+                    <input name="telefone" type="text" class="col-start-1 row-start-4">
+                    <label for="cpf" class="col-start-2 row-start-3">CNPJ</label>
+                    <input name="cpf" type="text" class="col-start-2 row-start-4">
+                    <label for="senha" class="col-start-1 row-start-5">Senha</label>
+                    <input name="senha" type="password" class="col-start-1 row-start-6">
+                    <label for="rsenha" class="col-start-2 row-start-5">Repita sua senha</label>
+                    <input name="rsenha" type="password" class="col-start-2 row-start-6">
+                    <button type="submit" class="bg-white text-black rounded-lg col-span-2 transition ease-in-out hover:bg-purple-400 hover:text-white">Enviar</button>
+                </form>
+            </div>
+        </div>
     </div>
 </body>
 </html>

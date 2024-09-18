@@ -1,13 +1,24 @@
 <!DOCTYPE html>
 <html lang="pt" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org"
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/nao_logado}">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <div layout:fragment="corpo">
+        <div class="bg-zinc-800 h-[95vh] w-full flex justify-center flex-col text-center text-white gap-5">
+            <h1>Registrar</h1>
+            <p class="text-xl">Escolha como gostaria de se registrar</p>
+            <div class="">
+                <a th:href="@{/registro_pessoa}" class="bg-white border px-8 text-black rounded-md text-xl transition ease-in-out hover:bg-purple-500">Pessoa</a>
+                <a th:href="@{/registro_empresa}" class="bg-stone-800 border px-8 border-stone-500 rounded-md text-xl  transition ease-in-out hover:bg-purple-500">Empresa</a>
+            </div>
+        </div>
     </div>
 </body>
+
 </html>

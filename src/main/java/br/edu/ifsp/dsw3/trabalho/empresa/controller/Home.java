@@ -46,9 +46,4 @@ public class Home {
     public String registro() {
         return "pages/registro";
     }
-
-    @GetMapping("/nao_logado")
-    public String naoLogado() {
-        return "layouts/nao_logado";
-    }
 }

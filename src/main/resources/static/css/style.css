@@ -4,12 +4,15 @@
 
 @layer components {
     .menu a{
-        @apply hover:bg-zinc-600 rounded border-x-8 border-transparent
+        @apply rounded border-x-8 border-transparent transition ease-in-out hover:bg-purple-400 hover:text-black hover:scale-110
     }
     form input{
         @apply bg-stone-900 border border-stone-600 rounded-lg
     }
     form textarea{
         @apply bg-stone-900 border border-stone-600 rounded-lg
+    }
+    h1 {
+        @apply text-7xl text-purple-500 font-bold
     }
 }

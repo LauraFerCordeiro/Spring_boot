@@ -8,6 +8,16 @@
 </head>
 <body>
     <div layout:fragment="corpo">
+        <div class="h-[95vh] bg-zinc-800 justify-center grid grid-rows-6 grid-cols-3">
+            <h1 class="text-center mt-16 row-span-2 col-span-3">Entrar</h1>
+            <form action="" class="mt-6 col-start-2 w-4/5 p-10 justify-self-center bg-stone-800 text-white row-span-3 border-2 border-stone-500 rounded-md grid grid-rows-5">
+                <label for="email">Email</label>
+                <input name="email" type="email" class="h-10">
+                <label for="senha">Senha</label>
+                <input type="password" name="senha" class="h-10">
+                <button type="submit" class="bg-white text-black rounded-lg h-10 mt-3">Enviar</button>
+            </form>
+        </div>
     </div>
 </body>
 </html>
