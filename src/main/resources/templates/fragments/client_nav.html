@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <title>GuaraHackers</title>
+    <link rel="stylesheet" th:href="@{/css/output.css}">
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <aside th:fragment="nav" class="bg-zinc-900 w-32 h-[100vh] p-2">
+        <nav class="menu text-white text-center w-full h-full flex flex-col justify-center align-middle gap-5">
+            <a th:href="@{/people/home}">Home</a>
+            <a th:href="@{/people/meuscursos}">Meus cursos</a>
+            <a th:href="@{/people/todoscursos}">Todos os cursos</a>
+        </nav>
+    </aside>
+</body>
+
+</html>

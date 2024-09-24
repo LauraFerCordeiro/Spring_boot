@@ -1,4 +1,4 @@
-package br.edu.ifsp.dsw3.trabalho.empresa.controller;
+package br.edu.ifsp.dsw3.trabalho.empresa.page_controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -55,5 +55,10 @@ public class Home {
     @GetMapping("/header")
     public String headerAdm() {
         return "fragments/header_adm";
+    }
+
+    @GetMapping("/clientnav")
+    public String clientNav() {
+        return "fragments/client_nav";
     }
 }

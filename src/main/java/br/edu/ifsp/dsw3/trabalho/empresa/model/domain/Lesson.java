@@ -76,4 +76,12 @@ public class Lesson implements Serializable{
     public void setLessonLink(String lesson_link) {
         this.lessonLink = lesson_link;
     }
+
+    public Course getCourse() {
+        return this.course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
 }

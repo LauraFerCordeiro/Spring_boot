@@ -53,6 +53,33 @@ public class Course implements Serializable {
     @OneToMany(mappedBy = "course")
     private List<Lesson> lessons;
     
+    public Course(String name, LocalDate startDate, LocalDate endDate, String category, String description,
+            BigDecimal cost, String courseLink, List<PayCourse> pays, List<Lesson> lessons) {
+        this.name = name;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.category = category;
+        this.description = description;
+        this.cost = cost;
+        this.courseLink = courseLink;
+        this.pays = pays;
+        this.lessons = lessons;
+    }
+
+    public Course(Long id, String name, LocalDate startDate, LocalDate endDate, String category, String description,
+            BigDecimal cost, String courseLink, List<PayCourse> pays, List<Lesson> lessons) {
+        this.id = id;
+        this.name = name;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.category = category;
+        this.description = description;
+        this.cost = cost;
+        this.courseLink = courseLink;
+        this.pays = pays;
+        this.lessons = lessons;
+    }
+
     public Course(Long id, String name, LocalDate startDate, LocalDate endDate, String category, String description,
             BigDecimal cost, List<PayCourse> pays) {
         this.id = id;
@@ -152,5 +179,23 @@ public class Course implements Serializable {
     public void setPays(List<PayCourse> pays) {
         this.pays = pays;
     }
+
+    public String getCourseLink() {
+        return courseLink;
+    }
+
+    public void setCourseLink(String courseLink) {
+        this.courseLink = courseLink;
+    }
+
+    public List<Lesson> getLessons() {
+        return lessons;
+    }
+
+    public void setLessons(List<Lesson> lessons) {
+        this.lessons = lessons;
+    }
+
+    
 
 }

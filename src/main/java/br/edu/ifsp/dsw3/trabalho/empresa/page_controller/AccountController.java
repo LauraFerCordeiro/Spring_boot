@@ -1,4 +1,4 @@
-package br.edu.ifsp.dsw3.trabalho.empresa.controller;
+package br.edu.ifsp.dsw3.trabalho.empresa.page_controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

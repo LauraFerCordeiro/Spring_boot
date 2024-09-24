@@ -1,4 +1,4 @@
-package br.edu.ifsp.dsw3.trabalho.empresa.controller;
+package br.edu.ifsp.dsw3.trabalho.empresa.page_controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -65,4 +65,19 @@ public class PersonController {
         return listar(map);
     }
 
+    @GetMapping("/home")
+    public String peopleHome(ModelMap map) {
+        
+        return "pages/people/home";
+    }
+
+    @GetMapping("/meuscursos")
+    public String peopleMeusCursos() {
+        return "pages/people/meuscursos";
+    }
+
+    @GetMapping("/todoscursos")
+    public String peopleTodosCursos() {
+        return "pages/people/todoscursos";
+    }
 }
