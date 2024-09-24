@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/adm}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Curso</title>
+</head>
+
+<body>
+    <div layout:fragment="corpo">
+        <section>
+            <nav>
+                <h3>Editar Curso</h3>
+            </nav>
+
+            <div class="w-full">
+                <form th:object="${course}" th:action="@{/courses/editar/{id} (id=${course.id})}" method="post">
+                    <div class="flex flex-col gap-4">
+                        <label for="name">Nome:</label>
+                        <input type="text" th:field="*{name}" id="name" class="px-4 py-2 rounded-md border border-purple-200 text-white">
+
+                        <label for="startDate">Data Inicio:</label>
+                        <input type="date" placeholder="XX/XX/XXXX" th:field="*{startDate}" id="startDate" class="px-4 py-2 rounded-md border bg-purple-200 text-white">
+
+                        <label for="endDate">Data Fim:</label>
+                        <input type="date" placeholder="XX/XX/XXXX" th:field="*{endDate}" id="endDate" class="px-4 py-2 rounded-md border border-purple-200 text-white">
+
+                        <label for="category">Categoria:</label>
+                        <input type="text" th:field="*{category}" id="category" class="px-4 py-2 rounded-md border border-purple-200 text-white">
+
+                        <label for="description">Descrição:</label>
+                        <input type="text" th:field="*{description}" id="description" class="px-4 py-2 rounded-md border border-purple-200 text-white">
+
+                        <label for="cost">Custo:</label>
+                        <input type="text" th:field="*{cost}" data-mask="#.##0,00" data-mask-reverse="true" id="cost" class="px-4 py-2 rounded-md border border-purple-200 text-white">
+
+                        <label for="courseLink">Link da aula de introdução:</label>
+                        <input type="text" th:field="*{courseLink}" id="courseLink" class="px-4 py-2 rounded-md border border-purple-200 text-white">
+
+                        <button type="submit" class="bg-purple-400 hover:bg-purple-500 px-4 py-2 rounded-md">Editar</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+</body>
+
+</html>

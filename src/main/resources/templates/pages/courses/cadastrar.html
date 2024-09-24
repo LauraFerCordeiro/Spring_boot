@@ -5,12 +5,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Cadastrar Curso</title>
 </head>
 
 <body>
     <div layout:fragment="corpo">
-        
+        <section class="justify-center flex flex-col text-white w-2/3">
+            <nav>
+                <h3 class="font-bold text-5xl text-purple-500 mb-4 mt-20">Cadastrar Curso</h3>
+            </nav>
+
+            <div class="w-full" id="cadastro">
+                <form th:action="${course.id == null} ? @{/courses/salvar} : @{/courses/editar}" th:object="${course}" method="POST">
+                    <div class="flex flex-col gap-4">
+                        <label for="name">Nome do Curso</label>
+                        <input type="text" id="name" placeholder="Nome do curso"
+                            autofocus="autofocus" th:field="*{name}" class="px-4 py-2 rounded-md border border-purple-200 text-white"/>
+                    
+                        <label for="startDate">Data de Início</label>
+                        <input type="date" id="startDate" 
+                        placeholder="XX/XX/XXXX" th:field="*{startDate}" class="px-4 py-2 rounded-md border border-purple-200 text-white"/>
+
+                        <label for="endDate">Data de Fim</label>
+                        <input type="date" id="endDate" 
+                        placeholder="XX/XX/XXXX" th:field="*{endDate}" class="px-4 py-2 rounded-md border border-purple-200 text-white"/>
+                    
+                        <label for="category">Categoria</label>
+                        <input type="text" id="category"
+                        autofocus="autofocus" th:field="*{category}" class="px-4 py-2 rounded-md border border-purple-200 text-white"/>
+                        
+                        <label for="description">Descrição</label>
+                        <input type="text" id="description"
+                        autofocus="autofocus" th:field="*{description}" class="px-4 py-2 rounded-md border border-purple-200 text-white"/>
+                
+                        <label for="cost">Custo</label>
+                        <input type="text" id="cost" data-mask="#.##0,00"
+                                data-mask-reverse="true" th:field="*{cost}" class="px-4 py-2 rounded-md border border-purple-200 text-white"/>
+            
+                        <label for="courseLink">Link da aula de introdução</label>
+                        <input type="text" id="courseLink"
+                            autofocus="autofocus" th:field="*{courseLink}" class="px-4 py-2 rounded-md border border-purple-200 text-white"/>
+
+                        <input type="hidden" th:field="*{id}" />
+                        <button type="submit" class="bg-purple-400 hover:bg-purple-500 px-4 py-2 rounded-md">Salvar</button>
+                    </div>
+                </form>
+            </div>
+        </section>
     </div>
 </body>
 

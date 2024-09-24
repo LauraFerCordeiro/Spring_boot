@@ -5,12 +5,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Listar Curso</title>
 </head>
 
 <body>
     <div layout:fragment="corpo">
-        
+        <section></section>
+            <nav>
+                <h3 class="font-bold text-5xl text-purple-500 mt-20 mb-8 text-center">Lista de cursos</h3>
+            </nav>
+
+            <div class="mx-52 border-2 rounded-2xl overflow-auto bg-zinc-800">
+                <table class="w-full text-white">
+                    <thead>
+                        <tr class="bg-zinc-600">
+                            <th class="px-4 py-2">#</th>
+                            <th class="px-4 py-2">Nome</th>
+                            <th class="px-4 py-2">Data Inicio</th>
+                            <th class="px-4 py-2">Data Fim</th>
+                            <th class="px-4 py-2">Categoria</th>
+                            <th class="px-4 py-2">Descrição</th>
+                            <th class="px-4 py-2">Custo</th>
+                            <th class="px-4 py-2">Link introdução</th>
+                        </tr>                
+                    </thead>
+                    <tbody>
+
+                        <tr th:each="c : ${courses}" class="bg-zinc-800 hover:bg-zinc-700 text-center">
+                            <td class="px-4 py-2" th:text="${c.id}">1</td>
+                            <td class="px-4 py-2" th:text="${c.name}">Curso adm</td>
+                            <td class="px-4 py-2" th:text="${c.startDate}">22/02/2007</td>
+                            <td class="px-4 py-2" th:text="${c.endDate}">22/02/2009</td>
+                            <td class="px-4 py-2" th:text="${c.category}">Administração</td>
+                            <td class="px-4 py-2" th:text="${c.description}">um curso bacana</td>
+                            <td class="px-4 py-2" th:text="${c.cost}">111111111</td>
+                            <td class="px-4 py-2" th:text="${c.courseLink}">link here</td>
+                            <td class="px-4 py-2">
+                                <a th:href="@{/courses/editar/{id} (id=${c.id})}" role="button" class="bg-purple-400 hover:bg-purple-500 px-4 py-2 rounded-md">Editar</a>
+                                <a th:href="@{/courses/excluir/{id} (id=${c.id})}" role="button" th:onclick="|if(confirm('Tem certeza que deseja excluir o curso?')) { location.href='/courses/excluir/'+${c.id} } else { return false; }|" class="bg-red-500 hover:bg-red-600 px-4 py-2 rounded-md">Excluir</a>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </section>
     </div>
 </body>
 
