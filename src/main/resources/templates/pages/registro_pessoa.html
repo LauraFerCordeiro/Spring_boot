@@ -13,24 +13,38 @@
         <div class="h-[95vh] w-full bg-zinc-800 justify-center flex flex-col text-center gap-10">
             <h1>Registrar</h1>
             <div class="w-full flex justify-center">
-                <form action=""
+                <form th:action="@{/accounts/person/salvar}" th:object="${account}" method="post"
                     class="grid p-8 items-center text-left grid-rows-7 grid-cols-6 gap-x-5 gap-y-3 w-[50vw] text-white bg-stone-800 border border-stone-500 rounded-lg">
+
+                    <!-- Campos de pessoa -->
                     <label for="nome" class="col-start-1 col-end-4 row-start-1">Nome completo</label>
-                    <input name="nome" type="text" class="col-start-1 col-end-4 row-start-2">
-                    <label for="email" class="col-start-4 col-end-7 row-start-1">Email</label>
-                    <input name="email" type="email" class="col-start-4 col-end-7 row-start-2">
+                    <input name="name" type="text" th:field="${person.name}" class="col-start-1 col-end-4 row-start-2">
+
                     <label for="telefone" class="col-start-1 col-end-3 row-start-3">Telefone</label>
-                    <input name="telefone" type="text" class="col-start-1 col-end-3 row-start-4">
+                    <input name="phone" type="text" th:field="${person.telephone}" class="col-start-1 col-end-3 row-start-4">
+
                     <label for="cpf" class="col-start-3 col-end-5 row-start-3">CPF</label>
-                    <input name="cpf" type="text" class="col-start-3 col-end-5 row-start-4">
+                    <input name="cpf" type="text" th:field="${person.cpf}" class="col-start-3 col-end-5 row-start-4">
+
                     <label for="nascimento" class="col-start-5 col-end-7 row-start-3">Data de nascimento</label>
-                    <input name="nascimento" type="date" class="col-start-5 col-end-7 row-start-4">
+                    <input name="birthDate" type="date" th:field="${person.birthDate}"
+                        class="col-start-5 col-end-7 row-start-4">
+
+                    <!-- Campos de conta -->
+                    <label for="email" class="col-start-4 col-end-7 row-start-1">Email</label>
+                    <input name="email" type="email" th:field="*{email}" class="col-start-4 col-end-7 row-start-2">
+
                     <label for="senha" class="col-start-1 col-end-4 row-start-5">Senha</label>
-                    <input name="senha" type="password" class="col-start-1 col-end-4 row-start-6">
+                    <input name="password" type="password" th:field="*{password}"
+                        class="col-start-1 col-end-4 row-start-6">
+
                     <label for="rsenha" class="col-start-4 col-end-7 row-start-5">Repita sua senha</label>
                     <input name="rsenha" type="password" class="col-start-4 col-end-7 row-start-6">
-                    <button type="submit" class="bg-white text-black rounded-lg col-start-3 col-span-2 transition ease-in-out hover:bg-purple-400 hover:scale-110 hover:text-white">Enviar</button>
+
+                    <button type="submit"
+                        class="bg-white text-black rounded-lg col-start-3 col-span-2 transition ease-in-out hover:bg-purple-400 hover:scale-110 hover:text-white">Enviar</button>
                 </form>
+
             </div>
         </div>
     </div>

@@ -1,10 +1,15 @@
 package br.edu.ifsp.dsw3.trabalho.empresa.page_controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 
-@Controller
+import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Account;
+import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Company;
+import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Person;
+import jakarta.servlet.http.HttpSession;
 
+@Controller
 public class Home {
 
     @GetMapping(name = "/.")
@@ -18,8 +23,8 @@ public class Home {
     }
 
     @GetMapping("/login")
-    public String login() {
-        return "pages/login";
+    public String login(ModelMap map) {
+        return "redirect:accounts/login";
     }
 
     @GetMapping("/parceiros")
@@ -32,14 +37,18 @@ public class Home {
         return "pages/quem_somos";
     }
 
-    @GetMapping("/registro_empresa")
-    public String registroEmpresa() {
-        return "pages/registro_empresa";
+    @GetMapping("/registro_pessoa")
+    public String registroPessoa(ModelMap model) {
+        model.addAttribute("account", new Account());
+        model.addAttribute("person", new Person());
+        return "pages/registro_pessoa";
     }
 
-    @GetMapping("/registro_pessoa")
-    public String registroPessoa() {
-        return "pages/registro_pessoa";
+    @GetMapping("/registro_empresa")
+    public String registroEmpresa(ModelMap model) {
+        model.addAttribute("account", new Account());
+        model.addAttribute("company", new Company());
+        return "pages/registro_empresa";
     }
 
     @GetMapping("/registro")
@@ -61,4 +70,12 @@ public class Home {
     public String clientNav() {
         return "fragments/client_nav";
     }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+
+        return "redirect: /";
+    }
+    
 }

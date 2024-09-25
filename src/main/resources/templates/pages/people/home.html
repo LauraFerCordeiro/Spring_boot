@@ -11,7 +11,32 @@
 <body>
     <div layout:fragment="corpo">
         <h2>GuaraHack</h2>
-        <p>Olá! Bem vindo <span th:></span></p>
+        <p>Olá! Bem vindo, <span th:text="${loggedInUser.name}">_fulano_</span>!</p>
+        <p>Fique à vontade para explorar</p>
+
+        <h3>Todos os Cursos</h3>
+        <div th:each>
+            <div>
+                <h4>Curso 1</h4>
+                <p>Minicurso de tecnologia 1</p>
+            </div>
+            <div>
+                <h4>Curso 2</h4>
+                <p>Minicurso de tecnologia 2</p>
+            </div>
+            <div>
+                <h4>Curso 3</h4>
+                <p>Minicurso de tecnologia 3</p>
+            </div>
+            <div>
+                <h4>Curso 4</h4>
+                <p>Minicurso de tecnologia 4</p>
+            </div>
+        </div>
+
+        <h3>Meus Cursos ➔</h3>
+        <div>
+        </div>
     </div>
 </body>
 

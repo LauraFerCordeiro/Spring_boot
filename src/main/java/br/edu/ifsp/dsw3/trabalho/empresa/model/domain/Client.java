@@ -31,7 +31,6 @@ public abstract class Client implements Serializable {
     @Column(nullable = false, unique = true)
     protected String telephone;
     
-    @Column(nullable = false)
     protected String address;
 
     @OneToOne(cascade = CascadeType.ALL)

@@ -1,34 +1,48 @@
 <!DOCTYPE html>
 <html lang="pt" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org"
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/nao_logado}">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <div layout:fragment="corpo">
         <div class="h-[95vh] w-full bg-zinc-800 justify-center flex flex-col text-center gap-10">
             <h1>Registrar</h1>
             <div class="w-full flex justify-center">
-                <form action=""
+                <form th:action="@{/accounts/company/salvar}" th:object="${company}" method="post"
                     class="grid p-8 items-center text-left grid-rows-7 grid-cols-2 gap-x-5 gap-y-3 w-[50vw] text-white bg-stone-800 border border-stone-500 rounded-lg">
+
                     <label for="nome" class="col-start-1 row-start-1">Nome da empresa</label>
-                    <input name="nome" type="text" class="col-start-1 row-start-2">
+                    <input id="nome" name="nome" type="text" th:field="*{name}" class="col-start-1 row-start-2">
+
                     <label for="email" class="col-start-2 row-start-1">Email empresarial</label>
-                    <input name="email" type="email" class="col-start-2 row-start-2">
+                    <input id="email" name="email" type="email" th:field="${account.email}" class="col-start-2 row-start-2">
+
                     <label for="telefone" class="col-start-1 row-start-3">Telefone</label>
-                    <input name="telefone" type="text" class="col-start-1 row-start-4">
+                    <input id="telefone" name="telefone" type="text" th:field="*{telephone}"
+                        class="col-start-1 row-start-4">
+
                     <label for="cpf" class="col-start-2 row-start-3">CNPJ</label>
-                    <input name="cpf" type="text" class="col-start-2 row-start-4">
+                    <input id="cpf" name="cnpj" type="text" th:field="*{cnpj}" class="col-start-2 row-start-4">
+
                     <label for="senha" class="col-start-1 row-start-5">Senha</label>
-                    <input name="senha" type="password" class="col-start-1 row-start-6">
+                    <input id="senha" name="password" type="password" th:field="${account.password}"
+                        class="col-start-1 row-start-6">
+
                     <label for="rsenha" class="col-start-2 row-start-5">Repita sua senha</label>
-                    <input name="rsenha" type="password" class="col-start-2 row-start-6">
-                    <button type="submit" class="bg-white text-black rounded-lg col-span-2 transition ease-in-out hover:bg-purple-400 hover:text-white">Enviar</button>
+                    <input id="rsenha" name="confirmPassword" type="password" class="col-start-2 row-start-6">
+
+                    <button type="submit"
+                        class="bg-white text-black rounded-lg col-span-2 transition ease-in-out hover:bg-purple-400 hover:text-white">Enviar</button>
                 </form>
+
             </div>
         </div>
     </div>
 </body>
+
 </html>

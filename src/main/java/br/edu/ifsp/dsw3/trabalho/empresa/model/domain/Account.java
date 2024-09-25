@@ -128,4 +128,10 @@ public class Account implements Serializable{
         this.worker = worker;
     }
 
+    @Override
+    public String toString() {
+        return "Account [id=" + id + ", email=" + email + ", password=" + password + ", name=" + name + ", view=" + view
+                + ", admin=" + admin + ", client=" + client + ", worker=" + worker + "]";
+    }
+
 }
