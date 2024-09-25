@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,19 +35,20 @@ public class PersonController {
     }
 
     @PostMapping("/salvar")
-    public String salvar(Person person){
+    public String salvar(@ModelAttribute Person person){
         pDao.save(person);
-        return("redirect:/people/cadastrar");
+        return("redirect:/people/lista");
     }
 
     @GetMapping("/editar/{id}")
     public String editar(ModelMap map, @PathVariable("id")Long id ){
         map.addAttribute("person", pDao.getReferenceById(id));
-        return ("/people/editar");
+        return ("pages/people/editar");
     }
 
-    @PostMapping("/editar")
-    public String alterar(Person person, RedirectAttributes attr){
+    @PostMapping("/editar/{id}")
+    public String alterar(@PathVariable("id") Long id,  @ModelAttribute Person person, RedirectAttributes attr){
+        person.setId(id);
         pDao.save(person);
         attr.addFlashAttribute("success", "Pessoa editada com sucesso!");
         return("redirect:/people/lista");
