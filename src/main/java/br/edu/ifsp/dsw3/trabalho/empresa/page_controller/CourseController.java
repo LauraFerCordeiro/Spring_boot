@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -79,7 +80,7 @@ public class CourseController {
 
     @Transactional
     @GetMapping("/excluir/{id}")
-    public String excluir(@PathVariable("id") Long id, ModelMap map){
+    public String excluir(@PathVariable("id") Long id, ModelMap map) {
         Optional<Course> optionalCourse = cDao.findById(id);
         if (optionalCourse.isPresent()) {
             Course course = optionalCourse.get();
@@ -91,29 +92,36 @@ public class CourseController {
                 return listar(map);
             }
 
-            if (!course.getLessons().isEmpty()) {
-                for (Lesson lesson : course.getLessons()) {
-                    Optional<Lesson> optionalLesson = lDao.findById(lesson.getId());
-                    if (optionalLesson.isPresent()) {
-                        lDao.deleteById(lesson.getId());
+            try {
+                // Deletar as lições associadas ao curso
+                if (!course.getLessons().isEmpty()) {
+                    for (Lesson lesson : course.getLessons()) {
+                        Optional<Lesson> optionalLesson = lDao.findById(lesson.getId());
+                        if (optionalLesson.isPresent()) {
+                            lDao.delete(optionalLesson.get());
+                        }
                     }
                 }
-            }
 
-            if(pDao.findPaysByCourseId(id).isEmpty()){
-                cDao.deleteById(id);
-            } else {
+                // Deletar os pagamentos associados ao curso
                 List<PayCourse> pays = pDao.findPaysByCourseId(id);
-                for (PayCourse pay : pays) {
-                    Optional<PayCourse> optionalPay = pDao.findById(pay.getId());
-                    if (optionalPay.isPresent()) {
-                        pDao.deleteById(pay.getId());
+                if (!pays.isEmpty()) {
+                    for (PayCourse pay : pays) {
+                        Optional<PayCourse> optionalPay = pDao.findById(pay.getId());
+                        if (optionalPay.isPresent()) {
+                            pDao.delete(optionalPay.get());
+                        }
                     }
                 }
-                cDao.deleteById(id);
-            }
 
-            map.addAttribute("success", "Curso excluído com sucesso");
+                // Deletar o curso
+                cDao.delete(course);
+
+                map.addAttribute("success", "Curso excluído com sucesso");
+            } catch (ObjectOptimisticLockingFailureException e) {
+                map.addAttribute("error", "O curso foi atualizado ou deletado por outra transação. Tente novamente.");
+                return listar(map);
+            }
         } else {
             map.addAttribute("error", "Curso não encontrado");
         }

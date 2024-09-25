@@ -15,6 +15,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Version;
 
 @Entity
 @Table(name = "courses")
@@ -52,7 +53,11 @@ public class Course implements Serializable {
 
     @OneToMany(mappedBy = "course")
     private List<Lesson> lessons;
+
+    @Version
+    private Long version;
     
+   
     public Course(String name, LocalDate startDate, LocalDate endDate, String category, String description,
             BigDecimal cost, String courseLink, List<PayCourse> pays, List<Lesson> lessons) {
         this.name = name;
@@ -194,6 +199,14 @@ public class Course implements Serializable {
 
     public void setLessons(List<Lesson> lessons) {
         this.lessons = lessons;
+    }
+
+    public Long getVersion() {
+        return version;
+    }
+
+    public void setVersion(Long version) {
+        this.version = version;
     }
 
 }
