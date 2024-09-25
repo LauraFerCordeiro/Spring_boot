@@ -21,4 +21,25 @@
     p {
         @apply text-white
     }
+    .excluir{
+        @apply bg-red-500 hover:bg-red-600 px-4 py-2 rounded-md
+    }
+    .editar{
+        @apply bg-purple-400 hover:bg-purple-500 px-4 py-2 rounded-md
+    }
+    .titulo{
+        @apply font-bold text-5xl text-purple-500 mb-4 mt-20
+    }
+    .corpo{
+        @apply bg-zinc-800 w-full justify-center items-start flex
+    }
+    .formulario{
+        @apply flex flex-col gap-4
+    }
+    .alinhamento{
+        @apply justify-center flex flex-col text-white w-2/3
+    }
+    .campo{
+        @apply px-4 py-2 rounded-md border border-purple-200 text-white
+    }
 }

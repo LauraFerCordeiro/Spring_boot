@@ -31,20 +31,12 @@ public class PersonController {
 
     @GetMapping("/cadastrar")
     public String cadastrar(Person person, HttpSession session) {
-        String response = verificaSession(session, 4);
-        if (!(response.equals("correto"))) {
-            return response;
-        }
 
         return ("pages/people/cadastrar");
     }
 
     @GetMapping("/lista")
     public String listar(ModelMap map, HttpSession session) {
-        String response = verificaSession(session, 4);
-        if (!(response.equals("correto"))) {
-            return response;
-        }
 
         map.addAttribute("people", pDao.findAll());
         return ("pages/people/lista");
@@ -58,11 +50,6 @@ public class PersonController {
 
     @GetMapping("/editar/{id}")
     public String editar(ModelMap map, @PathVariable("id") Long id, HttpSession session) {
-        String response = verificaSession(session, 4);
-        if (!(response.equals("correto"))) {
-            return response;
-        }
-
         map.addAttribute("person", pDao.getReferenceById(id));
         return ("pages/people/editar");
     }
@@ -77,11 +64,6 @@ public class PersonController {
 
     @GetMapping("/excluir/{id}")
     public String excluir(@PathVariable("id") Long id, ModelMap map, HttpSession session) {
-        String response = verificaSession(session, 4);
-        if (!(response.equals("correto"))) {
-            return response;
-        }
-
         if (pCDao.findPaysByPersonId(id).isEmpty()) {
             pDao.deleteById(id);
         } else {

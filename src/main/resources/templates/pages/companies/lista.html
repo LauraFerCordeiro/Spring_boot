@@ -25,7 +25,7 @@
                             <th class="px-4 py-2">Telefone</th>
                             <th class="px-4 py-2">CNPJ</th>
                             <th class="px-4 py-2">Ações</th>
-                        </tr>                
+                        </tr>
                     </thead>
                     <tbody>
 
@@ -36,8 +36,8 @@
                             <td class="px-4 py-2" th:text="${c.telephone}">1111111111</td>
                             <td class="px-4 py-2" th:text="${c.cnpj}">111111111</td>
                             <td class="px-4 py-2">
-                                <a th:href="@{/companies/editar/{id} (id=${c.id})}" role="button" class="bg-purple-400 hover:bg-purple-500 px-4 py-2 rounded-md">Editar</a>
-                                <a th:href="@{/companies/excluir/{id} (id=${c.id})}" role="button" th:onclick="|if(confirm('Tem certeza que deseja excluir a empresa?')) { location.href='/companies/excluir/'+${c.id} } else { return false; }|" class="bg-red-500 hover:bg-red-600 px-4 py-2 rounded-md">Excluir</a>
+                                <a th:href="@{/companies/editar/{id} (id=${c.id})}" role="button" class="editar">Editar</a>
+                                <a th:href="@{/companies/excluir/{id} (id=${c.id})}" role="button" th:onclick="|if(confirm('Tem certeza que deseja excluir a empresa?')) { location.href='/companies/excluir/'+${c.id} } else { return false; }|" class="excluir">Excluir</a>
                             </td>
                         </tr>
 

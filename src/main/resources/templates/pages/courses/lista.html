@@ -42,7 +42,7 @@
                             <td class="px-4 py-2" th:text="${c.courseLink}">link here</td>
                             <td class="px-4 py-2">
                                 <a th:href="@{/courses/editar/{id} (id=${c.id})}" role="button" class="bg-purple-400 hover:bg-purple-500 px-4 py-2 rounded-md">Editar</a>
-                                <a th:href="@{/courses/excluir/{id} (id=${c.id})}" role="button" th:onclick="|if(confirm('Tem certeza que deseja excluir o curso?')) { location.href='/courses/excluir/'+${c.id} } else { return false; }|" class="bg-red-500 hover:bg-red-600 px-4 py-2 rounded-md">Excluir</a>
+                                <a th:href="@{/courses/excluir/{id} (id=${c.id})}" role="button" th:onclick="|if(confirm('Tem certeza que deseja excluir o curso?')) { location.href='/courses/excluir/'+${c.id} } else { return false; }|" class="excluir">Excluir</a>
                             </td>
                         </tr>
 
