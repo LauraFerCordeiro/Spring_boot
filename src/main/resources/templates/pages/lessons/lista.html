@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/adm}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listar Aulas</title>
+</head>
+
+<body>
+    <div layout:fragment="corpo">
+        <section>
+            <nav>
+                <h3 class="font-bold text-5xl text-purple-500 mt-20 mb-8 text-center">Lista de aulas</h3>
+            </nav>
+
+            <div class="mx-52 border-2 rounded-2xl overflow-auto bg-zinc-800">
+                <table class="w-full text-white">
+                    <thead>
+                        <tr class="bg-zinc-600">
+                            <th class="px-4 py-2">#</th>
+                            <th class="px-4 py-2">Nome</th>
+                            <th class="px-4 py-2">Data de Liberação</th>
+                            <th class="px-4 py-2">Link</th>
+                            <th class="px-4 py-2">Curso</th>
+                        </tr>                
+                    </thead>
+                    <tbody>
+
+                        <tr th:each="l : ${lessons}" class="bg-zinc-800 hover:bg-zinc-700 text-center">
+                            <td class="px-4 py-2" th:text="${l.id}">1</td>
+                            <td class="px-4 py-2" th:text="${l.name}">Aula 1 de adm</td>
+                            <td class="px-4 py-2" th:text="${l.release}">22/02/2007</td>
+                            <td class="px-4 py-2" th:text="${l.lessonLink}">https:/youtube.com</td>
+                            <td class="px-4 py-2" th:text="${l.course.name}">Curso de adm</td>
+                            <td class="px-4 py-2">
+                                <a th:href="@{/lessons/editar/{id} (id=${l.id})}" role="button" class="bg-purple-400 hover:bg-purple-500 px-4 py-2 rounded-md">Editar</a>
+                                <a th:href="@{/lessons/excluir/{id} (id=${l.id})}" role="button" th:onclick="|if(confirm('Tem certeza que deseja excluir a aula?')) { location.href='/lessons/excluir/'+${l.id} } else { return false; }|" class="bg-red-500 hover:bg-red-600 px-4 py-2 rounded-md">Excluir</a>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+</body>
+
+</html>

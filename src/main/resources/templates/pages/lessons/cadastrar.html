@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/adm}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Aula</title>
+</head>
+
+<body>
+    <div layout:fragment="corpo">
+        <section class="justify-center flex flex-col text-white w-2/3">
+            <nav>
+                <h3 class="font-bold text-5xl text-purple-500 mb-4 mt-20">Cadastrar Aula</h3>
+            </nav>
+
+            <div class="w-full">
+                <form th:action="${lesson.id == null} ? @{/lessons/salvar} : @{/lessons/editar}" th:object="${lesson}" method="POST">
+                    <div class="flex flex-col gap-4">
+                        <label for="name">Nome:</label>
+                        <input type="text" th:field="*{name}" id="name" class="px-4 py-2 rounded-md border border-purple-200 text-white">
+
+                        <label for="release">Data de Liberação:</label>
+                        <input type="date" placeholder="XX/XX/XXXX" th:field="*{release}" id="release" class="px-4 py-2 rounded-md border border-purple-200 text-white">
+
+                        <label for="lessonLink">Link:</label>
+                        <input type="text" th:field="*{lessonLink}" id="lessonLink" class="px-4 py-2 rounded-md border border-purple-200 text-white">
+
+                        <label for="course">Curso</label>
+                        <select id="course" th:field="*{course}" class="text-black">
+                            <option value="">Selecione</option>
+                            <option th:each="c : ${courses}" th:value="${c.id}" th:text="${c.name}">Administração</option>
+                        </select>
+
+                        <button type="submit" class="bg-purple-400 hover:bg-purple-500 px-4 py-2 rounded-md">Cadastrar</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+</body>
+
+</html>

@@ -196,6 +196,4 @@ public class Course implements Serializable {
         this.lessons = lessons;
     }
 
-    
-
 }
