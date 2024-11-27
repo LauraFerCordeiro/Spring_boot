@@ -34,7 +34,7 @@ public class Account implements Serializable{
     @OneToOne(mappedBy = "account")
     private Worker worker;
 
-    @Column(nullable = false, length = 6)
+    @Column(nullable = false, length = 7)
     @Enumerated(EnumType.STRING)
     private Role role;
 

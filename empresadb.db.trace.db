@@ -12030,3 +12030,6 @@ insert into accounts (email,name,password,role,id) values (?,?,?,?,default) [220
 2024-11-26 16:21:47.477650-03:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLDataException: Value too long for column "ROLE CHARACTER VARYING(5)": "'PERSON' (6)"; SQL statement:
 insert into accounts (email,name,password,role,id) values (?,?,?,?,default) [22001-224]
+2024-11-27 08:06:52.859261-03:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "ROLE CHARACTER VARYING(6)": "'COMPANY' (7)"; SQL statement:
+insert into accounts (email,name,password,role,id) values (?,?,?,?,default) [22001-224]

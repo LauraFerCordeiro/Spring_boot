@@ -17,17 +17,17 @@
                     class="grid p-8 items-center text-left grid-rows-7 grid-cols-2 gap-x-5 gap-y-3 w-[50vw] text-white bg-stone-800 border border-stone-500 rounded-lg">
 
                     <label for="nome" class="col-start-1 row-start-1">Nome da empresa</label>
-                    <input id="nome" name="nome" type="text" th:field="*{name}" class="col-start-1 row-start-2">
+                    <input id="name" name="name" type="text" th:field="*{name}" class="col-start-1 row-start-2">
 
                     <label for="email" class="col-start-2 row-start-1">Email empresarial</label>
                     <input id="email" name="email" type="email" th:field="${account.email}" class="col-start-2 row-start-2">
 
                     <label for="telefone" class="col-start-1 row-start-3">Telefone</label>
-                    <input id="telefone" name="telefone" type="text" th:field="*{telephone}"
+                    <input id="telephone" name="telephone" type="text"
                         class="col-start-1 row-start-4">
 
                     <label for="cpf" class="col-start-2 row-start-3">CNPJ</label>
-                    <input id="cpf" name="cnpj" type="text" th:field="*{cnpj}" class="col-start-2 row-start-4">
+                    <input id="cpf" name="cnpj" type="text" class="col-start-2 row-start-4">
 
                     <label for="senha" class="col-start-1 row-start-5">Senha</label>
                     <input id="senha" name="password" type="password" th:field="${account.password}"

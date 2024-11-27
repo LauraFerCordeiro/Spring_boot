@@ -127,9 +127,9 @@ public class AccountController {
         return nome;
     }
 
-    @ModelAttribute("name")
-    public String getName() {
-        Account account = adao.findByEmail(getUsername());
-        return account.getName();
-    }
+    // @ModelAttribute("name")
+    // public String getName() {
+    //     Account account = adao.findByEmail(getUsername());
+    //     return account.getName();
+    // }
 }
