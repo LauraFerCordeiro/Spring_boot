@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -26,43 +28,15 @@ public class Account implements Serializable{
     @Column(nullable = false, unique = true)
     private String name;
 
-    @Column(nullable = false)
-    private Integer view; //{1 : Person, 2 : Company, 3 : Worker, 4 : Admin}
-
-    @Column(nullable = false)
-    private Boolean admin;
-
     @OneToOne(mappedBy = "account")
     private Client client;
 
     @OneToOne(mappedBy = "account")
     private Worker worker;
 
-    public Account(Long id, String email, String password, String name, Integer view, Boolean admin, Client client,
-            Worker worker) {
-        this.id = id;
-        this.email = email;
-        this.password = password;
-        this.name = name;
-        this.view = view;
-        this.admin = admin;
-        this.client = client;
-        this.worker = worker;
-    }
-
-    public Account(String email, String password, String name, Integer view, Boolean admin, Client client,
-            Worker worker) {
-        this.email = email;
-        this.password = password;
-        this.name = name;
-        this.view = view;
-        this.admin = admin;
-        this.client = client;
-        this.worker = worker;
-    }
-
-    public Account() {
-    }
+    @Column(nullable = false, length = 6)
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     public Long getId() {
         return id;
@@ -96,22 +70,6 @@ public class Account implements Serializable{
         this.name = name;
     }
 
-    public Integer getView() {
-        return view;
-    }
-
-    public void setView(Integer view) {
-        this.view = view;
-    }
-
-    public Boolean getAdmin() {
-        return admin;
-    }
-
-    public void setAdmin(Boolean admin) {
-        this.admin = admin;
-    }
-
     public Client getClient() {
         return client;
     }
@@ -128,10 +86,18 @@ public class Account implements Serializable{
         this.worker = worker;
     }
 
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+    
     @Override
     public String toString() {
-        return "Account [id=" + id + ", email=" + email + ", password=" + password + ", name=" + name + ", view=" + view
-                + ", admin=" + admin + ", client=" + client + ", worker=" + worker + "]";
+        return "Account [id=" + id + ", email=" + email + ", password=" + password + ", name=" + name + ", client=" + client + ", worker=" + worker + "]";
     }
+
 
 }

@@ -1,9 +1,12 @@
 package br.edu.ifsp.dsw3.trabalho.empresa.page_controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -54,6 +57,16 @@ public class CardController {
         cdao.deleteById(id);
         map.addAttribute("success", "Cartão excluído com sucesso");
         return listar(map);
+    }
+
+        @ModelAttribute("username")
+    public String getUsername() {
+        String nome = null;
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDetails userDetails) {
+            nome = userDetails.getUsername();
+        }
+        return nome;
     }
     
 }

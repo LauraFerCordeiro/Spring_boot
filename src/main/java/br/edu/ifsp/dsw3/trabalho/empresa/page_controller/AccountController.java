@@ -1,6 +1,10 @@
 package br.edu.ifsp.dsw3.trabalho.empresa.page_controller;
 
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +21,7 @@ import br.edu.ifsp.dsw3.trabalho.empresa.model.dao.PersonDAO;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Account;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Company;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Person;
-import jakarta.servlet.http.HttpSession;
+import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Role;
 
 @Controller
 @RequestMapping("/accounts")
@@ -43,50 +47,50 @@ public class AccountController {
         return ("pages/accounts/lista");
     }
 
-    @PostMapping("/salvar")
-    public String salvar(Account account) {
-        adao.save(account);
-        return ("redirect:/accounts/cadastrar");
-    }
-
     @PostMapping("/person/salvar")
-    public String salvar(@ModelAttribute Person person, @RequestParam("email") String email,
-            @RequestParam("password") String password) {
+    public String salvar(
+            @ModelAttribute Account account,
+            @RequestParam("name") String name,
+            @RequestParam("telephone") String telephone,
+            @RequestParam("cpf") String cpf,
+            @RequestParam("birthDate") String birthDate) {
 
-        // Criar objeto Account
-        Integer view = 1;
-        Boolean admin = false;
-        Account a = new Account(email, password, person.getName(), view, admin, person, null);
-        person.setAccount(a);
+        Person person = new Person();
+        person.setName(name);
+        person.setTelephone(telephone);
+        person.setCpf(cpf);
+        person.setBirthDate(LocalDate.parse(birthDate));
+        person.setAccount(account);
 
-        // Salvar no banco de dados
+        account.setRole(Role.PERSON);
+
         pDao.save(person);
-        adao.save(a);
+        adao.save(account);
 
         return "redirect:/login";
     }
 
     @PostMapping("/company/salvar")
-    public String salvar(@ModelAttribute Company company, @RequestParam("email") String email,
-            @RequestParam("password") String password) {
-
-        // Criar objeto Account
-        Integer view = 2;
-        Boolean admin = false;
-        Account a = new Account(email, password, company.getName(), view, admin, company, null);
-        company.setAccount(a);
-
-        // Salvar no banco de dados
-        cDao.save(company);
-        adao.save(a);
-
+    public String salvar(
+            @ModelAttribute Account account,
+            @RequestParam("name") String name,
+            @RequestParam("telephone") String telephone,
+            @RequestParam("cnpj") String cnpj) {
+    
+        account.setRole(Role.COMPANY);
+    
+        Company company = new Company();
+        company.setName(name);
+        company.setTelephone(telephone);
+        company.setCnpj(cnpj);
+        company.setAccount(account);
+    
+        adao.save(account); // Salva o Account
+        cDao.save(company); // Salva a Company
+    
         return "redirect:/login";
     }
-
-    @GetMapping("/login")
-    public String login(ModelMap map) {
-        return "pages/login";
-    }
+    
 
     @GetMapping("/editar/{id}")
     public String editar(ModelMap map, @PathVariable("id") Long id) {
@@ -108,32 +112,24 @@ public class AccountController {
         return listar(map);
     }
 
-    @PostMapping("/login")
-    public String login(@RequestParam String email, @RequestParam String password, ModelMap map, HttpSession session) {
-        Account a = adao.findByEmail(email).filter(account -> account.getPassword().equals(password)).orElse(null);
-        if (a != null) {
-
-            // Adiciona o usuário na sessão
-            session.setAttribute("loggedInUser", a);
-
-            // Log para verificar se a sessão está configurada corretamente
-            System.out.println("Usuário logado: " + session.getAttribute("loggedInUser").toString());
-            switch (a.getView()) {
-                case 1:
-                    return "redirect:/people/home";
-                case 2:
-                    return "redirect:/companies/home";
-                case 3:
-                    return "redirect:/workers/home";
-                case 4:
-                    return "redirect:/admin";
-                default:
-                    return "redirect:/";
-            }
-        } else {
-            map.addAttribute("error", "Usuário ou senha inválidos");
-            return login(map);
-        }
+    @ModelAttribute("tipos")
+    public Role[] getRoles() {
+        return Role.values();
     }
 
+    @ModelAttribute("username")
+    public String getUsername() {
+        String nome = null;
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDetails userDetails) {
+            nome = userDetails.getUsername();
+        }
+        return nome;
+    }
+
+    @ModelAttribute("name")
+    public String getName() {
+        Account account = adao.findByEmail(getUsername());
+        return account.getName();
+    }
 }
