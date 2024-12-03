@@ -1,5 +1,6 @@
 package br.edu.ifsp.dsw3.trabalho.empresa.page_controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -7,14 +8,19 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import br.edu.ifsp.dsw3.trabalho.empresa.model.dao.AccountDAO;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Account;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Company;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Person;
+import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Role;
 import jakarta.servlet.http.HttpSession;
 
 
 @Controller
 public class Home {
+
+    @Autowired
+    AccountDAO aDao;
 
     @GetMapping(name = "/.")
     public String principal(){
@@ -28,6 +34,19 @@ public class Home {
 
     @GetMapping("/login")
     public String login(Account account) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        Account a = aDao.findByEmail(username);
+
+        if(a != null){
+            if(a.getRole().equals(Role.ADMIN)){
+                return "redirect:/dashbord/admin";
+            }
+            else if(a.getRole().equals(Role.PERSON)){
+                return "redirect:/people/home";
+            }
+        }
+
+
         return "pages/login";
     }
 

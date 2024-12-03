@@ -12033,3 +12033,28 @@ insert into accounts (email,name,password,role,id) values (?,?,?,?,default) [220
 2024-11-27 08:06:52.859261-03:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLDataException: Value too long for column "ROLE CHARACTER VARYING(6)": "'COMPANY' (7)"; SQL statement:
 insert into accounts (email,name,password,role,id) values (?,?,?,?,default) [22001-224]
+2024-12-02 21:34:41.562179-03:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "INSERT INTO ACCOUNTS([*]'EMAIL', 'NAME', 'PASSWORD', 'ROLE') VALUES ('admin@gmail.com', 'Admin', '123456', 'ADMIN')"; expected "identifier"; SQL statement:
+INSERT INTO ACCOUNTS('EMAIL', 'NAME', 'PASSWORD', 'ROLE') VALUES ('admin@gmail.com', 'Admin', '123456', 'ADMIN') [42001-224]
+2024-12-02 23:58:43.119690-03:00 jdbc[54]: null
+org.h2.message.DbException: The connection was not closed by the application and is garbage collected [90018-224]
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:218)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:135)
+	at org.h2.Driver.connect(Driver.java:59)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:138)
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:359)
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:201)
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:470)
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:733)
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:712)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientConnectionException: The connection was not closed by the application and is garbage collected [90018-224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:690)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	... 16 more

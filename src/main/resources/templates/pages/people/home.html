@@ -11,28 +11,23 @@
 <body>
     <div layout:fragment="corpo">
         <h2>GuaraHack</h2>
-        <p>Olá! Bem vindo, <span th:text="${username}">_fulano_</span>!</p>
+        <p>Olá! Bem vindo, <span th:text="${name}">_fulano_</span>!</p>
         <p>Fique à vontade para explorar</p>
+        <br>
 
-        <h3>Todos os Cursos</h3>
-        <div>
-            <div>
-                <h4>Curso 1</h4>
-                <p>Minicurso de tecnologia 1</p>
-            </div>
-            <div>
-                <h4>Curso 2</h4>
-                <p>Minicurso de tecnologia 2</p>
-            </div>
-            <div>
-                <h4>Curso 3</h4>
-                <p>Minicurso de tecnologia 3</p>
-            </div>
-            <div>
-                <h4>Curso 4</h4>
-                <p>Minicurso de tecnologia 4</p>
+        <h3 class="text-2xl font-bold mb-4 text-white">Cursos disponiveis</h3>
+        <div class="relative overflow-hidden">
+            <div class="flex space-x-4 overflow-y-auto max-h-[40vh]" th:each="course : ${courses}">
+                <div class="min-w-[250px] bg-zinc-700 border rounded shadow p-4">
+                    <h4 class="text-lg font-semibold mb-2 text-white" th:text="${course.name}">Nome do Curso</h4>
+                    <a class="text-purple-400 underline hover:text-blue-500"
+                    th:href="@{/courses/course/{id}(id=${course.id})}">
+                        Acessar Curso
+                    </a>
+                </div>
             </div>
         </div>
+        
 
         <h3>Meus Cursos ➔</h3>
         <div>

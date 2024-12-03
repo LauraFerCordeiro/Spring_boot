@@ -692,6 +692,10 @@ p {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+.relative {
+  position: relative;
+}
+
 .col-span-2 {
   grid-column: span 2 / span 2;
 }
@@ -794,6 +798,10 @@ p {
   margin-right: 13rem;
 }
 
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+
 .mb-4 {
   margin-bottom: 1rem;
 }
@@ -880,6 +888,26 @@ p {
   height: 100%;
 }
 
+.max-h-\[\] {
+  max-height: ;
+}
+
+.max-h-\[v\] {
+  max-height: v;
+}
+
+.max-h-\[40\] {
+  max-height: 40;
+}
+
+.max-h-\[40v\] {
+  max-height: 40v;
+}
+
+.max-h-\[40vh\] {
+  max-height: 40vh;
+}
+
 .w-2\/3 {
   width: 66.666667%;
 }
@@ -910,6 +938,10 @@ p {
 
 .w-full {
   width: 100%;
+}
+
+.min-w-\[250px\] {
+  min-width: 250px;
 }
 
 .grid-cols-2 {
@@ -980,6 +1012,10 @@ p {
   gap: 2.5rem;
 }
 
+.gap-2 {
+  gap: 0.5rem;
+}
+
 .gap-4 {
   gap: 1rem;
 }
@@ -997,6 +1033,12 @@ p {
   row-gap: 0.75rem;
 }
 
+.space-x-4 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(1rem * var(--tw-space-x-reverse));
+  margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
 .self-center {
   align-self: center;
 }
@@ -1007,6 +1049,18 @@ p {
 
 .overflow-auto {
   overflow: auto;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.overflow-x-auto {
+  overflow-x: auto;
+}
+
+.overflow-y-auto {
+  overflow-y: auto;
 }
 
 .rounded {
@@ -1115,6 +1169,11 @@ p {
 .bg-zinc-900 {
   --tw-bg-opacity: 1;
   background-color: rgb(24 24 27 / var(--tw-bg-opacity));
+}
+
+.bg-zinc-300 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(212 212 216 / var(--tw-bg-opacity));
 }
 
 .bg-\[url\(\'\/image\/cybersecurity\.jpg\'\)\] {
@@ -1247,6 +1306,11 @@ p {
   line-height: 1;
 }
 
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
 .text-xl {
   font-size: 1.25rem;
   line-height: 1.75rem;
@@ -1263,6 +1327,11 @@ p {
 .text-black {
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity));
+}
+
+.text-blue-500 {
+  --tw-text-opacity: 1;
+  color: rgb(59 130 246 / var(--tw-text-opacity));
 }
 
 .text-purple-400 {
@@ -1283,6 +1352,16 @@ p {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.underline {
+  text-decoration-line: underline;
+}
+
+.shadow {
+  --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
 .transition {
@@ -1347,7 +1426,17 @@ p {
   color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
+.hover\:text-blue-700:hover {
+  --tw-text-opacity: 1;
+  color: rgb(29 78 216 / var(--tw-text-opacity));
+}
+
 .hover\:text-white:hover {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.hover\:text-blue-500:hover {
+  --tw-text-opacity: 1;
+  color: rgb(59 130 246 / var(--tw-text-opacity));
 }

@@ -21,9 +21,9 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         http
             .authorizeHttpRequests((requests) -> requests
-                .requestMatchers("/css/*", "/images/*","/","/contato", "/login", "/parceiros", "/quem_somos", "/registro", "/registro_empresa", "/registro_pessoa", "/h2-console/**", "/accounts/person/salvar", "accounts/company/salvar").permitAll()
-                .requestMatchers("/companies/**", "/courses/**", "/departments/**", "/lessons/**" , "/people/cadastrar", "/people/editar", "people/lista", "/workers/**").hasRole("ADMIN")
-                .requestMatchers("/people/home", "/people/meuscursos", "/people/todoscursos").hasRole("PERSON")
+                .requestMatchers("/css/*", "/images/*","/","/contato", "/login", "/parceiros", "/quem_somos", "/registro", "/registro_empresa", "/registro_pessoa", "/h2-console/**", "/accounts/person/salvar", "/accounts/company/salvar").permitAll()
+                .requestMatchers("/people/home", "/people/meuscursos", "/people/todoscursos", "/courses/course/*").hasRole("PERSON")
+                .requestMatchers("/companies/**", "/courses/**", "/departments/**", "/lessons/**" , "/people/**", "/workers/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
             )
             
@@ -34,6 +34,7 @@ public class WebSecurityConfig {
 
             .formLogin((form) -> form
                 .loginPage("/login")
+                .defaultSuccessUrl("/login", true)
                 .permitAll()
             )
             

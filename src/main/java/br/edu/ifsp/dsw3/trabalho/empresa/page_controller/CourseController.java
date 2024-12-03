@@ -22,6 +22,7 @@ import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Lesson;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.PayCourse;
 import jakarta.transaction.Transactional;
 
+
 @Controller
 @RequestMapping("/courses")
 public class CourseController {
@@ -38,6 +39,17 @@ public class CourseController {
     public String cadastrar(Course course){
         return("pages/courses/cadastrar");
     }
+
+    @GetMapping("/course/{id}")
+    public String curso(@PathVariable("id") Long id, ModelMap map) {
+        Course course = cDao.findById(id).orElse(null);
+        if(course!= null){
+            map.addAttribute("course", course);
+            return "pages/courses/course";
+        }
+        return "pages/courses/course";
+    }
+    
 
     @GetMapping("/lista")
     public String listar(ModelMap map){
@@ -63,20 +75,6 @@ public class CourseController {
         attr.addFlashAttribute("success", "Curso editado com sucesso!");
         return("redirect:/courses/lista");
     }
-
-    /* @GetMapping("/excluir/{id}")
-    public String excluir(@PathVariable("id")Long id, ModelMap map){
-        if(pDao.findPaysByCourseId(id).isEmpty()){
-            cDao.deleteById(id);
-        }else{
-            pDao.deletePaysByCourseId(id);
-            cDao.deleteById(id);
-        }
-
-        map.addAttribute("success", "Curso excluído com sucesso");
-        return listar(map);
-    }
-    */
 
     @Transactional
     @GetMapping("/excluir/{id}")

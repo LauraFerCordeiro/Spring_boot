@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <div layout:fragment="corpo">
+    <div layout:fragment="corpo" class="bg-zinc-800 w-full overflow-auto">
         <section>
             <nav>
                 <h3 class="font-bold text-5xl text-purple-500 mt-20 mb-8 text-center">Lista de cursos</h3>
@@ -27,7 +27,8 @@
                             <th class="px-4 py-2">Descrição</th>
                             <th class="px-4 py-2">Custo</th>
                             <th class="px-4 py-2">Link introdução</th>
-                        </tr>                
+                            <th class="px-4 py-2">Ações</th>
+                        </tr>
                     </thead>
                     <tbody>
 
@@ -40,7 +41,7 @@
                             <td class="px-4 py-2" th:text="${c.description}">um curso bacana</td>
                             <td class="px-4 py-2" th:text="${c.cost}">111111111</td>
                             <td class="px-4 py-2" th:text="${c.courseLink}">link here</td>
-                            <td class="px-4 py-2">
+                            <td class="px-4 py-2 flex gap-2 h-full">
                                 <a th:href="@{/courses/editar/{id} (id=${c.id})}" role="button" class="bg-purple-400 hover:bg-purple-500 px-4 py-2 rounded-md">Editar</a>
                                 <a th:href="@{/courses/excluir/{id} (id=${c.id})}" role="button" th:onclick="|if(confirm('Tem certeza que deseja excluir o curso?')) { location.href='/courses/excluir/'+${c.id} } else { return false; }|" class="excluir">Excluir</a>
                             </td>

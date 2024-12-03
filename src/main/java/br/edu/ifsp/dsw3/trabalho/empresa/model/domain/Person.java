@@ -1,6 +1,7 @@
 package br.edu.ifsp.dsw3.trabalho.empresa.model.domain;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -86,6 +87,15 @@ public class Person extends Client{
 
     public void setPays(List<PayCourse> pays) {
         this.pays = pays;
+    }
+
+    public List<Course> getCourses(){
+        List<PayCourse> pays = getPays();
+        ArrayList<Course> courses = new ArrayList<Course>();
+        for (PayCourse pay : pays) {
+            courses.add(pay.getCourse());
+        }
+        return courses;
     }
 
 }

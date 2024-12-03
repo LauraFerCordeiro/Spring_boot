@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.edu.ifsp.dsw3.trabalho.empresa.model.dao.AccountDAO;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.dao.CourseDAO;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.dao.PayCourseDAO;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.dao.PersonDAO;
+import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Account;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Person;
 
 @Controller
@@ -28,6 +30,9 @@ public class PersonController {
 
     @Autowired
     CourseDAO cDao;
+
+    @Autowired
+    AccountDAO aDao;
 
     @GetMapping("/cadastrar")
     public String cadastrar(Person person) {
@@ -43,9 +48,9 @@ public class PersonController {
     }
 
     @PostMapping("/salvar")
-    public String salvar(@ModelAttribute Person person){
+    public String salvar(@ModelAttribute Person person) {
         pDao.save(person);
-        return("redirect:/people/lista");
+        return ("redirect:/people/lista");
     }
 
     @GetMapping("/editar/{id}")
@@ -55,7 +60,7 @@ public class PersonController {
     }
 
     @PostMapping("/editar/{id}")
-    public String alterar(@PathVariable("id") Long id,  @ModelAttribute Person person, RedirectAttributes attr){
+    public String alterar(@PathVariable("id") Long id, @ModelAttribute Person person, RedirectAttributes attr) {
         person.setId(id);
         pDao.save(person);
         attr.addFlashAttribute("success", "Pessoa editada com sucesso!");
@@ -77,6 +82,19 @@ public class PersonController {
 
     @GetMapping("/home")
     public String home(ModelMap map) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        Account account = aDao.findByEmail(username);
+
+        map.addAttribute("name", account.getName());
+
+        if (account != null && account.getClient() instanceof Person person) {
+            map.addAttribute("client_courses", person.getCourses());
+        } else {
+            map.addAttribute("client_courses", null);
+        }
+
+        map.addAttribute("courses", cDao.findAll());
+
         return "pages/people/home";
     }
 
