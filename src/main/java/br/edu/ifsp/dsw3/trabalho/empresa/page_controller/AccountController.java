@@ -1,7 +1,5 @@
 package br.edu.ifsp.dsw3.trabalho.empresa.page_controller;
 
-import java.time.LocalDate;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,13 +10,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.edu.ifsp.dsw3.trabalho.empresa.model.dao.AccountDAO;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.dao.PersonDAO;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Account;
-import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Person;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Role;
 
 @Controller
@@ -31,6 +27,9 @@ public class AccountController {
     @Autowired
     PersonDAO pDao;
 
+    @Autowired
+    Home home;
+
     @GetMapping("/cadastrar")
     public String cadastrar(Account Account) {
         return ("pages/accounts/cadastrar");
@@ -41,29 +40,6 @@ public class AccountController {
         map.addAttribute("accounts", adao.findAll());
         return ("pages/accounts/lista");
     }
-
-    @PostMapping("/person/salvar")
-    public String salvar(
-            @ModelAttribute Account account,
-            @RequestParam("name") String name,
-            @RequestParam("telephone") String telephone,
-            @RequestParam("cpf") String cpf,
-            @RequestParam("birthDate") String birthDate) {
-
-        Person person = new Person();
-        person.setName(name);
-        person.setTelephone(telephone);
-        person.setCpf(cpf);
-        person.setBirthDate(LocalDate.parse(birthDate));
-        person.setAccount(account);
-
-        account.setRole(Role.PERSON);
-
-        pDao.save(person);
-        adao.save(account);
-
-        return "redirect:/login";
-    }    
 
     @GetMapping("/editar/{id}")
     public String editar(ModelMap map, @PathVariable("id") Long id) {
