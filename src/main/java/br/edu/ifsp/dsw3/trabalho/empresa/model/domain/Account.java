@@ -31,9 +31,6 @@ public class Account implements Serializable{
     @OneToOne(mappedBy = "account")
     private Client client;
 
-    @OneToOne(mappedBy = "account")
-    private Worker worker;
-
     @Column(nullable = false, length = 7)
     @Enumerated(EnumType.STRING)
     private Role role;
@@ -78,14 +75,6 @@ public class Account implements Serializable{
         this.client = client;
     }
 
-    public Worker getWorker() {
-        return worker;
-    }
-
-    public void setWorker(Worker worker) {
-        this.worker = worker;
-    }
-
     public Role getRole() {
         return role;
     }
@@ -96,7 +85,7 @@ public class Account implements Serializable{
     
     @Override
     public String toString() {
-        return "Account [id=" + id + ", email=" + email + ", password=" + password + ", name=" + name + ", client=" + client + ", worker=" + worker + "]";
+        return "Account [id=" + id + ", email=" + email + ", password=" + password + ", name=" + name + ", client=" + client + "]";
     }
 
 

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import br.edu.ifsp.dsw3.trabalho.empresa.model.dao.AccountDAO;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Account;
-import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Company;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Person;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Role;
 import jakarta.servlet.http.HttpSession;
@@ -72,18 +71,6 @@ public class Home {
         return "pages/registro_pessoa";
     }
 
-    @GetMapping("/registro_empresa")
-    public String registroEmpresa(ModelMap model) {
-        model.addAttribute("account", new Account());
-        model.addAttribute("company", new Company());
-        return "pages/registro_empresa";
-    }
-
-    @GetMapping("/registro")
-    public String registro() {
-        return "pages/registro";
-    }
-
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
@@ -91,7 +78,7 @@ public class Home {
         return "redirect: /";
     }
 
-        @ModelAttribute("username")
+    @ModelAttribute("username")
     public String getUsername(){
         String nome = null;
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
