@@ -27,32 +27,32 @@ public class Person extends Client{
     @OneToMany(mappedBy = "person")
     private List<PayCourse> pays;
 
-    public Person(Long id, String name, String telephone, String address, Account account, List<Card> cards, String cpf,
+    public Person(Long id, String name, String telephone, String address, Account account, String cpf,
             LocalDate birthDate, List<PayCourse> pays) {
-        super(id, name, telephone, address, account, cards);
+        super(id, name, telephone, address, account);
         this.cpf = cpf;
         this.birthDate = birthDate;
         this.pays = pays;
     }
 
-    public Person(String name, String telephone, String address, Account account, List<Card> cards, String cpf,
+    public Person(String name, String telephone, String address, Account account, String cpf,
             LocalDate birthDate, List<PayCourse> pays) {
-        super(name, telephone, address, account, cards);
+        super(name, telephone, address, account);
         this.cpf = cpf;
         this.birthDate = birthDate;
         this.pays = pays;
     }
 
-    public Person(Long id, String name, String telephone, String address, Account account, List<Card> cards, String cpf,
+    public Person(Long id, String name, String telephone, String address, Account account, String cpf,
             LocalDate birthDate) {
-        super(id, name, telephone, address, account, cards);
+        super(id, name, telephone, address, account);
         this.cpf = cpf;
         this.birthDate = birthDate;
     }
 
-    public Person(String name, String telephone, String address, Account account, List<Card> cards, String cpf,
+    public Person(String name, String telephone, String address, Account account, String cpf,
             LocalDate birthDate) {
-        super(name, telephone, address, account, cards);
+        super(name, telephone, address, account);
         this.cpf = cpf;
         this.birthDate = birthDate;
     }

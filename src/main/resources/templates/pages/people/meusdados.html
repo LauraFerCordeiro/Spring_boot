@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org"
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/people}">
 
 <head>
@@ -7,40 +7,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dados do Cliente</title>
     <link rel="stylesheet" href="../css/person.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 
-<body>
-    <div layout:fragment="corpo">
-        <h2 class="text-2xl font-bold mb-4">Meus dados</h2>
-        <table class="w-full text-white border-collapse">
-            <tr class="border-b border-zinc-700">
-                <th class="px-4 py-2 text-left">Nome:</th>
-                <td th:text="${people.name}" class="px-4 py-2">Fulano de Tal</td>
-            </tr>
-            <tr class="border-b border-zinc-700">
-                <th class="px-4 py-2 text-left">Data de Nascimento:</th>
-                <td th:text="${people.birthDate}" class="px-4 py-2">01/01/2000</td>
-            </tr>
-            <tr class="border-b border-zinc-700">
-                <th class="px-4 py-2 text-left">CPF:</th>
-                <td th:text="${people.cpf}" class="px-4 py-2">000.000.000-00</td>
-            </tr>
-            <tr class="border-b border-zinc-700">
-                <th class="px-4 py-2 text-left">Telefone:</th>
-                <td th:text="${people.telephone}" class="px-4 py-2">(00) 00000-0000</td>
-            </tr>
-            <tr class="border-b border-zinc-700">
-                <th class="px-4 py-2 text-left">Endereço:</th>
-                <td th:text="${people.address}" class="px-4 py-2">Rua Exemplo, 123</td>
-            </tr>
-            <tr>
-                <td colspan="2" class="pt-4">
-                    <a th:href="@{/people/editarPessoa/{id} (id=${people.id})}" role="button" class="bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-md inline-block">Editar</a>
-                </td>
-            </tr>
-        </table>
+<body class="bg-gray-900 text-gray-200">
+    <div layout:fragment="corpo" class="container mx-auto p-4">
+        <h2 class="text-3xl font-bold text-center text-purple-400 mb-6">Meus Dados</h2>
+        
+        <!-- Container para centralizar a tabela -->
+        <div class="flex justify-center">
+            <div class="w-full max-w-4xl bg-zinc-800 p-6 rounded-lg shadow-lg">
+                <table class="w-full border-collapse">
+                    <thead>
+                        <tr class="bg-zinc-700 text-white">
+                            <th class="px-4 py-2 text-left font-semibold">Campo</th>
+                            <th class="px-4 py-2 text-left font-semibold">Informação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b border-zinc-700 hover:bg-zinc-700 transition duration-150">
+                            <td class="px-4 py-2">Nome:</td>
+                            <td class="px-4 py-2" th:text="${people.name}">Fulano de Tal</td>
+                        </tr>
+                        <tr class="border-b border-zinc-700 hover:bg-zinc-700 transition duration-150">
+                            <td class="px-4 py-2">Data de Nascimento:</td>
+                            <td class="px-4 py-2" th:text="${people.birthDate}">01/01/2000</td>
+                        </tr>
+                        <tr class="border-b border-zinc-700 hover:bg-zinc-700 transition duration-150">
+                            <td class="px-4 py-2">CPF:</td>
+                            <td class="px-4 py-2" th:text="${people.cpf}">000.000.000-00</td>
+                        </tr>
+                        <tr class="border-b border-zinc-700 hover:bg-zinc-700 transition duration-150">
+                            <td class="px-4 py-2">Telefone:</td>
+                            <td class="px-4 py-2" th:text="${people.telephone}">(00) 00000-0000</td>
+                        </tr>
+                        <tr class="border-b border-zinc-700 hover:bg-zinc-700 transition duration-150">
+                            <td class="px-4 py-2">Endereço:</td>
+                            <td class="px-4 py-2" th:text="${people.address}">Rua Exemplo, 123</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="pt-4 text-center">
+                                <a th:href="@{/people/editarPessoa/{id} (id=${people.id})}" role="button" 
+                                   class="bg-purple-500 hover:bg-purple-600 text-white px-6 py-2 rounded-md transition duration-200">
+                                    Editar
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-    
 </body>
 
 </html>

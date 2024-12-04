@@ -1,11 +1,20 @@
 package br.edu.ifsp.dsw3.trabalho.empresa.page_controller;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+
 import org.springframework.web.bind.annotation.GetMapping;
+
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -106,6 +115,11 @@ public class PersonController {
     @GetMapping("/todoscursos")
     public String peopleTodosCursos(ModelMap map) {
         return "pages/people/todoscursos";
+    }
+
+    @GetMapping("/cadastrarcartao")
+    public String cadastrarCartao(ModelMap map) {
+        return "pages/people/cadastrarcartao";
     }
 
     @GetMapping("/meusdados")

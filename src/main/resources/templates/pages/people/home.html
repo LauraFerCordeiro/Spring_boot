@@ -6,32 +6,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 
-<body>
-    <div layout:fragment="corpo">
-        <h2>GuaraHack</h2>
-        <p>Olá! Bem vindo, <span th:text="${name}">_fulano_</span>!</p>
-        <p>Fique à vontade para explorar</p>
-        <br>
+<body class="bg-gray-900 text-gray-100 font-sans">
+    <div layout:fragment="corpo" class="container mx-auto p-6">
+        <header class="mb-8">
+            <h2 class="text-4xl font-bold text-white">GuaraHack</h2>
+            <p class="text-lg mt-2">Olá! Bem-vindo, <span th:text="${name}" class="font-semibold text-purple-400">_fulano_</span>!</p>
+            <p class="text-sm text-gray-300 mt-1">Fique à vontade para explorar</p>
+        </header>
 
-        <h3 class="text-2xl font-bold mb-4 text-white">Cursos disponiveis</h3>
-        <div class="relative overflow-hidden">
-            <div class="flex space-x-4 overflow-y-auto max-h-[40vh]" th:each="course : ${courses}">
-                <div class="min-w-[250px] bg-zinc-700 border rounded shadow p-4">
-                    <h4 class="text-lg font-semibold mb-2 text-white" th:text="${course.name}">Nome do Curso</h4>
-                    <a class="text-purple-400 underline hover:text-blue-500"
-                    th:href="@{/courses/course/{id}(id=${course.id})}">
-                        Acessar Curso
-                    </a>
+        <section class="mb-8">
+            <h3 class="text-2xl font-bold text-white mb-4">Cursos disponíveis</h3>
+            <div class="relative overflow-hidden">
+                <div class="flex space-x-4 overflow-x-auto max-h-[40vh] py-2">
+                    <div class="flex flex-nowrap">
+                        <div th:each="course : ${courses}" class="min-w-[250px] bg-zinc-800 border border-gray-700 rounded-lg shadow-lg p-4 hover:shadow-2xl transition-shadow duration-300">
+                            <h4 class="text-lg font-semibold mb-2 text-white" th:text="${course.name}">Nome do Curso</h4>
+                            <a class="text-purple-400 underline hover:text-blue-500 transition duration-200"
+                                th:href="@{/courses/course/{id}(id=${course.id})}">
+                                Acessar Curso
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        
+        </section>
 
-        <h3>Meus Cursos ➔</h3>
-        <div>
-        </div>
+        <section>
+            <h3 class="text-xl font-semibold text-white mb-4">Meus Cursos ➔</h3>
+            <div class="bg-zinc-800 rounded-lg p-4 shadow-md">
+                <p class="text-gray-400">Aqui você pode ver os cursos que você já está matriculado.</p>
+            </div>
+        </section>
     </div>
 </body>
 
