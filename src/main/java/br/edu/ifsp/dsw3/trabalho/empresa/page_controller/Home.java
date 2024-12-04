@@ -1,5 +1,7 @@
 package br.edu.ifsp.dsw3.trabalho.empresa.page_controller;
 
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -7,8 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import br.edu.ifsp.dsw3.trabalho.empresa.model.dao.AccountDAO;
+import br.edu.ifsp.dsw3.trabalho.empresa.model.dao.PersonDAO;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Account;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Person;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Role;
@@ -21,10 +26,14 @@ public class Home {
     @Autowired
     AccountDAO aDao;
 
+    @Autowired
+    PersonDAO pDao;
+    
     @GetMapping(name = "/.")
     public String principal(){
         return "/home";
     }
+
 
     @GetMapping("/contato")
     public String contato() {
@@ -66,10 +75,35 @@ public class Home {
 
     @GetMapping("/registro_pessoa")
     public String registroPessoa(ModelMap model) {
+        model.addAttribute("erro", "erro");
         model.addAttribute("account", new Account());
         model.addAttribute("person", new Person());
         return "pages/registro_pessoa";
     }
+
+    @PostMapping("accounts/person/salvar")
+    public String salvar(
+            @ModelAttribute Account account,
+            @RequestParam("name") String name,
+            @RequestParam("telephone") String telephone,
+            @RequestParam("cpf") String cpf,
+            @RequestParam("birthDate") String birthDate,
+            @RequestParam("rsenha") String rsenha) {
+                
+        Person person = new Person();
+        person.setName(name);
+        person.setTelephone(telephone);
+        person.setCpf(cpf);
+        person.setBirthDate(LocalDate.parse(birthDate));
+        person.setAccount(account);
+
+        account.setRole(Role.PERSON);
+
+        pDao.save(person);
+        aDao.save(account);
+
+        return "redirect:/login";
+    }    
 
     @GetMapping("/logout")
     public String logout(HttpSession session) {

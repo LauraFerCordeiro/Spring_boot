@@ -13,7 +13,7 @@
         <div class="h-[95vh] w-full bg-zinc-800 justify-center flex flex-col text-center gap-10">
             <h1>Registrar</h1>
             <div class="w-full flex justify-center">
-                <form th:action="@{/accounts/person/salvar}" th:object="${account}" method="post"
+                <form id="registrationForm" th:action="@{/accounts/person/salvar}" th:object="${account}" method="post"
                     class="grid p-8 items-center text-left grid-rows-7 grid-cols-6 gap-x-5 gap-y-3 w-[50vw] text-white bg-stone-800 border border-stone-500 rounded-lg">
 
                     <!-- Campos de pessoa -->
@@ -35,16 +35,26 @@
                     <input name="email" type="email" th:field="*{email}" class="col-start-4 col-end-7 row-start-2">
 
                     <label for="senha" class="col-start-1 col-end-4 row-start-5">Senha</label>
-                    <input name="password" type="password" th:field="*{password}"
+                    <input id="password" name="password" type="password" th:field="*{password}"
                         class="col-start-1 col-end-4 row-start-6">
 
                     <label for="rsenha" class="col-start-4 col-end-7 row-start-5">Repita sua senha</label>
-                    <input name="rsenha" type="password" class="col-start-4 col-end-7 row-start-6">
+                    <input id="rsenha" name="rsenha" type="password" class="col-start-4 col-end-7 row-start-6">
 
                     <button type="submit"
                         class="bg-white text-black rounded-lg col-start-3 col-span-2 transition ease-in-out hover:bg-purple-400 hover:scale-110 hover:text-white">Enviar</button>
                 </form>
-
+                <script>
+                    document.getElementById('registrationForm').addEventListener('submit', function(event) {
+                        const password = document.getElementById('password').value;
+                        const confirmPassword = document.getElementById('rsenha').value;
+                
+                        if (password !== confirmPassword) {
+                            alert("As senhas não coincidem!");
+                            event.preventDefault();
+                        }
+                    });
+                </script>
             </div>
         </div>
     </div>
