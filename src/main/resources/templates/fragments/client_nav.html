@@ -3,29 +3,32 @@
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
-    <title>GuaraHackers</title>
+    <title>GuaraHacker</title>
     <link rel="stylesheet" th:href="@{/css/output.css}">
     <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 
-<body>
-    <aside th:fragment="nav" class="bg-zinc-900 w-32 h-[100vh] p-2 flex flex-col">
-        <nav class="menu text-white text-center w-full h-full flex flex-col justify-center align-middle gap-5">
-            <a th:href="@{/people/home}">Home</a>
-            <a th:href="@{/people/meuscursos}">Meus cursos</a>
-            <a th:href="@{/people/todoscursos}">Todos os cursos</a>
-            <a th:href="@{/people/meusdados}">Meus dados</a>
-            <a th:href="@{/people/meuscartoes}">Meus cartões</a>
-            <div class="spacer flex-grow"></div>
-            <div class="logout mt-auto flex justify-center self-center">
+<body class="bg-gray-900">
+    <aside th:fragment="nav" class="bg-zinc-900 w-64 h-[100vh] p-4 flex flex-col shadow-lg">
+        <nav class="menu text-white text-center w-full h-full flex flex-col justify-start gap-6">
+            <h1 class="text-2xl font-bold mb-6 text-center text-purple-400">GuaraHacker</h1>
+            <a th:href="@{/people/home}" class="menu-item text-lg font-semibold py-2 px-4 rounded hover:bg-zinc-700 transition duration-200">Home</a>
+            <a th:href="@{/people/meuscursos}" class="menu-item text-lg font-semibold py-2 px-4 rounded hover:bg-zinc-700 transition duration-200">Meus Cursos</a>
+            <a th:href="@{/people/todoscursos}" class="menu-item text-lg font-semibold py-2 px-4 rounded hover:bg-zinc-700 transition duration-200">Todos os Cursos</a>
+            <a th:href="@{/people/meusdados}" class="menu-item text-lg font-semibold py-2 px-4 rounded hover:bg-zinc-700 transition duration-200">Meus Dados</a>
+            
+            <div class="flex-grow"></div>
+            
+            <div class="logout mt-auto">
                 <form th:action="@{/logout}" method="post" class="text-center">
-                    <button type="submit" class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded">
+                    <button type="submit" class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded w-full transition duration-200">
                         Log-Out
                     </button>
                 </form>
             </div>
         </nav>
-    </aside>    
+    </aside>
 </body>
 
 </html>

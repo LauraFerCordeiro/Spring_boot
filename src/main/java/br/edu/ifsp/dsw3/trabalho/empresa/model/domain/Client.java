@@ -1,7 +1,6 @@
 package br.edu.ifsp.dsw3.trabalho.empresa.model.domain;
 
 import java.io.Serializable;
-import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -12,7 +11,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -36,26 +34,6 @@ public abstract class Client implements Serializable {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "account_id", referencedColumnName = "id")
     protected Account account;
-
-    @OneToMany(mappedBy = "client")
-    protected List<Card> cards;
-
-    protected Client(Long id, String name, String telephone, String address, Account account, List<Card> cards) {
-        this.id = id;
-        this.name = name;
-        this.telephone = telephone;
-        this.address = address;
-        this.account = account;
-        this.cards = cards;
-    }
-
-    protected Client(String name, String telephone, String address, Account account, List<Card> cards) {
-        this.name = name;
-        this.telephone = telephone;
-        this.address = address;
-        this.account = account;
-        this.cards = cards;
-    }
 
     protected Client(Long id, String name, String telephone, String address, Account account) {
         this.id = id;
@@ -114,14 +92,4 @@ public abstract class Client implements Serializable {
     public void setAccount(Account account) {
         this.account = account;
     }
-
-    public List<Card> getCards() {
-        return cards;
-    }
-
-    public void setCards(List<Card> cards) {
-        this.cards = cards;
-    }
-
-    
 }
