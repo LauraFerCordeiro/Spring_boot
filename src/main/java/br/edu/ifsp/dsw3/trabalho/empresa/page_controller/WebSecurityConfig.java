@@ -23,7 +23,7 @@ public class WebSecurityConfig {
             .authorizeHttpRequests((requests) -> requests
                 .requestMatchers("/css/*", "/images/*","/","/contato", "/login", "/parceiros", "/quem_somos", "/registro", "/registro_empresa", "/registro_pessoa", "/h2-console/**", "/accounts/person/salvar", "/accounts/company/salvar").permitAll()
                 .requestMatchers("/people/home", "/people/meuscursos", "/people/todoscursos", "/courses/course/*").hasRole("PERSON")
-                .requestMatchers("/companies/**", "/courses/**", "/departments/**", "/lessons/**" , "/people/**", "/workers/**").hasRole("ADMIN")
+                .requestMatchers("/companies/**", "/courses/**", "/departments/**", "/lessons/**" , "/people/**", "/workers/**", "/dashboard/admin").hasRole("ADMIN")
                 .anyRequest().authenticated()
             )
             

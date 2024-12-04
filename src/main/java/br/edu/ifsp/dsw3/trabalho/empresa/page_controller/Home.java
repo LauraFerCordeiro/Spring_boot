@@ -39,7 +39,7 @@ public class Home {
 
         if(a != null){
             if(a.getRole().equals(Role.ADMIN)){
-                return "redirect:/dashbord/admin";
+                return "redirect:/dashboard/admin";
             }
             else if(a.getRole().equals(Role.PERSON)){
                 return "redirect:/people/home";
@@ -48,6 +48,11 @@ public class Home {
 
 
         return "pages/login";
+    }
+
+    @GetMapping("/dashboard/admin")
+    public String dashboardAdmin() {
+        return "pages/admin";
     }
 
     @GetMapping("/parceiros")

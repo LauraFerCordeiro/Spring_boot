@@ -16,24 +16,29 @@
             </nav>
 
             <div class="w-full">
-                <form th:action="${lesson.id == null} ? @{/lessons/salvar} : @{/lessons/editar}" th:object="${lesson}" method="POST">
+                <form th:action="${lesson.id == null} ? @{/lessons/salvar} : @{/lessons/editar}" th:object="${lesson}"
+                    method="POST" enctype="multipart/form-data">
                     <div class="flex flex-col gap-4">
                         <label for="name">Nome:</label>
-                        <input type="text" th:field="*{name}" id="name" class="px-4 py-2 rounded-md border border-purple-200 text-white">
+                        <input type="text" th:field="*{name}" id="name"
+                            class="px-4 py-2 rounded-md border border-purple-200 text-white">
 
                         <label for="release">Data de Liberação:</label>
-                        <input type="date" placeholder="XX/XX/XXXX" th:field="*{release}" id="release" class="px-4 py-2 rounded-md border border-purple-200 text-white">
-
-                        <label for="lessonLink">Link:</label>
-                        <input type="text" th:field="*{lessonLink}" id="lessonLink" class="px-4 py-2 rounded-md border border-purple-200 text-white">
+                        <input type="date" placeholder="XX/XX/XXXX" th:field="*{release}" id="release"
+                            class="px-4 py-2 rounded-md border border-purple-200 text-white">
 
                         <label for="course">Curso</label>
                         <select id="course" th:field="*{course}" class="text-black">
                             <option value="">Selecione</option>
-                            <option th:each="c : ${courses}" th:value="${c.id}" th:text="${c.name}">Administração</option>
+                            <option th:each="c : ${courses}" th:value="${c.id}" th:text="${c.name}">Administração
+                            </option>
                         </select>
 
-                        <button type="submit" class="bg-purple-400 hover:bg-purple-500 px-4 py-2 rounded-md">Cadastrar</button>
+                        <label for="video">Video</label>
+                        <input type="file" id="video" name="video"/>
+
+                        <button type="submit"
+                            class="bg-purple-400 hover:bg-purple-500 px-4 py-2 rounded-md">Cadastrar</button>
                     </div>
                 </form>
             </div>

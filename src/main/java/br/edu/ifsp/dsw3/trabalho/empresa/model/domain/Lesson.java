@@ -31,6 +31,7 @@ public class Lesson implements Serializable{
     @DateTimeFormat(iso = ISO.DATE)
     private LocalDate release;
 
+    @Column(name = "video", nullable = true)
     @Lob
     private byte[] video;
 

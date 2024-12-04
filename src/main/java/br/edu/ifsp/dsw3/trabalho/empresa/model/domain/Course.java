@@ -15,7 +15,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.persistence.Version;
 
 @Entity
 @Table(name = "courses")
@@ -45,48 +44,14 @@ public class Course implements Serializable {
     @Column(name = "cost", nullable = false, columnDefinition = "DECIMAL")
     private BigDecimal cost;
 
-    @Column(name = "course_link", nullable = false)
-    private String courseLink;
-
     @OneToMany(mappedBy = "course")
     private List<PayCourse> pays;
 
     @OneToMany(mappedBy = "course")
     private List<Lesson> lessons;
 
-    @Version
-    private Long version;
-    
-   
-    public Course(String name, LocalDate startDate, LocalDate endDate, String category, String description,
-            BigDecimal cost, String courseLink, List<PayCourse> pays, List<Lesson> lessons) {
-        this.name = name;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.category = category;
-        this.description = description;
-        this.cost = cost;
-        this.courseLink = courseLink;
-        this.pays = pays;
-        this.lessons = lessons;
-    }
-
     public Course(Long id, String name, LocalDate startDate, LocalDate endDate, String category, String description,
-            BigDecimal cost, String courseLink, List<PayCourse> pays, List<Lesson> lessons) {
-        this.id = id;
-        this.name = name;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.category = category;
-        this.description = description;
-        this.cost = cost;
-        this.courseLink = courseLink;
-        this.pays = pays;
-        this.lessons = lessons;
-    }
-
-    public Course(Long id, String name, LocalDate startDate, LocalDate endDate, String category, String description,
-            BigDecimal cost, List<PayCourse> pays) {
+            BigDecimal cost, List<PayCourse> pays, List<Lesson> lessons) {
         this.id = id;
         this.name = name;
         this.startDate = startDate;
@@ -95,10 +60,11 @@ public class Course implements Serializable {
         this.description = description;
         this.cost = cost;
         this.pays = pays;
+        this.lessons = lessons;
     }
 
     public Course(String name, LocalDate startDate, LocalDate endDate, String category, String description,
-            BigDecimal cost, List<PayCourse> pays) {
+            BigDecimal cost, List<PayCourse> pays, List<Lesson> lessons) {
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -106,10 +72,22 @@ public class Course implements Serializable {
         this.description = description;
         this.cost = cost;
         this.pays = pays;
+        this.lessons = lessons;
     }
 
     public Course(String name, LocalDate startDate, LocalDate endDate, String category, String description,
             BigDecimal cost) {
+        this.name = name;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.category = category;
+        this.description = description;
+        this.cost = cost;
+    }
+
+    public Course(Long id, String name, LocalDate startDate, LocalDate endDate, String category, String description,
+            BigDecimal cost) {
+        this.id = id;
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -185,14 +163,6 @@ public class Course implements Serializable {
         this.pays = pays;
     }
 
-    public String getCourseLink() {
-        return courseLink;
-    }
-
-    public void setCourseLink(String courseLink) {
-        this.courseLink = courseLink;
-    }
-
     public List<Lesson> getLessons() {
         return lessons;
     }
@@ -201,12 +171,5 @@ public class Course implements Serializable {
         this.lessons = lessons;
     }
 
-    public Long getVersion() {
-        return version;
-    }
-
-    public void setVersion(Long version) {
-        this.version = version;
-    }
-
+    
 }

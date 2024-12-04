@@ -1,5 +1,6 @@
 package br.edu.ifsp.dsw3.trabalho.empresa.page_controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.edu.ifsp.dsw3.trabalho.empresa.model.dao.CourseDAO;
@@ -40,7 +43,13 @@ public class LessonController {
     }
 
     @PostMapping("/salvar")
-    public String salvar(@ModelAttribute Lesson lesson){
+    public String salvar(Lesson lesson,  @RequestParam("video") MultipartFile file) throws IOException{
+        if(file != null){
+            lesson.setNameVideo(file.getOriginalFilename());
+            lesson.setTypeVideo(file.getContentType());
+            lesson.setVideo(file.getBytes());
+        }
+
         lDao.save(lesson);
         return("redirect:/lessons/lista");
     }
@@ -57,20 +66,6 @@ public class LessonController {
         attr.addFlashAttribute("success", "Aula editada com sucesso!");
         return("redirect:/lessons/lista");
     }
-
-    /* @GetMapping("/excluir/{id}")
-    public String excluir(@PathVariable("id")Long id, ModelMap map){
-        if(pDao.findPaysByCourseId(id).isEmpty()){
-            cDao.deleteById(id);
-        }else{
-            pDao.deletePaysByCourseId(id);
-            cDao.deleteById(id);
-        }
-
-        map.addAttribute("success", "Curso excluído com sucesso");
-        return listar(map);
-    }
-    */
 
     @GetMapping("/excluir/{id}")
     public String excluir(@PathVariable("id") Long id, ModelMap map){
