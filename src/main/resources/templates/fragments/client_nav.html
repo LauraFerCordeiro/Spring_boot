@@ -9,13 +9,21 @@
 </head>
 
 <body>
-    <aside th:fragment="nav" class="bg-zinc-900 w-32 h-[100vh] p-2">
+    <aside th:fragment="nav" class="bg-zinc-900 w-32 h-[100vh] p-2 flex flex-col">
         <nav class="menu text-white text-center w-full h-full flex flex-col justify-center align-middle gap-5">
             <a th:href="@{/people/home}">Home</a>
             <a th:href="@{/people/meuscursos}">Meus cursos</a>
             <a th:href="@{/people/todoscursos}">Todos os cursos</a>
+            <div class="spacer flex-grow"></div>
+            <div class="logout mt-auto flex justify-center self-center">
+                <form th:action="@{/logout}" method="post" class="text-center">
+                    <button type="submit" class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded">
+                        Log-Out
+                    </button>
+                </form>
+            </div>
         </nav>
-    </aside>
+    </aside>    
 </body>
 
 </html>
