@@ -1,5 +1,7 @@
 package br.edu.ifsp.dsw3.trabalho.empresa.page_controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,6 +19,8 @@ import br.edu.ifsp.dsw3.trabalho.empresa.model.dao.CourseDAO;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.dao.PayCourseDAO;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.dao.PersonDAO;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Account;
+import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Course;
+import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Lesson;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Person;
 
 @Controller
@@ -86,9 +90,21 @@ public class PersonController {
         Account account = aDao.findByEmail(username);
 
         map.addAttribute("name", account.getName());
-
         if (account != null && account.getClient() instanceof Person person) {
-            map.addAttribute("client_courses", person.getCourses());
+            List<Course> courses = person.getCourses();
+            for (Course course : courses) {
+                Boolean flag = false;
+                List<Lesson> lessons = course.getLessons();
+                for (Lesson lesson : lessons) {
+                    if(lesson.getLessonNumber().equals(1)){
+                        flag = true;
+                    }
+                }
+                if(!flag){
+                    courses.remove(course);
+                }
+            }
+            map.addAttribute("client_courses", courses);
         } else {
             map.addAttribute("client_courses", null);
         }

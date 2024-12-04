@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.edu.ifsp.dsw3.trabalho.empresa.model.dao.CourseDAO;
@@ -43,13 +41,7 @@ public class LessonController {
     }
 
     @PostMapping("/salvar")
-    public String salvar(Lesson lesson,  @RequestParam("video") MultipartFile file) throws IOException{
-        if(file != null){
-            lesson.setNameVideo(file.getOriginalFilename());
-            lesson.setTypeVideo(file.getContentType());
-            lesson.setVideo(file.getBytes());
-        }
-
+    public String salvar(Lesson lesson) throws IOException{
         lDao.save(lesson);
         return("redirect:/lessons/lista");
     }

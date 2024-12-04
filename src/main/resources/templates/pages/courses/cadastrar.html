@@ -39,7 +39,7 @@
                         autofocus="autofocus" th:field="*{description}" class="px-4 py-2 rounded-md border border-purple-200 text-white"/>
                 
                         <label for="cost">Custo</label>
-                        <input type="text" id="cost" data-mask="#.##0,00"
+                        <input type="number" id="cost" data-mask="#.##0,00"
                                 data-mask-reverse="true" th:field="*{cost}" class="px-4 py-2 rounded-md border border-purple-200 text-white"/>
 
                         <input type="hidden" th:field="*{id}" />

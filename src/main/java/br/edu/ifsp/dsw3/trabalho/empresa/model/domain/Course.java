@@ -171,5 +171,21 @@ public class Course implements Serializable {
         this.lessons = lessons;
     }
 
-    
+    public Boolean haveFirstLesson(){
+        for (Lesson lesson : lessons) {
+            if(lesson.getLessonNumber().equals(1)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Lesson getFirstLesson(){
+        for (Lesson lesson : lessons) {
+            if(lesson.getLessonNumber().equals(1)){
+                return lesson;
+            }
+        }
+        return null;
+    }
 }
