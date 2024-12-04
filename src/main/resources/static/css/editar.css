@@ -1,0 +1,77 @@
+/* Estilo geral da página */
+body {
+    background-color: #121212; /* Fundo escuro */
+    color: #e5e7eb; /* Texto claro */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fonte moderna */
+}
+
+/* Container do formulário */
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #1f1f1f; /* Fundo ligeiramente mais claro */
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+}
+
+/* Estilo do título */
+h2 {
+    color: #ffffff; /* Cor do título */
+    border-bottom: 2px solid #4a4a4a; /* Linha abaixo do título */
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+/* Estilo dos campos de entrada */
+input[type="text"],
+input[type="date"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 16px;
+    border: 1px solid #4a4a4a;
+    border-radius: 8px;
+    background-color: #ffffff;
+    color: #ffffff;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+/* Efeito de foco nos campos de entrada */
+input[type="text"]:focus,
+input[type="date"]:focus {
+    border-color: #7a42f4; /* Cor de destaque */
+    box-shadow: 0 0 8px rgba(122, 66, 244, 0.3); /* Sombra de foco */
+}
+
+/* Estilo dos labels */
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #b3b3b3; /* Cor dos labels */
+}
+
+/* Botão de envio */
+button[type="submit"] {
+    background-color: #7a42f4; /* Cor de fundo do botão */
+    color: #ffffff; /* Cor do texto */
+    padding: 12px 20px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+/* Efeito de hover no botão */
+button[type="submit"]:hover {
+    background-color: #5e33b3; /* Cor de hover */
+    transform: translateY(-2px); /* Efeito de elevação */
+}
+
+/* Efeito de foco no botão */
+button[type="submit"]:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(122, 66, 244, 0.5); /* Sombra de foco */
+}

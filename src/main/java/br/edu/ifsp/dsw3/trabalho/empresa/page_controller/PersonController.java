@@ -108,6 +108,36 @@ public class PersonController {
         return "pages/people/todoscursos";
     }
 
+    @GetMapping("/meusdados")
+    public String meusdados(ModelMap map) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        Account a = aDao.findByEmail(username);
+
+        Person p = (Person) a.getClient();
+
+        map.addAttribute("people", p);
+        return "pages/people/meusdados";
+    }
+
+    @GetMapping("/editarPessoa/{id}")
+    public String editarPessoa(ModelMap map, @PathVariable Long id) {
+        Person p = pDao.findById(id).orElse(null);
+        map.addAttribute("person", p);
+
+        return "pages/people/editarPessoa";
+    }
+
+    @PostMapping("/editarPessoa/{id}")
+    public String alterarPessoa(@PathVariable("id") Long id, @ModelAttribute Person person, RedirectAttributes attr) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        Account a = aDao.findByEmail(username);
+        person.setId(id);
+        person.setAccount(a);
+        pDao.save(person);
+        attr.addFlashAttribute("success", "Pessoa editada com sucesso!");
+        return ("redirect:/people/meusdados");
+    }
+
     @ModelAttribute("username")
     public String getUsername() {
         String nome = null;

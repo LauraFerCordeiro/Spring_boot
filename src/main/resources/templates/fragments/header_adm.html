@@ -12,8 +12,15 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <body>
     <header th:fragment="cabecalho">
-        <nav class="flex bg-zinc-800 items-center justify-center text-white h-12 px-10 border-b-2 border-zinc-700">
+        <nav class="flex bg-zinc-800 items-center justify-between text-white h-12 px-10 border-b-2 border-zinc-700">
             <h2 class="font-bold text-purple-400 text-xl">Admin area</h2>
+            <div class="logout ml-auto flex self-end gap-5">
+                <form th:action="@{/logout}" method="post" class="text-center">
+                    <button type="submit" class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded">
+                        Log-Out
+                    </button>
+                </form>
+            </div>
         </nav>
     </header>
 </body>
