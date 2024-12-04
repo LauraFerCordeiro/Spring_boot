@@ -16,10 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.edu.ifsp.dsw3.trabalho.empresa.model.dao.AccountDAO;
-import br.edu.ifsp.dsw3.trabalho.empresa.model.dao.CompanyDAO;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.dao.PersonDAO;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Account;
-import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Company;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Person;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Role;
 
@@ -32,9 +30,6 @@ public class AccountController {
 
     @Autowired
     PersonDAO pDao;
-
-    @Autowired
-    CompanyDAO cDao;
 
     @GetMapping("/cadastrar")
     public String cadastrar(Account Account) {
@@ -68,29 +63,7 @@ public class AccountController {
         adao.save(account);
 
         return "redirect:/login";
-    }
-
-    @PostMapping("/company/salvar")
-    public String salvar(
-            @ModelAttribute Account account,
-            @RequestParam("name") String name,
-            @RequestParam("telephone") String telephone,
-            @RequestParam("cnpj") String cnpj) {
-    
-        account.setRole(Role.COMPANY);
-    
-        Company company = new Company();
-        company.setName(name);
-        company.setTelephone(telephone);
-        company.setCnpj(cnpj);
-        company.setAccount(account);
-    
-        adao.save(account); // Salva o Account
-        cDao.save(company); // Salva a Company
-    
-        return "redirect:/login";
-    }
-    
+    }    
 
     @GetMapping("/editar/{id}")
     public String editar(ModelMap map, @PathVariable("id") Long id) {

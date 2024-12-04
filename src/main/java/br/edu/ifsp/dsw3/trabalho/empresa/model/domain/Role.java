@@ -2,8 +2,7 @@ package br.edu.ifsp.dsw3.trabalho.empresa.model.domain;
 
 public enum Role {
     ADMIN("ADMIN"),
-    PERSON("PERSON"),
-    COMPANY("COMPANY");
+    PERSON("PERSON");
 
     private String descricao;
 
