@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
+<head>
+    <title>Editar Pessoa</title>
+    <link rel="stylesheet" th:href="@{/css/editar.css}">
+    <meta charset="UTF-8">
+</head>
+<body>
+    <div class="container mx-auto px-4 py-8">
+        <h2 class="text-2xl font-bold mb-6">Editar Dados de Pessoa</h2>
+        <form th:action="@{/people/editarPessoa/{id} (id=${person.id})}" method="post" class="bg-gray-800 p-6 rounded-lg shadow-md">
+            <div class="mb-4">
+                <label for="name" class="block text-gray-300 mb-2">Nome</label>
+                <input type="text" id="name" name="name" th:value="${person.name}" class="w-full p-2 border border-gray-700 rounded-md focus:outline-none focus:border-purple-500" required>
+            </div>
+            <div class="mb-4">
+                <label for="birthDate" class="block text-gray-300 mb-2">Data de Nascimento</label>
+                <input type="date" id="birthDate" name="birthDate" th:value="${person.birthDate}" class="w-full p-2 border border-gray-700 rounded-md focus:outline-none focus:border-purple-500" required>
+            </div>
+            <div class="mb-4">
+                <label for="cpf" class="block text-gray-300 mb-2">CPF</label>
+                <input type="text" id="cpf" name="cpf" th:value="${person.cpf}" class="w-full p-2 border border-gray-700 rounded-md focus:outline-none focus:border-purple-500" required>
+            </div>
+            <div class="mb-4">
+                <label for="telephone" class="block text-gray-300 mb-2">Telefone</label>
+                <input type="text" id="telephone" name="telephone" th:value="${person.telephone}" class="w-full p-2 border border-gray-700 rounded-md focus:outline-none focus:border-purple-500" required>
+            </div>
+            <div class="mb-4">
+                <label for="address" class="block text-gray-300 mb-2">Endereço</label>
+                <input type="text" id="address" name="address" th:value="${person.address}" class="w-full p-2 border border-gray-700 rounded-md focus:outline-none focus:border-purple-500" required>
+            </div>
+            <div class="flex justify-end mt-4">
+                <button type="submit" class="bg-purple-500 hover:bg-purple-600 text-white px-6 py-2 rounded-md">Salvar</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
