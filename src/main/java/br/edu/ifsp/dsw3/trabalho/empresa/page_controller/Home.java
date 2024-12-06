@@ -103,7 +103,7 @@ public class Home {
         aDao.save(account);
 
         return "redirect:/login";
-    }    
+    }
 
     @GetMapping("/logout")
     public String logout(HttpSession session) {

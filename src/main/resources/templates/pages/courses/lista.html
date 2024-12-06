@@ -22,10 +22,8 @@
                             <th class="px-4 py-2">#</th>
                             <th class="px-4 py-2">Nome</th>
                             <th class="px-4 py-2">Data Inicio</th>
-                            <th class="px-4 py-2">Data Fim</th>
                             <th class="px-4 py-2">Categoria</th>
                             <th class="px-4 py-2">Descrição</th>
-                            <th class="px-4 py-2">Custo</th>
                             <th class="px-4 py-2">Ações</th>
                         </tr>
                     </thead>
@@ -34,11 +32,9 @@
                         <tr th:each="c : ${courses}" class="bg-zinc-800 hover:bg-zinc-700 text-center">
                             <td class="px-4 py-2" th:text="${c.id}">1</td>
                             <td class="px-4 py-2" th:text="${c.name}">Curso adm</td>
-                            <td class="px-4 py-2" th:text="${c.startDate}">22/02/2007</td>
-                            <td class="px-4 py-2" th:text="${c.endDate}">22/02/2009</td>
+                            <td class="px-4 py-2" th:text="${#temporals.format(c.startDate,'dd/MM/yyyy')}">22/02/2007</td>
                             <td class="px-4 py-2" th:text="${c.category}">Administração</td>
                             <td class="px-4 py-2" th:text="${c.description}">um curso bacana</td>
-                            <td class="px-4 py-2" th:text="${c.cost}">111111111</td>
                             <td class="px-4 py-2 flex gap-2 h-full">
                                 <a th:href="@{/courses/editar/{id} (id=${c.id})}" role="button" class="bg-purple-400 hover:bg-purple-500 px-4 py-2 rounded-md">Editar</a>
                                 <a th:href="@{/courses/excluir/{id} (id=${c.id})}" role="button" th:onclick="|if(confirm('Tem certeza que deseja excluir o curso?')) { location.href='/courses/excluir/'+${c.id} } else { return false; }|" class="excluir">Excluir</a>

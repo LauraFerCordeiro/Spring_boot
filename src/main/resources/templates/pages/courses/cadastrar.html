@@ -25,10 +25,6 @@
                         <label for="startDate">Data de Início</label>
                         <input type="date" id="startDate" 
                         placeholder="XX/XX/XXXX" th:field="*{startDate}" class="px-4 py-2 rounded-md border border-purple-200 text-white"/>
-
-                        <label for="endDate">Data de Fim</label>
-                        <input type="date" id="endDate" 
-                        placeholder="XX/XX/XXXX" th:field="*{endDate}" class="px-4 py-2 rounded-md border border-purple-200 text-white"/>
                     
                         <label for="category">Categoria</label>
                         <input type="text" id="category"
@@ -37,10 +33,6 @@
                         <label for="description">Descrição</label>
                         <input type="text" id="description"
                         autofocus="autofocus" th:field="*{description}" class="px-4 py-2 rounded-md border border-purple-200 text-white"/>
-                
-                        <label for="cost">Custo</label>
-                        <input type="text" id="cost" data-mask="#.##0,00"
-                                data-mask-reverse="true" th:field="*{cost}" class="px-4 py-2 rounded-md border border-purple-200 text-white"/>
 
                         <input type="hidden" th:field="*{id}" />
                         <button type="submit" class="bg-purple-400 hover:bg-purple-500 px-4 py-2 rounded-md">Salvar</button>

@@ -14,9 +14,9 @@ import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 
 @Entity
-@PrimaryKeyJoinColumn(name="idClient")
+@PrimaryKeyJoinColumn(name = "idClient")
 @Table(name = "person")
-public class Person extends Client{
+public class Person extends Client {
     @Column(unique = true, nullable = false)
     private String cpf;
 
@@ -27,32 +27,32 @@ public class Person extends Client{
     @OneToMany(mappedBy = "person")
     private List<PayCourse> pays;
 
-    public Person(Long id, String name, String telephone, String address, Account account, List<Card> cards, String cpf,
+    public Person(Long id, String name, String telephone, String address, Account account, String cpf,
             LocalDate birthDate, List<PayCourse> pays) {
-        super(id, name, telephone, address, account, cards);
+        super(id, name, telephone, address, account);
         this.cpf = cpf;
         this.birthDate = birthDate;
         this.pays = pays;
     }
 
-    public Person(String name, String telephone, String address, Account account, List<Card> cards, String cpf,
+    public Person(String name, String telephone, String address, Account account, String cpf,
             LocalDate birthDate, List<PayCourse> pays) {
-        super(name, telephone, address, account, cards);
+        super(name, telephone, address, account);
         this.cpf = cpf;
         this.birthDate = birthDate;
         this.pays = pays;
     }
 
-    public Person(Long id, String name, String telephone, String address, Account account, List<Card> cards, String cpf,
+    public Person(Long id, String name, String telephone, String address, Account account, String cpf,
             LocalDate birthDate) {
-        super(id, name, telephone, address, account, cards);
+        super(id, name, telephone, address, account);
         this.cpf = cpf;
         this.birthDate = birthDate;
     }
 
-    public Person(String name, String telephone, String address, Account account, List<Card> cards, String cpf,
+    public Person(String name, String telephone, String address, Account account, String cpf,
             LocalDate birthDate) {
-        super(name, telephone, address, account, cards);
+        super(name, telephone, address, account);
         this.cpf = cpf;
         this.birthDate = birthDate;
     }
@@ -89,12 +89,15 @@ public class Person extends Client{
         this.pays = pays;
     }
 
-    public List<Course> getCourses(){
+    public List<Course> getCourses() {
         List<PayCourse> pays = getPays();
-        ArrayList<Course> courses = new ArrayList<Course>();
+        List<Course> courses = new ArrayList<Course>();
         for (PayCourse pay : pays) {
-            courses.add(pay.getCourse());
+            if (pay.getCourse() != null) {
+                courses.add(pay.getCourse());
+            }
         }
+
         return courses;
     }
 

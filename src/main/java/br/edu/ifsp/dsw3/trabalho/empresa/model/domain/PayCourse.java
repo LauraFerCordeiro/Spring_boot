@@ -1,7 +1,6 @@
 package br.edu.ifsp.dsw3.trabalho.empresa.model.domain;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -18,7 +17,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "pay_course")
-public class PayCourse implements Serializable{
+public class PayCourse implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,9 +25,6 @@ public class PayCourse implements Serializable{
     @Column(name = "date", nullable = false, columnDefinition = "DATE")
     @DateTimeFormat(iso = ISO.DATE)
     private LocalDate date;
-
-    @Column(name = "cost", nullable = false, columnDefinition = "DECIMAL")
-    private BigDecimal cost;
 
     @ManyToOne
     @JoinColumn(name = "course_id")
@@ -38,17 +34,15 @@ public class PayCourse implements Serializable{
     @JoinColumn(name = "person_id")
     private Person person;
 
-    public PayCourse(Long id, LocalDate date, BigDecimal cost, Course course, Person person) {
+    public PayCourse(Long id, LocalDate date, Course course, Person person) {
         this.id = id;
         this.date = date;
-        this.cost = cost;
         this.course = course;
         this.person = person;
     }
 
-    public PayCourse(LocalDate date, BigDecimal cost, Course course, Person person) {
+    public PayCourse(LocalDate date, Course course, Person person) {
         this.date = date;
-        this.cost = cost;
         this.course = course;
         this.person = person;
     }
@@ -72,14 +66,6 @@ public class PayCourse implements Serializable{
         this.date = date;
     }
 
-    public BigDecimal getCost() {
-        return cost;
-    }
-
-    public void setCost(BigDecimal cost) {
-        this.cost = cost;
-    }
-
     public Course getCourse() {
         return course;
     }
@@ -96,6 +82,4 @@ public class PayCourse implements Serializable{
         this.person = person;
     }
 
-    
-    
 }

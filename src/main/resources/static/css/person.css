@@ -1,0 +1,62 @@
+/* CSS geral para a tabela */
+table {
+    width: 50%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    max-width: 800px;
+}
+
+th, td {
+    padding: 10px; /* Reduz o padding entre th e td */
+    text-align: left;
+}
+
+th {
+    background-color: #2c2c2c;
+    color: #d1d5db;
+}
+
+td {
+    background-color: #3b3b3b;
+    color: #e5e7eb;
+    border-bottom: 1px solid #4a4a4a;
+}
+
+/* Espaçamento e estilo do botão */
+a {
+    display: inline-block;
+    text-decoration: none;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+/* Hover effect */
+a:hover {
+    background-color: #6b5b95; /* Cor mais clara quando passa o mouse */
+}
+
+/* Título */
+h2 {
+    color: #f3f4f6;
+    border-bottom: 2px solid #4a4a4a;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+/* Estilo geral da página */
+body {
+    background-color: #121212; /* Fundo escuro */
+    color: #e5e7eb; /* Texto claro */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fonte moderna */
+}
+
+/* Container do formulário */
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #1f1f1f; /* Fundo ligeiramente mais claro */
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+}

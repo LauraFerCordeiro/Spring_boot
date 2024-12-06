@@ -1,5 +1,8 @@
 package br.edu.ifsp.dsw3.trabalho.empresa.page_controller;
 
+import java.time.LocalDate;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,6 +20,8 @@ import br.edu.ifsp.dsw3.trabalho.empresa.model.dao.CourseDAO;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.dao.PayCourseDAO;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.dao.PersonDAO;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Account;
+import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Course;
+import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Lesson;
 import br.edu.ifsp.dsw3.trabalho.empresa.model.domain.Person;
 
 @Controller
@@ -62,6 +67,7 @@ public class PersonController {
     @PostMapping("/editar/{id}")
     public String alterar(@PathVariable("id") Long id, @ModelAttribute Person person, RedirectAttributes attr) {
         person.setId(id);
+        person.setAccount(pDao.findById(id).orElse(null).getAccount());
         pDao.save(person);
         attr.addFlashAttribute("success", "Pessoa editada com sucesso!");
         return ("redirect:/people/lista");
@@ -85,15 +91,30 @@ public class PersonController {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         Account account = aDao.findByEmail(username);
 
-        map.addAttribute("name", account.getName());
+        List<Course> courses = cDao.findAll();
 
+        map.addAttribute("name", account.getName());
         if (account != null && account.getClient() instanceof Person person) {
-            map.addAttribute("client_courses", person.getCourses());
+            List<Course> personCourses = person.getCourses();
+            courses.removeIf(personCourses::contains);
+            map.addAttribute("client_courses", personCourses);
         } else {
             map.addAttribute("client_courses", null);
         }
 
-        map.addAttribute("courses", cDao.findAll());
+        courses.removeIf(course -> {
+            List<Lesson> lessons = course.getLessons();
+            for (Lesson lesson : lessons) {
+                if (lesson.getLessonNumber().equals(1)) {
+                    return false;
+                }
+            }
+            return true;
+        });
+
+        courses.removeIf(course -> course.getStartDate().isAfter(LocalDate.now()));
+
+        map.addAttribute("courses", courses);
 
         return "pages/people/home";
     }
@@ -106,6 +127,41 @@ public class PersonController {
     @GetMapping("/todoscursos")
     public String peopleTodosCursos(ModelMap map) {
         return "pages/people/todoscursos";
+    }
+
+    @GetMapping("/cadastrarcartao")
+    public String cadastrarCartao(ModelMap map) {
+        return "pages/people/cadastrarcartao";
+    }
+
+    @GetMapping("/meusdados")
+    public String meusdados(ModelMap map) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        Account a = aDao.findByEmail(username);
+
+        Person p = (Person) a.getClient();
+
+        map.addAttribute("people", p);
+        return "pages/people/meusdados";
+    }
+
+    @GetMapping("/editarPessoa/{id}")
+    public String editarPessoa(ModelMap map, @PathVariable Long id) {
+        Person p = pDao.findById(id).orElse(null);
+        map.addAttribute("person", p);
+
+        return "pages/people/editarPessoa";
+    }
+
+    @PostMapping("/editarPessoa/{id}")
+    public String alterarPessoa(@PathVariable("id") Long id, @ModelAttribute Person person, RedirectAttributes attr) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        Account a = aDao.findByEmail(username);
+        person.setId(id);
+        person.setAccount(a);
+        pDao.save(person);
+        attr.addFlashAttribute("success", "Pessoa editada com sucesso!");
+        return ("redirect:/people/meusdados");
     }
 
     @ModelAttribute("username")

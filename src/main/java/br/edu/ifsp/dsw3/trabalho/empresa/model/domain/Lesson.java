@@ -2,7 +2,6 @@ package br.edu.ifsp.dsw3.trabalho.empresa.model.domain;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Arrays;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
@@ -13,7 +12,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -31,41 +29,30 @@ public class Lesson implements Serializable{
     @DateTimeFormat(iso = ISO.DATE)
     private LocalDate release;
 
-    @Column(name = "video", nullable = true)
-    @Lob
-    private byte[] video;
+    @Column(name = "lesson_link", nullable = false)
+    private String lessonLink;
 
-    private String nameVideo;
-    
-    private String typeVideo;
+    @Column(name = "lesson_number", nullable = false)
+    private Integer lessonNumber;
 
     @ManyToOne
     @JoinColumn(name = "course_id", nullable = false)
     private Course course;
 
-    public Lesson(Long id, String name, LocalDate release, byte[] video, String nameVideo, String typeVideo,
-            Course course) {
+    public Lesson(Long id, String name, LocalDate release, String lessonLink, Integer lessonNumber, Course course) {
         this.id = id;
         this.name = name;
         this.release = release;
-        this.video = video;
-        this.nameVideo = nameVideo;
-        this.typeVideo = typeVideo;
+        this.lessonLink = lessonLink;
+        this.lessonNumber = lessonNumber;
         this.course = course;
     }
 
-    public Lesson(String name, LocalDate release, byte[] video, String nameVideo, String typeVideo, Course course) {
+    public Lesson(String name, LocalDate release, String lessonLink, Integer lessonNumber, Course course) {
         this.name = name;
         this.release = release;
-        this.video = video;
-        this.nameVideo = nameVideo;
-        this.typeVideo = typeVideo;
-        this.course = course;
-    }
-
-    public Lesson(String name, LocalDate release, Course course) {
-        this.name = name;
-        this.release = release;
+        this.lessonLink = lessonLink;
+        this.lessonNumber = lessonNumber;
         this.course = course;
     }
 
@@ -96,28 +83,20 @@ public class Lesson implements Serializable{
         this.release = release;
     }
 
-    public byte[] getVideo() {
-        return video;
+    public String getLessonLink() {
+        return lessonLink;
     }
 
-    public void setVideo(byte[] video) {
-        this.video = video;
+    public void setLessonLink(String lessonLink) {
+        this.lessonLink = lessonLink;
     }
 
-    public String getNameVideo() {
-        return nameVideo;
+    public Integer getLessonNumber() {
+        return lessonNumber;
     }
 
-    public void setNameVideo(String nameVideo) {
-        this.nameVideo = nameVideo;
-    }
-
-    public String getTypeVideo() {
-        return typeVideo;
-    }
-
-    public void setTypeVideo(String typeVideo) {
-        this.typeVideo = typeVideo;
+    public void setLessonNumber(Integer lessonNumber) {
+        this.lessonNumber = lessonNumber;
     }
 
     public Course getCourse() {
@@ -128,9 +107,4 @@ public class Lesson implements Serializable{
         this.course = course;
     }
 
-    @Override
-    public String toString() {
-        return "Lesson [id=" + id + ", name=" + name + ", release=" + release + ", video=" + Arrays.toString(video)
-                + ", nameVideo=" + nameVideo + ", typeVideo=" + typeVideo + ", course=" + course + "]";
-    }
 }

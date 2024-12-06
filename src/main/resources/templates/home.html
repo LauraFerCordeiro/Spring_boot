@@ -5,21 +5,19 @@
 <head>
     <title>Desenvolvimento de Sistemas Web III</title>
     <link rel="stylesheet" th:href="@{/css/output.css}">
+    <link rel="stylesheet" th:href="@{/css/home.css}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8" />
 </head>
 
 <body>
     <div layout:fragment="corpo">
-        <div class="h-[85vh] w-full grid grid-cols-2 bg-[url('/image/cybersecurity.jpg')] bg-cover">
+        <div class="h-[85vh] w-full grid grid-cols-2 bg-[url('/image/cybersecurity.jpg')] bg-cover bg-center">
             <div class="bg-gradient-to-r from-black to-transparent p-16">
-                <h1 class="col-start-1 py-5">
-                    GuaraHack
-                </h1>
-                <div class="col-start-1 w-4/6 text-justify text-white text-2xl">
+                <h1 class="py-5">GuaraHack</h1>
+                <div class="text-justify text-white text-2xl mt-4">
                     <p>
-                        GuaraHack é a sua empresa de segurança!
-                        Precisando saber como vai a segurança web da sua empresa?
+                        GuaraHack é a sua empresa de segurança! Precisando saber como vai a segurança web da sua empresa?
                         Contate-nos!
                         <br>
                         Os melhores cursos de segurança da informação e tecnologias você encontra aqui!
@@ -28,14 +26,16 @@
             </div>
         </div>
 
-        <div class="h-[100vh] bg-zinc-900 px-16">
-            <div class="w-full flex justify-center align-middle py-5">
+        <div class="h-[100vh] bg-zinc-900 px-16 py-8">
+            <div class="w-full flex justify-center align-middle mb-5">
                 <a
-                    class="bg-gradient-to-r from-purple-700 to-purple-400 p-4 hover:scale-110 rounded-md text-white font-sans font-semibold hover: hover:bg-gradient-to-r hover:from-blue-500 hover:to-blue-300 hover:text-black transition ease-in-out">Confira
-                    todos os nossos cursos</a>
+                    class="bg-gradient-to-r from-purple-700 to-purple-400 p-4 hover:scale-110 rounded-md text-white font-sans font-semibold hover:bg-gradient-to-r hover:from-blue-500 hover:to-blue-300 hover:text-black transition ease-in-out">
+                    Confira todos os nossos cursos
+                </a>
             </div>
-            <hr>
-            <div>
+            <hr class="border-t border-gray-700 mb-5">
+            <div class="flex justify-center">
+                <!-- Additional content goes here -->
             </div>
         </div>
     </div>
