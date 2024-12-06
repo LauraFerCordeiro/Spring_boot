@@ -9,10 +9,10 @@
 </head>
 
 <body>
-    <div layout:fragment="corpo">
-        <section>
+    <div layout:fragment="corpo" class="bg-zinc-800 w-full justify-center items-start flex overflow-auto">
+        <section class="justify-center flex flex-col text-white w-2/3">
             <nav>
-                <h3>Editar Aula</h3>
+                <h3 class="font-bold text-5xl text-purple-500 mb-4 mt-20">Editar Aula</h3>
             </nav>
 
             <div class="w-full">
@@ -22,7 +22,7 @@
                         <input type="text" th:field="*{name}" id="name" class="px-4 py-2 rounded-md border border-purple-200 text-white">
 
                         <label for="release">Data de Liberação:</label>
-                        <input type="date" placeholder="XX/XX/XXXX" th:field="*{release}" id="release" class="px-4 py-2 rounded-md border bg-purple-200 text-white">
+                        <input type="date" placeholder="XX/XX/XXXX" th:field="*{release}" id="release" class="px-4 py-2 rounded-md border border-purple-200 text-white">
                         
                         <label for="lesson">Link da aula:</label>
                         <input type="text" th:field="*{lessonLink}" id="lesson"

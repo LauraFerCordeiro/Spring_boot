@@ -31,7 +31,7 @@
                         </tr>
                         <tr class="border-b border-zinc-700 hover:bg-zinc-700 transition duration-150">
                             <td class="px-4 py-2">Data de Nascimento:</td>
-                            <td class="px-4 py-2" th:text="${people.birthDate}">01/01/2000</td>
+                            <td class="px-4 py-2" th:text="${#temporals.format(people.birthDate,'dd/MM/yyyy')}">01/01/2000</td>
                         </tr>
                         <tr class="border-b border-zinc-700 hover:bg-zinc-700 transition duration-150">
                             <td class="px-4 py-2">CPF:</td>

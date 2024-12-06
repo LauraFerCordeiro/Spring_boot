@@ -9,10 +9,10 @@
 </head>
 
 <body>
-    <div layout:fragment="corpo">
+    <div layout:fragment="corpo" class="bg-zinc-800 w-full overflow-auto">
         <section>
             <nav>
-                <h3 class="font-bold text-5xl text-purple-500 mt-20 mb-8 text-center">Lista de pessoas clientes</h3>
+                <h3 class="font-bold text-5xl text-purple-500 mt-20 mb-8 text-center">Lista de pessoas</h3>
             </nav>
 
             <div class="mx-52 border-2 rounded-2xl overflow-auto">
@@ -36,7 +36,7 @@
                             <td class="px-4 py-2" th:text="${p.address}">Rua Carlos Mota</td>
                             <td class="px-4 py-2" th:text="${p.telephone}">1111111111</td>
                             <td class="px-4 py-2" th:text="${p.cpf}">111111111</td>
-                            <td class="px-4 py-2" th:text="${p.birthDate}">22/02/2009</td>
+                            <td class="px-4 py-2" th:text="${#temporals.format(p.birthDate,'dd/MM/yyyy')}">22/02/2009</td>
                             <td class="px-4 py-2">
                                 <a th:href="@{/people/editar/{id} (id=${p.id})}" role="button" class="bg-purple-400 hover:bg-purple-500 px-4 py-2 rounded-md">Editar</a>
                                 <a th:href="@{/people/excluir/{id} (id=${p.id})}" role="button" th:onclick="|if(confirm('Tem certeza que deseja excluir a pessoa?')) { location.href='/people/excluir/'+${p.id} } else { return false; }|" class="bg-red-500 hover:bg-red-600 px-4 py-2 rounded-md">Excluir</a>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/people}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div layout:fragment="corpo" class="bg-gray-900 h-[100vh] w-full px-20 pt-5 overflow-auto flex flex-col justify-center items-center">
+        <h2 th:text="${lesson.name}" class="text-4xl font-bold text-purple-500 mb-4">Nome da aula</h2>
+    
+        <iframe th:src="${lesson.lessonLink}" width="960" height="540" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" title="cursolinux-1"></iframe>
+    </div>
+</body>
+
+</html>

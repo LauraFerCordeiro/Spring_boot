@@ -9,19 +9,17 @@
 </head>
 
 <body>
-    <div layout:fragment="corpo" class="bg-zinc-800 h-[100vh] w-full px-20 pt-10 overflow-auto">
+    <div layout:fragment="corpo" class="bg-zinc-800 h-[100vh] w-full px-20 pt-5 overflow-auto">
         <h2 th:text="${course.name}" class="text-4xl font-bold text-purple-500 mb-4">Nome do Curso</h2>
 
-        <div class="mb-6">
-            <h3 class="text-2xl font-semibold text-white">Descrição do Curso</h3>
+        <iframe th:src="${first_lesson_link}" width="960" height="540" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" title="cursolinux-1"></iframe>
+
+        <div>
             <p th:text="${course.description}" class="text-lg mt-2">Aqui vai a descrição do curso, explicando seu conteúdo, objetivos e benefícios.</p>
         </div>
 
-        <iframe src="https://www.youtube.com/embed/IzlEeujEyks?si=y9SAnD3pn7xlo23u" width="960" height="540" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" title="cursolinux-1"></iframe>
-
-        <div class="flex justify-between items-center">
-            <p class="text-2xl font-semibold text-yellow-400">Preço: <span th:text="${course.cost}">R$ 100,00</span></p>
-            <a href="#" class="bg-purple-600 text-white py-2 px-6 rounded hover:bg-purple-700">Comprar</a>
+        <div class="flex justify-between items-center py-5">
+            <a th:href="@{/courses/matricular/{id}(id=${course.id})}" class="bg-purple-600 text-white py-2 px-6 rounded hover:bg-purple-700">Se matricular</a>
         </div>
     </div>
 </body>

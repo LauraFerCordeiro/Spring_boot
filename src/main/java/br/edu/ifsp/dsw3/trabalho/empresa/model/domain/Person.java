@@ -14,9 +14,9 @@ import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 
 @Entity
-@PrimaryKeyJoinColumn(name="idClient")
+@PrimaryKeyJoinColumn(name = "idClient")
 @Table(name = "person")
-public class Person extends Client{
+public class Person extends Client {
     @Column(unique = true, nullable = false)
     private String cpf;
 
@@ -89,12 +89,15 @@ public class Person extends Client{
         this.pays = pays;
     }
 
-    public List<Course> getCourses(){
+    public List<Course> getCourses() {
         List<PayCourse> pays = getPays();
-        ArrayList<Course> courses = new ArrayList<Course>();
+        List<Course> courses = new ArrayList<Course>();
         for (PayCourse pay : pays) {
-            courses.add(pay.getCourse());
+            if (pay.getCourse() != null) {
+                courses.add(pay.getCourse());
+            }
         }
+
         return courses;
     }
 

@@ -33,7 +33,7 @@
                         <tr th:each="l : ${lessons}" class="bg-zinc-800 hover:bg-zinc-700 text-center">
                             <td class="px-4 py-2" th:text="${l.id}">1</td>
                             <td class="px-4 py-2" th:text="${l.name}">Aula 1 de adm</td>
-                            <td class="px-4 py-2" th:text="${l.release}">22/02/2007</td>
+                            <td class="px-4 py-2" th:text="${#temporals.format(l.release,'dd/MM/yyyy')}">22/02/2007</td>
                             <td class="px-4 py-2" th:text="${l.lessonLink}">https:/youtube.com</td>
                             <td class="px-4 py-2" th:text="${l.course.name}">Curso de adm</td>
                             <td class="px-4 py-2" th:text="${l.lessonNumber}">Numero da aula</td>

@@ -1,20 +1,14 @@
 package br.edu.ifsp.dsw3.trabalho.empresa.page_controller;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-
 import org.springframework.web.bind.annotation.GetMapping;
-
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -73,6 +67,7 @@ public class PersonController {
     @PostMapping("/editar/{id}")
     public String alterar(@PathVariable("id") Long id, @ModelAttribute Person person, RedirectAttributes attr) {
         person.setId(id);
+        person.setAccount(pDao.findById(id).orElse(null).getAccount());
         pDao.save(person);
         attr.addFlashAttribute("success", "Pessoa editada com sucesso!");
         return ("redirect:/people/lista");
@@ -96,27 +91,30 @@ public class PersonController {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         Account account = aDao.findByEmail(username);
 
+        List<Course> courses = cDao.findAll();
+
         map.addAttribute("name", account.getName());
         if (account != null && account.getClient() instanceof Person person) {
-            List<Course> courses = person.getCourses();
-            for (Course course : courses) {
-                Boolean flag = false;
-                List<Lesson> lessons = course.getLessons();
-                for (Lesson lesson : lessons) {
-                    if(lesson.getLessonNumber().equals(1)){
-                        flag = true;
-                    }
-                }
-                if(!flag){
-                    courses.remove(course);
-                }
-            }
-            map.addAttribute("client_courses", courses);
+            List<Course> personCourses = person.getCourses();
+            courses.removeIf(personCourses::contains);
+            map.addAttribute("client_courses", personCourses);
         } else {
             map.addAttribute("client_courses", null);
         }
 
-        map.addAttribute("courses", cDao.findAll());
+        courses.removeIf(course -> {
+            List<Lesson> lessons = course.getLessons();
+            for (Lesson lesson : lessons) {
+                if (lesson.getLessonNumber().equals(1)) {
+                    return false;
+                }
+            }
+            return true;
+        });
+
+        courses.removeIf(course -> course.getStartDate().isAfter(LocalDate.now()));
+
+        map.addAttribute("courses", courses);
 
         return "pages/people/home";
     }

@@ -1,7 +1,6 @@
 package br.edu.ifsp.dsw3.trabalho.empresa.model.domain;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -31,18 +30,11 @@ public class Course implements Serializable {
     @DateTimeFormat(iso = ISO.DATE)
     private LocalDate startDate;
 
-    @Column(name = "end_date", nullable = false, columnDefinition = "DATE")
-    @DateTimeFormat(iso = ISO.DATE)
-    private LocalDate endDate;
-
     @Column(nullable = false)
     private String category;
 
     @Column(nullable = false)
     private String description;
-
-    @Column(name = "cost", nullable = false, columnDefinition = "DECIMAL")
-    private BigDecimal cost;
 
     @OneToMany(mappedBy = "course")
     private List<PayCourse> pays;
@@ -50,50 +42,25 @@ public class Course implements Serializable {
     @OneToMany(mappedBy = "course")
     private List<Lesson> lessons;
 
-    public Course(Long id, String name, LocalDate startDate, LocalDate endDate, String category, String description,
-            BigDecimal cost, List<PayCourse> pays, List<Lesson> lessons) {
+    public Course(Long id, String name, LocalDate startDate, String category, String description, List<PayCourse> pays,
+            List<Lesson> lessons) {
         this.id = id;
         this.name = name;
         this.startDate = startDate;
-        this.endDate = endDate;
         this.category = category;
         this.description = description;
-        this.cost = cost;
         this.pays = pays;
         this.lessons = lessons;
     }
 
-    public Course(String name, LocalDate startDate, LocalDate endDate, String category, String description,
-            BigDecimal cost, List<PayCourse> pays, List<Lesson> lessons) {
+    public Course(String name, LocalDate startDate, String category, String description, List<PayCourse> pays,
+            List<Lesson> lessons) {
         this.name = name;
         this.startDate = startDate;
-        this.endDate = endDate;
         this.category = category;
         this.description = description;
-        this.cost = cost;
         this.pays = pays;
         this.lessons = lessons;
-    }
-
-    public Course(String name, LocalDate startDate, LocalDate endDate, String category, String description,
-            BigDecimal cost) {
-        this.name = name;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.category = category;
-        this.description = description;
-        this.cost = cost;
-    }
-
-    public Course(Long id, String name, LocalDate startDate, LocalDate endDate, String category, String description,
-            BigDecimal cost) {
-        this.id = id;
-        this.name = name;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.category = category;
-        this.description = description;
-        this.cost = cost;
     }
 
     public Course() {
@@ -123,14 +90,6 @@ public class Course implements Serializable {
         this.startDate = startDate;
     }
 
-    public LocalDate getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
-    }
-
     public String getCategory() {
         return category;
     }
@@ -145,14 +104,6 @@ public class Course implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public BigDecimal getCost() {
-        return cost;
-    }
-
-    public void setCost(BigDecimal cost) {
-        this.cost = cost;
     }
 
     public List<PayCourse> getPays() {
@@ -171,16 +122,7 @@ public class Course implements Serializable {
         this.lessons = lessons;
     }
 
-    public Boolean haveFirstLesson(){
-        for (Lesson lesson : lessons) {
-            if(lesson.getLessonNumber().equals(1)){
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public Lesson getFirstLesson(){
+    public Lesson getFirstLesson() {
         for (Lesson lesson : lessons) {
             if(lesson.getLessonNumber().equals(1)){
                 return lesson;
