@@ -1,2 +1,2 @@
 # GuaraHack
-Esse site é construido para uma empresa ficticia de segurança da informação chamada GuaraHack, aqui você vai encontrar desde o backend ao frontend do site.
+Esse site é construido para uma empresa ficticia de segurança da informação chamada GuaraHack, aqui você vai encontrar desde o backend ao frontend do site. O propósito do site é uma plataforma que vende cursos online. Ela possui um sistema de login, tendo cliete e administrador.
