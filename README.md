@@ -1,2 +1,2 @@
 # GuaraHack
-Esse site é construido para uma empresa ficticia de segurança da informação chamada GuaraHack, aqui você vai encontrar desde o backend ao frontend do site. O propósito do site é uma plataforma que vende cursos online. Ela possui um sistema de login, tendo cliete e administrador.
+Esse site é construido para uma empresa ficticia de segurança da informação chamada GuaraHack, aqui você vai encontrar desde o backend ao frontend do site. O propósito do site é uma plataforma que vende cursos online. Ela possui um sistema de login, tendo cliente e administrador. Mais informações, como o diagrama de classes ou os requisitos do projeto, podem ser consultadas na [Documentação](https://github.com/LauraFerCordeiro/Spring_boot/tree/main/doc/diagrams)
